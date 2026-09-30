@@ -1,5 +1,24 @@
 <div>
-  <p>{{ task.description }}</p>
-  <p>Due: {{ task.dueDate }}</p>
-  <p>{{ task.difficulty }}</p>
+  <div class="task-heading">
+    <p class="task-description">{{ task.description }}</p>
+    @if (task.completed) {
+      <span class="task-status task-status-complete" aria-label="Completed" title="Completed"
+        >&#10003;</span
+      >
+    } @else {
+      <span
+        class="task-status task-status-open"
+        aria-label="Not completed"
+        title="Not completed"
+      ></span>
+    }
+  </div>
+  <div class="task-details">
+    <p>
+      Due <span>{{ task.dueDate }}</span>
+    </p>
+    <p>
+      Difficulty <span>{{ task.difficulty }}</span>
+    </p>
+  </div>
 </div>

@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  padding: 0.75rem;
+  border: 1px solid #dce2e8;
+  border-radius: 0.75rem;
+  background: #e9edf1;
+}
+
+app-task-item {
+  display: block;
+}
+
+app-task-item + app-task-item {
+  margin-top: 0.75rem;
+}
