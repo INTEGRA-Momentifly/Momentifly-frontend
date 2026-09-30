@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TaskList } from '../../components/task-list/task-list';
-import { Task } from '../../models/task';
+import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TaskItem } from '../task-item/task-item';
-import { Task } from '../../models/task';
+import { Task } from '../../models/task.model';
 
 @Component({
   imports: [TaskItem],
