@@ -2,12 +2,13 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { TaskList } from '../../components/task-list/task-list';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
+import { ButtonDirective } from 'primeng/button';
 
 type SortOption = 'date' | 'difficulty';
 type TaskView = 'all' | 'today' | 'week';
 
 @Component({
-  imports: [TaskList],
+  imports: [ButtonDirective, TaskList],
   selector: 'app-tasks',
   styleUrl: './tasks.css',
   templateUrl: './tasks.html',

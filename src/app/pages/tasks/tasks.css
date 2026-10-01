@@ -50,9 +50,31 @@ h1 {
   transform: translateY(-0.1rem);
 }
 
-.add-task span {
-  margin-right: 0.3rem;
-  font-size: 1rem;
+.add-task.p-button {
+  box-shadow: 0 0.2rem 0.45rem rgb(125 78 55 / 10%);
+  color: #fffaf4;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.add-task.p-button:hover {
+  background: #966148;
+  color: #fffaf4;
+  box-shadow: 0 0.5rem 1rem rgb(125 78 55 / 24%);
+  transform: translateY(-0.12rem);
+}
+
+.add-task.p-button .p-button-label {
+  color: inherit;
+}
+
+.add-task-icon {
+  margin-right: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transform: translateY(0.02rem);
 }
 
 .task-toolbar {
@@ -81,6 +103,10 @@ h1 {
   transition:
     color 180ms ease,
     transform 180ms ease;
+}
+
+.view-tabs .view-button.p-button {
+  box-shadow: none;
 }
 
 .view-tabs button:hover {
@@ -139,9 +165,19 @@ h1 {
   cursor: pointer;
 }
 
+.sort-trigger.p-button {
+  justify-content: space-between;
+  box-shadow: none;
+}
+
 .sort-trigger strong {
   color: #6d665f;
   font-weight: 700;
+}
+
+.sort-trigger .sort-icon {
+  color: #a66e50;
+  font-size: 0.82rem;
 }
 
 .sort-trigger:focus-visible {
@@ -174,6 +210,11 @@ h1 {
   font-weight: 600;
   text-align: left;
   cursor: pointer;
+}
+
+.sort-option.p-button {
+  justify-content: flex-start;
+  box-shadow: none;
 }
 
 .sort-option:hover,

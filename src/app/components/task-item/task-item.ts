@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { Task } from '../../models/task.model';
+import { FormsModule } from '@angular/forms';
+import { Checkbox } from 'primeng/checkbox';
 
 @Component({
-  imports: [],
+  imports: [Checkbox, FormsModule],
   selector: 'app-task-item',
   styleUrl: './task-item.css',
   templateUrl: './task-item.html',
@@ -33,7 +35,7 @@ export class TaskItem {
     return timeValue?.slice(0, 5) ?? '';
   }
 
-  private isToday(date: Date) {
+  isToday(date: Date) {
     const today = new Date();
 
     return (

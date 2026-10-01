@@ -20,6 +20,49 @@ p {
   display: contents;
 }
 
+.task-check {
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+:host ::ng-deep .task-check .p-checkbox-box {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1.5px solid #d4cbbf;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+:host ::ng-deep .task-check:hover .p-checkbox-box {
+  border-color: #7f9d76;
+  background: #d9e7d5;
+  box-shadow: 0 0 0 0.18rem rgb(127 157 118 / 18%);
+  transform: scale(1.05);
+}
+
+:host ::ng-deep .task-check.p-checkbox-checked .p-checkbox-box {
+  border-color: #afbea7;
+  background: #afbea7;
+}
+
+:host ::ng-deep .task-check .p-checkbox-icon {
+  color: #fffdf8;
+  font-size: 0.7rem;
+  transition: transform 180ms ease;
+}
+
+:host ::ng-deep .task-check:hover .p-checkbox-icon {
+  transform: scale(1.08);
+}
+
 .difficulty-dot {
   width: 0.42rem;
   height: 0.42rem;

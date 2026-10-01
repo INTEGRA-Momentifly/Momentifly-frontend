@@ -1,12 +1,12 @@
 <div>
   <div class="task-heading">
-    @if (task.completed) {
-      <span class="task-status task-status-complete" aria-label="Completed" title="Completed"
-        >&#10003;</span
-      >
-    } @else {
-      <span class="task-status task-status-open" aria-label="Incomple" title="Not completed"></span>
-    }
+    <p-checkbox
+      class="task-check"
+      [binary]="true"
+      [ngModel]="task.completed"
+      [disabled]="false"
+      [ariaLabel]="task.completed ? 'Completed' : 'Not completed'"
+    />
     <span
       class="difficulty-dot"
       [class.difficulty-easy]="task.difficulty === 'EASY'"

@@ -4,12 +4,17 @@
       <h1>Task-urile tale</h1>
       <p>{{ completedCount() }} din {{ tasks().length }} completate</p>
     </div>
-    <button class="add-task" type="button"><span>+</span> Task nou</button>
+    <button pButton class="add-task" type="button">
+      <i class="pi pi-plus add-task-icon" aria-hidden="true"></i>
+      <span>Task nou</span>
+    </button>
   </header>
 
   <div class="task-toolbar">
     <div class="view-tabs" aria-label="Task views">
       <button
+        pButton
+        class="view-button"
         [class.selected]="activeView() === 'all'"
         [attr.aria-pressed]="activeView() === 'all'"
         type="button"
@@ -18,6 +23,8 @@
         Toate
       </button>
       <button
+        pButton
+        class="view-button"
         [class.selected]="activeView() === 'today'"
         [attr.aria-pressed]="activeView() === 'today'"
         type="button"
@@ -26,6 +33,8 @@
         Azi
       </button>
       <button
+        pButton
+        class="view-button"
         [class.selected]="activeView() === 'week'"
         [attr.aria-pressed]="activeView() === 'week'"
         type="button"
@@ -37,6 +46,7 @@
 
     <div class="sort-control" [class.open]="sortMenuOpen()">
       <button
+        pButton
         class="sort-trigger"
         type="button"
         aria-haspopup="listbox"
@@ -45,10 +55,12 @@
       >
         <span>Sortare:</span>
         <strong>{{ sortLabel() }}</strong>
+        <i class="pi pi-sort-down sort-icon" aria-hidden="true"></i>
       </button>
       @if (sortMenuOpen()) {
         <div class="sort-menu" role="listbox" aria-label="Sort tasks by">
           <button
+            pButton
             class="sort-option"
             [class.selected]="sortBy() === 'date'"
             role="option"
@@ -59,6 +71,7 @@
             Dată
           </button>
           <button
+            pButton
             class="sort-option"
             [class.selected]="sortBy() === 'difficulty'"
             role="option"

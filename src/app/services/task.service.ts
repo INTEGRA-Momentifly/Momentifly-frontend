@@ -5,7 +5,7 @@ import { delay, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
-  private http = inject(HttpClient); // I can now make http requests
+  private http = inject(HttpClient);
   private baseUrl = 'http://localhost:8080/tasks';
 
   getAll(): Observable<Task[]> {

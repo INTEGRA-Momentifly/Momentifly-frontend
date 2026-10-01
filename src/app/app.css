@@ -15,10 +15,32 @@
 .sidebar {
   display: flex;
   flex-direction: column;
+  height: 100dvh;
   min-height: 100dvh;
+  box-sizing: border-box;
   padding: 1.8rem 0.75rem 1.5rem;
   border-right: 1px solid #e6dfd5;
   background: #f0ebe1;
+}
+
+.global-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100dvh;
+  min-height: 100dvh;
+}
+
+:host ::ng-deep .global-sidebar.p-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  min-height: 100dvh;
+  border: 0;
+  border-right: 1px solid #e6dfd5;
+  border-radius: 0;
+  background: #f0ebe1;
+  box-shadow: none;
 }
 
 .brand {
@@ -34,8 +56,7 @@
   gap: 0.25rem;
 }
 
-.main-nav a,
-.main-nav button,
+.main-nav .nav-button,
 .settings-link {
   display: flex;
   align-items: center;
@@ -49,7 +70,6 @@
   font: inherit;
   font-size: 0.82rem;
   text-align: left;
-  text-decoration: none;
   cursor: pointer;
   transition:
     background 180ms ease,
@@ -57,15 +77,14 @@
     transform 180ms ease;
 }
 
-.main-nav a:hover,
-.main-nav button:hover,
+.main-nav .nav-button:hover,
 .settings-link:hover {
   background: #e7ddd0;
   color: #a66e50;
   transform: translateX(0.15rem);
 }
 
-.main-nav a.active {
+.main-nav .nav-button.active {
   border-left: 3px solid #b47758;
   padding-left: calc(0.75rem - 3px);
   background: #e7ddd0;
@@ -79,6 +98,12 @@
   place-items: center;
   color: currentColor;
   font-size: 1rem;
+}
+
+.main-nav .nav-button.p-button,
+.settings-link.p-button {
+  justify-content: flex-start;
+  box-shadow: none;
 }
 
 .settings-link {
@@ -110,15 +135,14 @@
     font-size: 1.2rem;
   }
 
-  .main-nav a,
-  .main-nav button,
+  .main-nav .nav-button,
   .settings-link {
     justify-content: center;
     padding-inline: 0.5rem;
     font-size: 0;
   }
 
-  .main-nav a.active {
+  .main-nav .nav-button.active {
     padding-left: calc(0.5rem - 3px);
   }
 }
