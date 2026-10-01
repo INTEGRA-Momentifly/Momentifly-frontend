@@ -1,28 +1,26 @@
 <div class="app-shell">
-	<aside class="sidebar">
-		<div class="brand">Momentifly</div>
+  <aside class="sidebar">
+    <div class="brand">Momentifly</div>
 
-		<nav class="main-nav" aria-label="Main navigation">
-			<a
-				routerLink="/"
-				routerLinkActive="active"
-				[routerLinkActiveOptions]="{ exact: true }"
-			><span class="nav-icon">&#8226;</span>Dashboard</a>
-			<a routerLink="/tasks" routerLinkActive="active"
-				><span class="nav-icon">&#10003;</span>Tasks</a
-			>
-			<button type="button"><span class="nav-icon">&#9711;</span>Calendar</button>
-			<button type="button"><span class="nav-icon">&#8596;</span>Fitness</button>
-			<button type="button"><span class="nav-icon">&#9711;</span>Subscriptions</button>
-			<button type="button"><span class="nav-icon">&#8226;</span>Social</button>
-		</nav>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        ><span class="nav-icon">&#8226;</span>Dashboard</a
+      >
+      <a routerLink="/tasks" routerLinkActive="active"
+        ><span class="nav-icon">&#10003;</span>Tasks</a
+      >
+      <button type="button"><span class="nav-icon">&#9711;</span>Calendar</button>
+      <button type="button"><span class="nav-icon">&#8596;</span>Fitness</button>
+      <button type="button"><span class="nav-icon">&#9711;</span>Subscriptions</button>
+      <button type="button"><span class="nav-icon">&#8226;</span>Social</button>
+    </nav>
 
-		<button class="settings-link" type="button">
-			<span class="nav-icon">&#9881;</span>Settings
-		</button>
-	</aside>
+    <button class="settings-link" type="button">
+      <span class="nav-icon">&#9881;</span>Settings
+    </button>
+  </aside>
 
-	<main class="page-content">
-		<router-outlet />
-	</main>
+  <main class="page-content">
+    <router-outlet />
+  </main>
 </div>

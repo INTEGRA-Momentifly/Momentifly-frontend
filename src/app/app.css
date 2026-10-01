@@ -1,121 +1,124 @@
 :host {
-	display: block;
-	min-height: 100dvh;
+  display: block;
+  min-height: 100dvh;
 }
 
 .app-shell {
-	display: grid;
-	grid-template-columns: 13.75rem minmax(0, 1fr);
-	min-height: 100dvh;
-	background: #f7f4ee;
-	color: #393735;
-	font-family: 'Avenir Next', 'Trebuchet MS', sans-serif;
+  display: grid;
+  grid-template-columns: 13.75rem minmax(0, 1fr);
+  min-height: 100dvh;
+  background: #f7f4ee;
+  color: #393735;
+  font-family: 'Avenir Next', 'Trebuchet MS', sans-serif;
 }
 
 .sidebar {
-	display: flex;
-	flex-direction: column;
-	min-height: 100dvh;
-	padding: 1.8rem 0.75rem 1.5rem;
-	border-right: 1px solid #e6dfd5;
-	background: #f0ebe1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: 1.8rem 0.75rem 1.5rem;
+  border-right: 1px solid #e6dfd5;
+  background: #f0ebe1;
 }
 
 .brand {
-	padding: 0 0.75rem 2rem;
-	color: #a96f52;
-	font-family: Georgia, serif;
-	font-size: 1.2rem;
-	font-weight: 700;
+  padding: 0 0.75rem 2rem;
+  color: #a96f52;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .main-nav {
-	display: grid;
-	gap: 0.25rem;
+  display: grid;
+  gap: 0.25rem;
 }
 
 .main-nav a,
 .main-nav button,
 .settings-link {
-	display: flex;
-	align-items: center;
-	gap: 0.7rem;
-	min-height: 2.35rem;
-	padding: 0 0.75rem;
-	border: 0;
-	border-radius: 0.55rem;
-	background: transparent;
-	color: #706b65;
-	font: inherit;
-	font-size: 0.82rem;
-	text-align: left;
-	text-decoration: none;
-	cursor: pointer;
-	transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 2.35rem;
+  padding: 0 0.75rem;
+  border: 0;
+  border-radius: 0.55rem;
+  background: transparent;
+  color: #706b65;
+  font: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .main-nav a:hover,
 .main-nav button:hover,
 .settings-link:hover {
-	background: #e7ddd0;
-	color: #a66e50;
-	transform: translateX(0.15rem);
+  background: #e7ddd0;
+  color: #a66e50;
+  transform: translateX(0.15rem);
 }
 
 .main-nav a.active {
-	border-left: 3px solid #b47758;
-	padding-left: calc(0.75rem - 3px);
-	background: #e7ddd0;
-	color: #a66e50;
-	font-weight: 700;
+  border-left: 3px solid #b47758;
+  padding-left: calc(0.75rem - 3px);
+  background: #e7ddd0;
+  color: #a66e50;
+  font-weight: 700;
 }
 
 .nav-icon {
-	display: inline-grid;
-	width: 1rem;
-	place-items: center;
-	color: currentColor;
-	font-size: 1rem;
+  display: inline-grid;
+  width: 1rem;
+  place-items: center;
+  color: currentColor;
+  font-size: 1rem;
 }
 
 .settings-link {
-	margin-top: auto;
+  margin-top: auto;
 }
 
 .page-content {
-	min-width: 0;
-	min-height: 100vh;
+  min-width: 0;
+  min-height: 100vh;
 }
 
 @media (max-width: 44rem) {
-	.app-shell {
-		grid-template-columns: 4.5rem minmax(0, 1fr);
-	}
+  .app-shell {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+  }
 
-	.sidebar {
-		align-items: center;
-		padding-inline: 0.4rem;
-	}
+  .sidebar {
+    align-items: center;
+    padding-inline: 0.4rem;
+  }
 
-	.brand {
-		padding-inline: 0;
-		font-size: 0;
-	}
+  .brand {
+    padding-inline: 0;
+    font-size: 0;
+  }
 
-	.brand::after {
-		content: 'M';
-		font-size: 1.2rem;
-	}
+  .brand::after {
+    content: 'M';
+    font-size: 1.2rem;
+  }
 
-	.main-nav a,
-	.main-nav button,
-	.settings-link {
-		justify-content: center;
-		padding-inline: 0.5rem;
-		font-size: 0;
-	}
+  .main-nav a,
+  .main-nav button,
+  .settings-link {
+    justify-content: center;
+    padding-inline: 0.5rem;
+    font-size: 0;
+  }
 
-	.main-nav a.active {
-		padding-left: calc(0.5rem - 3px);
-	}
+  .main-nav a.active {
+    padding-left: calc(0.5rem - 3px);
+  }
 }
