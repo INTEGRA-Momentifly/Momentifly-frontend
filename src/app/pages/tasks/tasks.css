@@ -1,40 +1,241 @@
-:host {
-  display: block;
-  min-height: 100vh;
-  background: #f4f6f8;
-  color: #1f2933;
-}
-
 .tasks-page {
-  width: min(100% - 2rem, 44rem);
+  width: min(100% - 5rem, 53rem);
   margin: 0 auto;
-  padding: 4rem 0;
+  padding: 2.1rem 0 3rem;
 }
 
 .tasks-header {
-  margin-bottom: 1.5rem;
-}
-
-.eyebrow {
-  margin: 0 0 0.5rem;
-  color: #607080;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2.1rem;
 }
 
 h1 {
   margin: 0;
-  color: #17212b;
-  font-size: clamp(2rem, 5vw, 2.75rem);
-  line-height: 1.1;
+  color: #302d2a;
+  font-family: 'Palatino Linotype', Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  letter-spacing: 0;
 }
 
-.tasks-summary {
-  margin: 0.75rem 0 0;
-  color: #607080;
+.tasks-header p {
+  margin: 0.45rem 0 0;
+  color: #877f76;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.add-task {
+  margin-top: 0.05rem;
+  padding: 0.7rem 1rem;
+  border: 0;
+  border-radius: 0.55rem;
+  background: #ad7659;
+  color: #fffaf4;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.add-task:hover {
+  background: #966148;
+  box-shadow: 0 0.35rem 0.8rem rgb(125 78 55 / 18%);
+  transform: translateY(-0.1rem);
+}
+
+.add-task span {
+  margin-right: 0.3rem;
   font-size: 1rem;
+}
+
+.task-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #e1d9ce;
+}
+
+.view-tabs {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.view-tabs button {
+  position: relative;
+  padding: 0.7rem 0 0.8rem;
+  border: 0;
+  background: transparent;
+  color: #8b8379;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.view-tabs button:hover {
+  color: #a66e50;
+  transform: translateY(-0.1rem);
+}
+
+.view-tabs button.selected {
+  color: #4e4944;
+  font-weight: 700;
+}
+
+.view-tabs button.selected::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: #a86f51;
+  content: '';
+}
+
+.sort-control {
+  position: relative;
+  width: 8.75rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.45rem;
+  border: 1px solid #e6dfd5;
+  border-radius: 0.45rem;
+  color: #8b8379;
+  font-size: 0.78rem;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.sort-control:hover,
+.sort-control.open {
+  border-color: #b47758;
+  box-shadow: 0 0 0 0.15rem rgb(180 119 88 / 12%);
+}
+
+.sort-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.3rem;
+  padding: 0.55rem 0.6rem;
+  border: 0;
+  background: transparent;
+  color: #8b8379;
+  font: inherit;
+  cursor: pointer;
+}
+
+.sort-trigger strong {
+  color: #6d665f;
+  font-weight: 700;
+}
+
+.sort-trigger:focus-visible {
+  outline: 2px solid #b47758;
+  outline-offset: -2px;
+}
+
+.sort-menu {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.3rem);
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  border: 1px solid #e6dfd5;
+  border-radius: 0.45rem;
+  background: #fffdf9;
+  box-shadow: 0 0.5rem 1.2rem rgb(72 56 43 / 14%);
+  animation: sort-menu-enter 140ms ease-out both;
+}
+
+.sort-option {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.6rem;
+  border: 0;
+  background: transparent;
+  color: #6d665f;
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sort-option:hover,
+.sort-option.selected {
+  background: #f0e6da;
+  color: #a66e50;
+}
+
+@keyframes sort-menu-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-message {
+  color: #877f76;
+}
+
+app-task-list.filter-changing {
+  display: block;
+  animation: task-filter-enter 280ms ease both;
+}
+
+@keyframes task-filter-enter {
+  from {
+    opacity: 0.35;
+    transform: translateY(0.35rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 44rem) {
+  .tasks-page {
+    width: min(100% - 2rem, 53rem);
+  }
+}
+
+@media (max-width: 34rem) {
+  .tasks-header {
+    display: block;
+  }
+
+  .add-task {
+    margin-top: 1rem;
+  }
+
+  .task-toolbar {
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  .sort-control {
+    align-self: flex-end;
+  }
 }
 
 @media (max-width: 30rem) {

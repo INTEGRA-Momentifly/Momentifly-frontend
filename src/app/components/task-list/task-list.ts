@@ -10,4 +10,12 @@ import { Task } from '../../models/task.model';
 })
 export class TaskList {
   @Input() tasks: Task[] = [];
+
+  get pendingTasks() {
+    return this.tasks.filter((task) => !task.completed);
+  }
+
+  get completedTasks() {
+    return this.tasks.filter((task) => task.completed);
+  }
 }

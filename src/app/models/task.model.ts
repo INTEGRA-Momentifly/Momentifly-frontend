@@ -5,6 +5,7 @@ export interface Task {
   userId: string;
   description: string;
   dueDate: string;
+  dueTime?: string;
   difficulty: Difficulty;
   completed: boolean;
 }
