@@ -3,5 +3,13 @@
     <h1>My Tasks</h1>
   </header>
 
-  <app-task-list [tasks]="tasks()" />
+  @if (loading()) {
+    <p>Loading tasks...</p>
+  } @else {
+    @if (tasks().length === 0) {
+      <p>No tasks yet. Create one to get started.</p>
+    } @else {
+      <app-task-list [tasks]="tasks()" />
+    }
+  }
 </main>
