@@ -1,0 +1,98 @@
+<section class="tasks-page">
+  <header class="tasks-header">
+    <div>
+      <h1>Task-urile tale</h1>
+      <p>{{ completedCount() }} din {{ tasks().length }} completate</p>
+    </div>
+    <button pButton class="add-task" type="button">
+      <i class="pi pi-plus add-task-icon" aria-hidden="true"></i>
+      <span>Task nou</span>
+    </button>
+  </header>
+
+  <div class="task-toolbar">
+    <div class="view-tabs" aria-label="Task views">
+      <button
+        pButton
+        class="view-button"
+        [class.selected]="activeView() === 'all'"
+        [attr.aria-pressed]="activeView() === 'all'"
+        type="button"
+        (click)="setView('all')"
+      >
+        Toate
+      </button>
+      <button
+        pButton
+        class="view-button"
+        [class.selected]="activeView() === 'today'"
+        [attr.aria-pressed]="activeView() === 'today'"
+        type="button"
+        (click)="setView('today')"
+      >
+        Azi
+      </button>
+      <button
+        pButton
+        class="view-button"
+        [class.selected]="activeView() === 'week'"
+        [attr.aria-pressed]="activeView() === 'week'"
+        type="button"
+        (click)="setView('week')"
+      >
+        Săptămâna asta
+      </button>
+    </div>
+
+    <div class="sort-control" [class.open]="sortMenuOpen()">
+      <button
+        pButton
+        class="sort-trigger"
+        type="button"
+        aria-haspopup="listbox"
+        [attr.aria-expanded]="sortMenuOpen()"
+        (click)="toggleSortMenu()"
+      >
+        <span>Sortare:</span>
+        <strong>{{ sortLabel() }}</strong>
+        <i class="pi pi-sort-down sort-icon" aria-hidden="true"></i>
+      </button>
+      @if (sortMenuOpen()) {
+        <div class="sort-menu" role="listbox" aria-label="Sort tasks by">
+          <button
+            pButton
+            class="sort-option"
+            [class.selected]="sortBy() === 'date'"
+            role="option"
+            [attr.aria-selected]="sortBy() === 'date'"
+            type="button"
+            (click)="setSort('date')"
+          >
+            Dată
+          </button>
+          <button
+            pButton
+            class="sort-option"
+            [class.selected]="sortBy() === 'difficulty'"
+            role="option"
+            [attr.aria-selected]="sortBy() === 'difficulty'"
+            type="button"
+            (click)="setSort('difficulty')"
+          >
+            Dificultate
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (loading()) {
+    <p class="page-message">Loading tasks...</p>
+  } @else if (tasks().length === 0) {
+    <p class="page-message">No tasks yet. Create one to get started.</p>
+  } @else if (visibleTasks().length === 0) {
+    <p class="page-message">No tasks match this view.</p>
+  } @else {
+    <app-task-list [class.filter-changing]="filterAnimating()" [tasks]="visibleTasks()" />
+  }
+</section>
