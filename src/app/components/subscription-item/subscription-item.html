@@ -1,0 +1,20 @@
+<div class="subscription-row">
+  <!-- Coloana 1: Avatar + Nume -->
+  <div class="service-info">
+    <div class="avatar">
+      {{ subscription.name ? subscription.name.charAt(0).toUpperCase() : ''}}
+    </div>
+    <span class="service-name">{{ subscription.name }}</span>
+  </div>
+
+  <!-- Coloana 2: Preț / lună -->
+  <div class="price-info">
+    <span class="cost">{{ subscription.cost }}</span>
+    <span class="currency"> RON</span>
+  </div>
+
+  <!-- Coloana 3: Următoarea plată -->
+  <div class="date-info">
+    <span [ngClass]="{ 'urgent': isUrgent() }">{{ getFormattedDate() }}</span>
+  </div>
+</div>
