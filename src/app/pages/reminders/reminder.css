@@ -1,0 +1,75 @@
+.reminders-page {
+  margin: 2rem;
+  padding: 2.1rem 0 3rem;
+  color: grey;
+}
+
+
+
+h1 {
+  margin: 0;
+  color: #302d2a;
+  font-family: 'Palatino Linotype', Georgia, serif;
+  font-size: 25px;
+  letter-spacing: 0;
+}
+
+h2{
+ font-color:grey
+ font-size: 10px
+}
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px
+}
+
+span{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 44rem) {
+  .tasks-page {
+    width: min(100% - 2rem, 53rem);
+  }
+}
+
+@media (max-width: 34rem) {
+  .tasks-header {
+    display: block;
+  }
+
+  .add-task {
+    margin-top: 1rem;
+  }
+
+  .task-toolbar {
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  .sort-control {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 30rem) {
+  .tasks-page {
+    padding: 2.5rem 0;
+  }
+}

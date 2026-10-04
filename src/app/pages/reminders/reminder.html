@@ -1,0 +1,15 @@
+<section class="reminders-page">
+  <h1>Remindere</h1>
+  <span class="header-right">
+      {{ activeReminderCount }} ACTIVE
+    </span>
+
+  <div class="title">
+    <h2 class="header-left">REMINDER</h2>
+    <div class="header-right">
+      <h2>RECURENȚĂ</h2>
+      <h2>URMĂTOAREA DATĂ</h2>
+    </div>
+  </div>
+  <app-reminder-list [reminders]="reminders" />
+</section>

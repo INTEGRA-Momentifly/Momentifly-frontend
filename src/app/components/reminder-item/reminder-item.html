@@ -1,0 +1,40 @@
+<div class="reminder-item">
+
+  <div class="reminder-main">
+    <i class="pi pi-bell reminder-icon" aria-hidden="true"></i>
+
+    <p class="reminder-description">
+      {{ reminder.description }}
+    </p>
+  </div>
+
+  <div class="reminder-right">
+
+    <span
+      [class]="
+        'reminder-recurrence recurrence-' +
+        reminder.recurrence.toLowerCase()
+      "
+    >
+      {{
+        reminder.recurrence === 'WEEKLY'
+          ? 'Săptămânal'
+          : reminder.recurrence === 'MONTHLY'
+            ? 'Lunar'
+            : reminder.recurrence === 'YEARLY'
+              ? 'Anual'
+              : 'Ocazional'
+      }}
+    </span>
+
+    <time
+      class="task-due"
+      [attr.datetime]="reminder.reminderDate"
+      [class.today]="formatDueDate(reminder.reminderDate) === 'AZI'"
+    >
+      {{ formatDueDate(reminder.reminderDate) }}
+    </time>
+
+  </div>
+
+</div>

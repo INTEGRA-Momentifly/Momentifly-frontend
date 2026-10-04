@@ -1,0 +1,5 @@
+<div class="task-group">
+  @for (reminder of pendingReminders; track reminder.id) {
+  <app-reminder-item [reminder]="reminder" />
+  }
+</div>
