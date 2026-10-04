@@ -1,0 +1,14 @@
+<div class="task-group">
+  @for (task of pendingTasks; track task.id) {
+    <app-task-item [task]="task" />
+  }
+</div>
+
+@if (completedTasks.length > 0) {
+  <div class="completed-heading">Completate ({{ completedTasks.length }})</div>
+  <div class="task-group completed-tasks">
+    @for (task of completedTasks; track task.id) {
+      <app-task-item [task]="task" />
+    }
+  </div>
+}

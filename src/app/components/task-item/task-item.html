@@ -1,0 +1,29 @@
+<div>
+  <div class="task-heading">
+    <p-checkbox
+      class="task-check"
+      [binary]="true"
+      [ngModel]="task.completed"
+      [disabled]="false"
+      [ariaLabel]="task.completed ? 'Completed' : 'Not completed'"
+    />
+    <span
+      class="difficulty-dot"
+      [class.difficulty-easy]="task.difficulty === 'EASY'"
+      [class.difficulty-medium]="task.difficulty === 'MEDIUM'"
+      [class.difficulty-hard]="task.difficulty === 'HARD'"
+      aria-hidden="true"
+    ></span>
+    <p class="task-description" [class.completed-description]="task.completed">
+      {{ task.description }}
+    </p>
+  </div>
+  <div class="task-meta">
+    @if (task.dueTime) {
+      <time class="task-time" [attr.datetime]="task.dueTime">{{
+        formatDueTime(task.dueTime)
+      }}</time>
+    }
+    <time class="task-due" [attr.datetime]="task.dueDate">{{ formatDueDate(task.dueDate) }}</time>
+  </div>
+</div>
