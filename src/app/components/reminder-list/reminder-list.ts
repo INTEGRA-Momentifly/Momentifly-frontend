@@ -8,8 +8,10 @@ import { Reminder } from '../../models/reminder.model';
   styleUrl: './reminder-list.css',
   templateUrl: './reminder-list.html',
 })
+
 export class ReminderList {
   @Input() reminders: Reminder[] = [];
+  @Input() loading = false;
 
   get pendingReminders(): Reminder[] {
     return this.reminders.filter((reminder) => !reminder.done);

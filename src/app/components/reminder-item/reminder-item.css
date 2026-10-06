@@ -17,7 +17,6 @@
   box-sizing: border-box;
 
   border-bottom: 1px solid #e8e4dd;
-  background: #faf9f6;
 }
 
 
@@ -103,7 +102,7 @@
   color: #996c35;
 }
 
-.recurrence-montly {
+.recurrence-monthly {
   background: #eee3dc;
   color: #815e4a;
 }

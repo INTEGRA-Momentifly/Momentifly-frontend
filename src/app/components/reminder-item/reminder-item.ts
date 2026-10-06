@@ -9,8 +9,8 @@ import { Reminder } from '../../models/reminder.model';
 export class ReminderItem {
   @Input() reminder!: Reminder;
 
-  formatDueDate(dateValue: string) {
-    const date = new Date(`${dateValue}T00:00:00`);
+  formatDueDate(dateValue: string): string {
+    const date = new Date(dateValue);
 
     if (this.isToday(date)) {
       return 'AZI';

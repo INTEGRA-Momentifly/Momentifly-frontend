@@ -1,75 +1,48 @@
 .reminders-page {
+  width: 90%;
+  margin: 35vh auto 0;
+  padding-bottom: 3rem;
+}
+
+
+
+
+#title1 {
   margin: 2rem;
-  padding: 2.1rem 0 3rem;
-  color: grey;
+  color: black;
+  font-family: Georgia, serif;
 }
 
+#title2 {
+  color: black;
+  font-family: Georgia, serif;
+}
 
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-h1 {
+.page-header h1 {
   margin: 0;
-  color: #302d2a;
-  font-family: 'Palatino Linotype', Georgia, serif;
-  font-size: 25px;
-  letter-spacing: 0;
 }
 
-h2{
- font-color:grey
- font-size: 10px
+.active-count {
+  margin-left: auto;
+  color: gray
 }
-.title{
+
+.title {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  font-size: 10px
-}
-
-span{
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 10px
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
+  margin-top: 2rem;
+  color: gray
+  font-size: small
 }
 
 .header-right {
   display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-@media (max-width: 44rem) {
-  .tasks-page {
-    width: min(100% - 2rem, 53rem);
-  }
-}
-
-@media (max-width: 34rem) {
-  .tasks-header {
-    display: block;
-  }
-
-  .add-task {
-    margin-top: 1rem;
-  }
-
-  .task-toolbar {
-    align-items: flex-end;
-    flex-direction: column;
-  }
-
-  .sort-control {
-    align-self: flex-end;
-  }
-}
-
-@media (max-width: 30rem) {
-  .tasks-page {
-    padding: 2.5rem 0;
-  }
+  gap: 3rem;
 }

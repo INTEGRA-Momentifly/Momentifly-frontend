@@ -1,15 +1,26 @@
-<section class="reminders-page">
-  <h1>Remindere</h1>
-  <span class="header-right">
+<div class="all_page">
+  <h1 id="title1">Abonamente & Remindere</h1>
+
+  <section class="reminders-page">
+    <div class="page-header">
+      <h2 id="title2">Remindere</h2>
+
+      <span class="active-count">
       {{ activeReminderCount }} ACTIVE
     </span>
-
-  <div class="title">
-    <h2 class="header-left">REMINDER</h2>
-    <div class="header-right">
-      <h2>RECURENȚĂ</h2>
-      <h2>URMĂTOAREA DATĂ</h2>
     </div>
-  </div>
-  <app-reminder-list [reminders]="reminders" />
-</section>
+
+    <div class="title">
+      <p>REMINDER</p>
+
+      <div class="header-right">
+        <p>RECURENȚĂ</p>
+        <p>URMĂTOAREA DATĂ</p>
+      </div>
+    </div>
+    <app-reminder-list
+      [reminders]="reminders"
+      [loading]="loading"
+    />
+  </section>
+</div>

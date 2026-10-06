@@ -1,5 +1,16 @@
+@if (loading) {
+<div class="empty-state">
+  <p>Remindere se încarcă...</p>
+</div>
+} @else if (pendingReminders.length === 0) {
+<div class="empty-state">
+  <i class="pi pi-bell-slash"></i>
+  <p>Nu există remindere active.</p>
+</div>
+} @else {
 <div class="task-group">
   @for (reminder of pendingReminders; track reminder.id) {
   <app-reminder-item [reminder]="reminder" />
   }
 </div>
+}

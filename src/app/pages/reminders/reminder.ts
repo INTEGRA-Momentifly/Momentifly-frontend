@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { ReminderList } from '../../components/reminder-list/reminder-list';
 import { Reminder } from '../../models/reminder.model';
+import { ReminderService } from '../../services/reminder.service';
 
 @Component({
   selector: 'app-reminders',
@@ -8,35 +9,37 @@ import { Reminder } from '../../models/reminder.model';
   templateUrl: './reminder.html',
   styleUrl: './reminder.css',
 })
-export class Reminders {
-  reminders: Reminder[] = [
-    {
-      id: '1',
-      userId: 'user-1',
-      description: 'Hidratare',
-      reminderDate: '2026-10-04',
-      recurrence: 'NONE',
-      done: false,
-    },
-    {
-      id: '2',
-      userId: 'user-1',
-      description: 'Spring',
-      reminderDate: '2026-10-05',
-      recurrence: 'WEEKLY',
-      done: false,
-    },
-    {
-      id: '3',
-      userId: 'user-1',
-      description: 'Done',
-      reminderDate: '2026-10-03',
-      recurrence: 'NONE',
-      done: true,
-    },
-  ];
+export class Reminders implements OnInit {
+    private reminderService = inject(ReminderService);
+    private cdr = inject(ChangeDetectorRef);
 
-   get activeReminderCount(): number {
-      return this.reminders.filter(reminder => !reminder.done).length;
+    reminders: Reminder[] = [];
+    loading = true;
+
+    ngOnInit(): void {
+      this.reminderService.getReminders().subscribe({
+        next: (reminders: Reminder[]) => {
+          console.log('BACKEND:', reminders);
+
+          this.reminders = reminders;
+          this.loading = false;
+
+          console.log('LOADING:', this.loading);
+          console.log('REMINDERS:', this.reminders);
+
+          this.cdr.detectChanges();
+        },
+        error: (error: unknown) => {
+          console.error('FAILED:', error);
+
+          this.loading = false;
+
+          this.cdr.detectChanges();
+        },
+      });
     }
-}
+
+    get activeReminderCount(): number {
+      return this.reminders.filter((reminder) => !reminder.done).length;
+    }
+  }
