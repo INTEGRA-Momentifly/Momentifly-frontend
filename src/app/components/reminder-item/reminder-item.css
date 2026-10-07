@@ -65,7 +65,7 @@
   flex: 0 0 auto;
 
 
-  gap: 8px;
+  gap: 120px;
 
   margin-left: 20px;
 }
@@ -105,11 +105,13 @@
 .recurrence-monthly {
   background: #eee3dc;
   color: #815e4a;
+  margin-right: 13px;
 }
 
 .recurrence-yearly {
   background: #f1e2dc;
   color: #914b35;
+  margin-right: 13px;
 }
 
 
