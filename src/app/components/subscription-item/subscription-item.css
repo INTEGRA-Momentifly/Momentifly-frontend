@@ -1,8 +1,8 @@
-.subscription-row{
-  display: flex;
+.subscription-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
   align-items: center;
-  justify-content: space-between;
-  padding: 14px 8px;
+  padding: 14px 16px;
   border-bottom: 1px solid #eae6e1;
   font-family: inherit;
 }
@@ -36,9 +36,8 @@
 
 /* Coloana cu prețul */
 .price-info{
-  flex: 1;
   text-align: right;
-  padding-right: 40px;
+  width:100%;
 }
 
 .cost{
@@ -53,9 +52,13 @@
 }
 
 /* Coloana cu data */
+.date-info{
+  text-align: right;
+  width:100%;
+}
+
 /* Stilul implicit (pentru date mai îndepărtate) */
 .date-info span{
-  flex: 1;
   font-weight: 500;
   color: #7a7571
 }

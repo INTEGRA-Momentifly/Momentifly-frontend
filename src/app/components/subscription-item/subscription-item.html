@@ -8,13 +8,13 @@
   </div>
 
   <!-- Coloana 2: Preț / lună -->
-  <div class="price-info">
-    <span class="cost">{{ subscription.cost }}</span>
+  <div class="price-info text-right">
+    <span class="cost">{{ subscription.cost.toFixed(2) }}</span>
     <span class="currency"> RON</span>
   </div>
 
   <!-- Coloana 3: Următoarea plată -->
-  <div class="date-info">
-    <span [ngClass]="{ 'urgent': isUrgent() }">{{ subscription.endDate }}</span>
+  <div class="date-info text-right">
+    <span [ngClass]="{ 'urgent': isUrgent() }">{{ getFormattedDate() }}</span>
   </div>
 </div>
