@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { ReminderList } from '../../components/reminder-list/reminder-list';
 import { Reminder } from '../../models/reminder.model';
 import { ReminderService } from '../../services/reminder.service';
@@ -10,36 +10,25 @@ import { ReminderService } from '../../services/reminder.service';
   styleUrl: './reminder.css',
 })
 export class Reminders implements OnInit {
-    private reminderService = inject(ReminderService);
-    private cdr = inject(ChangeDetectorRef);
+  private reminderService = inject(ReminderService);
 
-    reminders: Reminder[] = [];
-    loading = true;
+  reminders = signal<Reminder[]>([]);
+  loading = signal(true);
 
-    ngOnInit(): void {
-      this.reminderService.getReminders().subscribe({
-        next: (reminders: Reminder[]) => {
-          console.log('BACKEND:', reminders);
-
-          this.reminders = reminders;
-          this.loading = false;
-
-          console.log('LOADING:', this.loading);
-          console.log('REMINDERS:', this.reminders);
-
-          this.cdr.detectChanges();
-        },
-        error: (error: unknown) => {
-          console.error('FAILED:', error);
-
-          this.loading = false;
-
-          this.cdr.detectChanges();
-        },
-      });
-    }
-
-    get activeReminderCount(): number {
-      return this.reminders.filter((reminder) => !reminder.done).length;
-    }
+  ngOnInit(): void {
+    this.reminderService.getReminders().subscribe({
+      next: (reminders: Reminder[]) => {
+        this.reminders.set(reminders);
+        this.loading.set(false);
+      },
+      error: (error: unknown) => {
+        console.error('Failed to load reminders:', error);
+        this.loading.set(false);
+      },
+    });
   }
+
+  get activeReminderCount(): number {
+    return this.reminders().filter((reminder) => !reminder.done).length;
+  }
+}

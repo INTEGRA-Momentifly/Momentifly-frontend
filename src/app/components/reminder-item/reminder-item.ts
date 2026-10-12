@@ -39,4 +39,14 @@ export class ReminderItem {
       date.getDate() === today.getDate()
     );
   }
+
+  private readonly recurrenceLabels: Record<string, string> = {
+    WEEKLY: 'Săptămânal',
+    MONTHLY: 'Lunar',
+    YEARLY: 'Anual',
+  };
+
+  recurrenceLabel(recurrence: string): string {
+    return this.recurrenceLabels[recurrence] ?? 'Ocazional';
+  }
 }

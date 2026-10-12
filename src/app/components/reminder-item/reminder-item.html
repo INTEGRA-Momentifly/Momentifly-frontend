@@ -12,20 +12,12 @@
 
     <span
       [class]="
-        'reminder-recurrence recurrence-' +
-        reminder.recurrence.toLowerCase()
-      "
+    'reminder-recurrence recurrence-' +
+    reminder.recurrence.toLowerCase()
+  "
     >
-      {{
-        reminder.recurrence === 'WEEKLY'
-          ? 'Săptămânal'
-          : reminder.recurrence === 'MONTHLY'
-            ? 'Lunar'
-            : reminder.recurrence === 'YEARLY'
-              ? 'Anual'
-              : 'Ocazional'
-      }}
-    </span>
+  {{ recurrenceLabel(reminder.recurrence) }}
+  </span>
 
     <time
       class="task-due"

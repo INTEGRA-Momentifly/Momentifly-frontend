@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, input, signal } from '@angular/core';
 import { ReminderItem } from '../reminder-item/reminder-item';
 import { Reminder } from '../../models/reminder.model';
 
@@ -10,10 +10,10 @@ import { Reminder } from '../../models/reminder.model';
 })
 
 export class ReminderList {
-  @Input() reminders: Reminder[] = [];
-  @Input() loading = false;
+  reminders = input<Reminder[]>([]);
+  loading = input(false);
 
   get pendingReminders(): Reminder[] {
-    return this.reminders.filter((reminder) => !reminder.done);
+    return this.reminders().filter((reminder) => !reminder.done);
   }
 }
