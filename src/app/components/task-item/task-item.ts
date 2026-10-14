@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { FormsModule } from '@angular/forms';
 import { Checkbox } from 'primeng/checkbox';
@@ -10,7 +11,8 @@ import { Checkbox } from 'primeng/checkbox';
   templateUrl: './task-item.html',
 })
 export class TaskItem {
-  @Input() task!: Task;
+  task = input.required<Task>();
+  private datePipe = new DatePipe('en-GB');
 
   formatDueDate(dateValue: string) {
     const date = new Date(`${dateValue}T00:00:00`);
@@ -19,20 +21,19 @@ export class TaskItem {
       return 'AZI';
     }
 
-    const options: Intl.DateTimeFormatOptions = {
-      day: 'numeric',
-      month: 'short',
-    };
-
-    if (date.getFullYear() !== new Date().getFullYear()) {
-      options.year = 'numeric';
-    }
-
-    return new Intl.DateTimeFormat('en-GB', options).format(date).toUpperCase();
+    return this.datePipe.transform(date, 'mediumDate') ?? '';
   }
 
   formatDueTime(timeValue?: string) {
-    return timeValue?.slice(0, 5) ?? '';
+    if (!timeValue) {
+      return '';
+    }
+
+    const [hours, minutes] = timeValue.split(':').map(Number);
+    const time = new Date();
+    time.setHours(hours, minutes, 0, 0);
+
+    return this.datePipe.transform(time, 'shortTime') ?? '';
   }
 
   isToday(date: Date) {
