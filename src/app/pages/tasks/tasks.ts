@@ -1,11 +1,11 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { TaskList } from '../../components/task-list/task-list';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { ButtonDirective } from 'primeng/button';
 
 type SortOption = 'date' | 'difficulty';
-type TaskView = 'all' | 'today' | 'week';
+type TaskFilter = 'all' | 'today' | 'week';
 
 @Component({
   imports: [ButtonDirective, TaskList],
@@ -13,13 +13,14 @@ type TaskView = 'all' | 'today' | 'week';
   styleUrl: './tasks.css',
   templateUrl: './tasks.html',
 })
-export class Tasks {
+export class Tasks implements OnInit {
   private taskService = inject(TaskService);
   tasks = signal<Task[]>([]);
   loading = signal(true);
+  errorMessage = signal('');
   sortBy = signal<SortOption>('date');
   sortMenuOpen = signal(false);
-  activeView = signal<TaskView>('all');
+  activeView = signal<TaskFilter>('all');
   filterAnimating = signal(false);
   sortedTasks = computed(() => {
     const tasks = [...this.tasks()];
@@ -66,6 +67,10 @@ export class Tasks {
         this.tasks.set(tasks);
         this.loading.set(false);
       },
+      error: () => {
+        this.errorMessage.set('Unable to load tasks. Please try again later.');
+        this.loading.set(false);
+      },
     });
   }
 
@@ -80,7 +85,7 @@ export class Tasks {
     this.sortMenuOpen.set(false);
   }
 
-  setView(view: TaskView) {
+  setView(view: TaskFilter) {
     if (this.activeView() === view) {
       return;
     }

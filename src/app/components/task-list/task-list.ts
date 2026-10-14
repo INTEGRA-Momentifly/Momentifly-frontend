@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { TaskItem } from '../task-item/task-item';
 import { Task } from '../../models/task.model';
 
@@ -9,13 +9,9 @@ import { Task } from '../../models/task.model';
   templateUrl: './task-list.html',
 })
 export class TaskList {
-  @Input() tasks: Task[] = [];
+  tasks = input.required<Task[]>();
 
-  get pendingTasks() {
-    return this.tasks.filter((task) => !task.completed);
-  }
+  pendingTasks = computed(() => this.tasks().filter((task) => !task.completed));
 
-  get completedTasks() {
-    return this.tasks.filter((task) => task.completed);
-  }
+  completedTasks = computed(() => this.tasks().filter((task) => task.completed));
 }
