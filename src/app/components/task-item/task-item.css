@@ -1,0 +1,137 @@
+:host {
+  display: block;
+}
+
+:host > div {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.2rem 0.55rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 3.45rem;
+  padding: 0.7rem 0;
+}
+
+p {
+  margin: 0;
+}
+
+.task-heading {
+  display: contents;
+}
+
+.task-check {
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+}
+
+:host ::ng-deep .task-check .p-checkbox-box {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1.5px solid #d4cbbf;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+:host ::ng-deep .task-check:hover .p-checkbox-box {
+  border-color: #7f9d76;
+  background: #d9e7d5;
+  box-shadow: 0 0 0 0.18rem rgb(127 157 118 / 18%);
+  transform: scale(1.05);
+}
+
+:host ::ng-deep .task-check.p-checkbox-checked .p-checkbox-box {
+  border-color: #afbea7;
+  background: #afbea7;
+}
+
+:host ::ng-deep .task-check .p-checkbox-icon {
+  color: #fffdf8;
+  font-size: 0.7rem;
+  transition: transform 180ms ease;
+}
+
+:host ::ng-deep .task-check:hover .p-checkbox-icon {
+  transform: scale(1.08);
+}
+
+.difficulty-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+}
+
+.difficulty-easy {
+  background: #819777;
+}
+
+.difficulty-medium {
+  background: #c99c62;
+}
+
+.difficulty-hard {
+  background: #bd6652;
+}
+
+.task-description {
+  color: #4d4945;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.completed-description {
+  color: #aaa39a;
+  text-decoration: line-through;
+  text-decoration-color: #aaa39a;
+  text-decoration-thickness: 1px;
+}
+
+.task-status {
+  display: grid;
+  width: 1.2rem;
+  height: 1.2rem;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.task-status-complete {
+  border: 0;
+  background: #afbea7;
+  color: #fffdf8;
+}
+
+.task-status-open {
+  border: 1.5px solid #d4cbbf;
+  background: transparent;
+}
+
+.task-meta {
+  display: flex;
+  min-width: 4.5rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.12rem;
+}
+
+.task-time,
+.task-due {
+  color: #8c847b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.task-time {
+  color: #6f6860;
+}
