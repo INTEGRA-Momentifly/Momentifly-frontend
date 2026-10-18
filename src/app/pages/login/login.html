@@ -6,13 +6,13 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="submit()">
       <label for="username">Username</label>
-      <input id="username" type="text" formControlName="username" placeholder="username" autocomplete="username" />
+      <input id="username" type="text" formControlName="username" autocomplete="username" />
       @if (submitted() && loginForm.controls.username.invalid) {
         <small class="field-error">Introdu username-ul.</small>
       }
       <label for="password">Parolă</label>
       <div class="password-field">
-        <input id="password" [type]="showPassword() ? 'text' : 'password'" formControlName="password" placeholder="••••••••" autocomplete="current-password" />
+        <input id="password" [type]="showPassword() ? 'text' : 'password'" formControlName="password" autocomplete="current-password" />
         <button type="button" class="password-toggle" (click)="togglePasswordVisibility()" [attr.aria-label]="showPassword() ? 'Ascunde parola' : 'Arată parola'">
           <i [class]="showPassword() ? 'pi pi-eye-slash' : 'pi pi-eye'" aria-hidden="true"></i>
         </button>
