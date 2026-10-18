@@ -1,0 +1,24 @@
+[33m4ebf4ca[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/auth[m[33m)[m ticket-65: fixing ui
+[33mf07e37a[m ticket-65: added guard so that only login and register page can be viewed if the user is not logged in
+[33m99fa644[m ticket-65: added logout
+[33m0cf269f[m ticket-65: made login + register form
+[33me566316[m ticket-65: finished with auth interceptor sub-issue -> to attach auth headers directly into the requests before sending them
+[33m5486032[m[33m ([m[1;32mbackup-feature-tasks[m[33m)[m ticket-15: resolving issues on PR
+[33m23784a7[m ticket-15: merging latest changes from main
+[33mb5649ac[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m Merge pull request #24 from INTEGRA-Momentifly/feature/reminder/ui
+[33me16a39b[m[33m ([m[1;31morigin/feature/reminder/ui[m[33m)[m requested changes
+[33m322948a[m fix css
+[33m0c9658b[m ui, css, testate cu backend
+[33m072f018[m ticket-15: changed baseUrl to .../api/tasks
+[33m74f2a19[m component, page
+[33mfedb59b[m minor changes: installed primeng and used its components and icons instead of the default ones
+[33mcb257a2[m moving the vertical navbar on app.html such that it is global and visible everywhere on the page
+[33mb4d6d50[m finished styling of the tasks page and vertical navbar of the web application such that it looks almost 1 on 1 with what was designed (except icons).
+[33m49c633c[m added loading + empty state to the task page
+[33m1d2ea90[m added a bit of temporary styling such that task items are separated from each other as cards.
+[33mf34c88e[m changed file from task.ts to task.model.ts
+[33m1680050[m configured http client, created a task service + getAll function -> sends a GET request to /tasks, gets ALL tasks and converts them from json.
+[33m1103b51[m added components for the Tasks page -> task-list and task-item. modified tasks.html such that it now shows the list of tasks (no styling, just hardcoded data for now)
+[33mec16990[m created task and home page, used router link for routing + added a button on the home page to see if the routing works
+[33mc16c3d1[m Initial project setup
+[33m0a24f90[m Initial commit

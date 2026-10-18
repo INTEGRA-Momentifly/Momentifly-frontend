@@ -1,0 +1,20 @@
+<main class="auth-page">
+  <section class="auth-card" aria-labelledby="register-title">
+    <div class="auth-heading"><h1 id="register-title">Momentifly</h1><p>Creează-ți contul.</p></div>
+    <form [formGroup]="registerForm" (ngSubmit)="submit()">
+      <label for="username">Username</label>
+      <input id="username" type="text" formControlName="username" placeholder="username" autocomplete="username" />
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" placeholder="nume@exemplu.com" autocomplete="email" />
+      <label for="password">Parolă</label>
+      <input id="password" type="password" formControlName="password" placeholder="••••••••" autocomplete="new-password" />
+      <label for="confirm-password">Confirmă parola</label>
+      <input id="confirm-password" type="password" formControlName="confirmPassword" placeholder="••••••••" autocomplete="new-password" />
+      @if (submitted() && registerForm.controls.password.value !== registerForm.controls.confirmPassword.value) {
+        <small class="field-error">Parolele nu coincid.</small>
+      }
+      <button class="primary-button" type="submit">Creează cont</button>
+    </form>
+    <p class="auth-switch">Ai deja cont? <a routerLink="/login">Autentifică-te</a></p>
+  </section>
+</main>

@@ -79,12 +79,6 @@
 }
 
 .main-nav .nav-button:hover,
-.settings-link:hover {
-  background: #e7ddd0;
-  color: #a66e50;
-  transform: translateX(0.15rem);
-}
-
 .main-nav .nav-button.active {
   border-left: 3px solid #b47758;
   padding-left: calc(0.75rem - 3px);
