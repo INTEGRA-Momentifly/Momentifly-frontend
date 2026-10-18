@@ -30,10 +30,7 @@ export class Register {
       this.registerForm.markAllAsTouched();
       return;
     }
-    this.authService.setCredentials(
-      this.registerForm.controls.username.value,
-      this.registerForm.controls.password.value,
-    );
-    this.router.navigateByUrl('/home');
+    // something like: this.authService.register(username, password)...
+    // this.router.navigateByUrl('/home');
   }
 }

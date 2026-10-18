@@ -4,3 +4,11 @@ export interface User {
   dailyCalorieGoal: number;
   score: number;
 }
+
+// for register, probably
+// export interface CreateUser {
+//   username: string;
+//   email: string;
+//   password: string;
+//   dailyCalorieGoal: number;
+// }

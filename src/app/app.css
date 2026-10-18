@@ -58,7 +58,8 @@
 }
 
 .main-nav .nav-button,
-.settings-link {
+.settings-link,
+.logout-link {
   display: flex;
   align-items: center;
   gap: 0.7rem;
@@ -96,13 +97,18 @@
 }
 
 .main-nav .nav-button.p-button,
-.settings-link.p-button {
+.settings-link.p-button,
+.logout-link.p-button {
   justify-content: flex-start;
   box-shadow: none;
 }
 
 .settings-link {
   margin-top: auto;
+}
+
+.logout-link {
+  margin-top: 0.25rem;
 }
 
 .page-content {
@@ -131,7 +137,8 @@
   }
 
   .main-nav .nav-button,
-  .settings-link {
+  .settings-link,
+  .logout-link {
     justify-content: center;
     padding-inline: 0.5rem;
     font-size: 0;
