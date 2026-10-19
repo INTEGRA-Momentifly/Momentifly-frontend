@@ -20,7 +20,7 @@ export class AuthService {
 
   login(username: string, password: string) {
     this.setCredentials(username, password); // stored first, so the interceptor can attach them
-    return this.http.get<User>(this.baseUrl + '/me').pipe(
+    return this.http.get<User>(this.baseUrl + '/current').pipe(
       catchError((err) => {
         this.clear(); // wrong credentials, undo the storing
         return throwError(() => err);

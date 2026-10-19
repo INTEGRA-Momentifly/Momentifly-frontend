@@ -12,5 +12,7 @@ export const routes: Routes = [
   { path: 'register', component: Register },
   { path: 'home', component: Home, canActivate: [authGuard] },
   { path: 'reminders', component: Reminders, canActivate: [authGuard] },
+  // after merge with Tasks UI page on main
+  // {path: 'tasks', component: Tasks, canActivate[authGuard]}
   { path: '**', redirectTo: 'login' },
 ];
