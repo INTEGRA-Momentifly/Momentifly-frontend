@@ -1,9 +1,1 @@
-html,
-body {
-  min-height: 100%;
-  margin: 0;
-}
-
-body {
-  background: #f7f4ee;
-}
+@import "primeicons/primeicons.css";/* You can add global styles to this file, and also import other style files */
