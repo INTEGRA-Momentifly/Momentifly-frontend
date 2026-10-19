@@ -1,0 +1,37 @@
+<div class="calendar-widget">
+  <div class="header">
+    <h2 class="title font-fraunces">Astăzi în calendar</h2>
+    <span class="event-count"> {{ totalEvents }} evenimente</span>
+  </div>
+
+  <div class="timeline-container">
+    <div class="time-labels">
+      <span>8:00</span>
+      <span>10:00</span>
+      <span>12:00</span>
+      <span>14:00</span>
+      <span>16:00</span>
+      <span>18:00</span>
+    </div>
+
+    <div class="timeline-track">
+      @for (apt of appointments; track apt.id) {
+        <div
+          class="timeline-block"
+          [ngStyle]="getTimelineStyles(apt)">
+          <span class="block-title">{{ apt.description }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="appointment-list">
+    @for (apt of listAppointments; track apt.id) {
+      <div class="appointment-item color-{{ apt.colorName }}">
+        <span class="time">{{ formatTime(apt.startDate) }}</span>
+        <span class="description">{{ apt.description }}</span>
+        <span class="duration">{{ formatDuration(apt.durationHours) }}</span>
+      </div>
+    }
+  </div>
+</div>
