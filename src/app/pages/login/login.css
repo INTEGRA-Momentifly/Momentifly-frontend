@@ -1,0 +1,137 @@
+.auth-page {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  align-content: center;
+  gap: 1.7rem;
+  box-sizing: border-box;
+  padding: 2rem 1rem;
+  background: #f9f7f3;
+  color: #393735;
+  font-family: 'Avenir Next', 'Trebuchet MS', sans-serif;
+}
+
+.auth-card {
+  width: min(100%, 28.75rem);
+  box-sizing: border-box;
+  padding: 3.1rem 2.6rem 2.5rem;
+  border: 1px solid #e8e0d5;
+  border-radius: 1.35rem;
+  background: #f1ede4;
+  box-shadow: 0 1rem 2rem rgb(91 72 57 / 8%);
+}
+
+.auth-heading {
+  margin-bottom: 2.25rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  color: #ad7558;
+  font-family: Georgia, serif;
+  font-size: 2rem;
+}
+
+.auth-heading p,
+.auth-switch,
+.auth-footer {
+  color: #817a72;
+}
+
+.auth-heading p {
+  margin: 0.9rem 0 0;
+}
+
+form {
+  display: grid;
+  gap: 0.65rem;
+}
+
+label {
+  margin-top: 0.55rem;
+  color: #6d665f;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.95rem 1rem;
+  border: 1px solid #e1d9cf;
+  border-radius: 0.7rem;
+  background: #fffdfa;
+  color: #494541;
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+input:focus {
+  outline: 2px solid rgb(173 117 88 / 28%);
+  border-color: #ad7558;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 3rem;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.9rem;
+  border: 0;
+  background: transparent;
+  color: #8d857c;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.primary-button {
+  margin-top: 1rem;
+  padding: 0.9rem;
+  border: 0;
+  border-radius: 0.7rem;
+  background: #ad7558;
+  color: #fffaf4;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  background: #976247;
+}
+
+.auth-switch {
+  margin: 1.7rem 0 0;
+  text-align: center;
+}
+
+a {
+  color: #ad7558;
+  text-decoration: underline;
+  text-underline-offset: 0.15rem;
+}
+
+.field-error {
+  color: #a85545;
+  font-size: 0.75rem;
+}
+
+.auth-footer {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 30rem) {
+  .auth-card {
+    padding: 2.4rem 1.35rem 2rem;
+  }
+}
