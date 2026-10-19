@@ -19,18 +19,17 @@ export class QuestList implements OnInit {
     const total = this.quests().length;
     return total === 0 ? 0 : (this.completedCount() / total) * 100;
   });
-  allDone = computed(
-    () => this.quests().length > 0 && this.completedCount() === this.quests().length,
-  );
 
   ngOnInit() {
-    this.quests.set([
-      { id: '1', description: 'Log breakfast', points: 10 },
-      { id: '2', description: 'Complete 3 tasks', points: 25 },
-      { id: '3', description: 'Drink 2L water', points: 15 },
-      { id: '4', description: '30 min activity', points: 10 },
-    ]);
-    this.questService.getAll().subscribe((data) => this.quests.set(data));
+    this.questService.getAll().subscribe({
+      next: (data) => {
+        this.quests.set(data);
+      },
+      error: (err) => {
+        console.error('Encountered an error while fetching quests:', err);
+        this.quests.set([]);
+      }
+    });
   }
 
   isDone(id: string) {

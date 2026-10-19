@@ -1,143 +1,110 @@
 :host {
   display: block;
-  --terracotta: #a8735a;
-  --sage: #7a8b6f;
-  --sand: #c99b6b;
-  --bg-card: #f0ebe3;
-  --border: #e8e1d6;
-  --text: #2c2823;
-  --text-muted: #6b6459;
 }
 
 .quests-card {
   max-width: 420px;
   margin: 0 auto;
-  padding: 24px;
+
   background: var(--bg-card);
   border-radius: 18px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  font-family: 'General Sans', 'Satoshi', system-ui, sans-serif;
-  color: var(--text);
-  transition: transform 150ms ease, box-shadow 150ms ease;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  padding: 18px 20px;
+  margin-top: 16px;
 }
 
-.quests-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
-}
-
-.quests-header {
+.header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-h2 {
+.header-top h2 {
+  font-family: var(--font-satoshi, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
   margin: 0;
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 22px;
-  font-weight: 500;
 }
 
-.trophy {
-  color: var(--border);
-  transition: color 300ms ease;
-}
-
-.trophy.active {
-  color: var(--sand);
-}
-
-.progress-meta {
-  margin: 14px 0 8px;
-}
-
-.meta {
+.progress-text {
   font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
 }
 
-.progress-track {
-  height: 4px;
-  background: var(--border);
-  border-radius: 999px;
+.progress-bar-bg {
+  height: 3px;
+  background-color: var(--border);
+  border-radius: 2px;
   overflow: hidden;
+  margin-bottom: 12px;
 }
 
-.progress-fill {
+.progress-bar-fill {
   height: 100%;
-  background: var(--sage);
-  border-radius: 999px;
-  transition: width 400ms ease;
+  background-color: var(--accent-primary);
+  border-radius: 2px;
+  transition: width 0.4s ease;
 }
 
 .quest-list {
   list-style: none;
-  margin: 18px 0 0;
+  margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .quest-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-  transition: opacity 400ms ease;
-}
-
-.quest-row:last-child {
-  border-bottom: none;
-}
-
-.quest-row.done {
-  opacity: 0.6;
-}
-
-.quest-row.done .description {
-  text-decoration: line-through;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .check {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   padding: 0;
-  border: 1.5px solid var(--text-muted);
   border-radius: 50%;
-  background: transparent;
+  border: 1.5px solid var(--border);
+  background-color: transparent;
   cursor: pointer;
-  transition: background 150ms ease, border-color 150ms ease;
-}
-
-.check:hover {
-  border-color: var(--sage);
+  transition: all 0.2s ease;
 }
 
 .check.checked {
-  background: var(--sage);
-  border-color: var(--sage);
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
 }
 
 .description {
-  flex: 1;
-  font-size: 15px;
+  font-size: 13px;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.quest-row.done .description {
+  text-decoration: line-through;
+  color: var(--text-secondary);
 }
 
 .points {
-  font-family: 'Fraunces', Georgia, serif;
-  font-weight: 600;
-  font-size: 14px;
-  font-variant-numeric: tabular-nums;
-  color: var(--terracotta);
+  display: none;
 }
 
-.empty {
-  padding: 12px 0;
-  font-size: 14px;
-  color: var(--text-muted);
+.empty, .success-message {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 10px;
+}
+
+.quests-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
 }
