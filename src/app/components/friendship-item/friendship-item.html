@@ -1,0 +1,15 @@
+<div class="friendship-item">
+
+  <div class="left">
+    <span class="first-letter">
+      {{ otherUser.username.charAt(0).toUpperCase() }}
+    </span>
+    <span class="friend-name">
+      {{otherUser.username }}
+    </span>
+  </div>
+
+  <div class="friendship-date">
+    since {{ friendship.friendshipDate | date:'dd.MM.yyyy.' }}
+  </div>
+</div>
