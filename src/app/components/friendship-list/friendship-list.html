@@ -1,0 +1,15 @@
+@if (loading()) {
+<div class="empty-state">
+  <p>Prietenii se încarcă...</p>
+</div>
+} @else if (activeFriends.length === 0) {
+<div class="empty-state">
+  <p>Încă nu ai prieteni.</p>
+</div>
+} @else {
+<div class="friend-group">
+  @for (friendship of activeFriends; track friendship.id) {
+  <app-friendship-item [friendship]="friendship" />
+  }
+</div>
+}

@@ -1,0 +1,70 @@
+.friendship-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  min-height: 64px;
+
+
+  padding: 0 6px;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid #e8e4dd;
+}
+
+.friend-name {
+  margin: 0;
+
+  color: black;
+
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.4;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.friendship-date {
+  min-width: 68px;
+
+  color: #68645d;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+
+  text-align: right;
+  white-space: nowrap;
+}
+
+.first-letter {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #d8e0d7;
+  color: #244b32;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.left{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
