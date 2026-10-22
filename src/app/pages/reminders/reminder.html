@@ -1,26 +1,69 @@
 <div class="all_page">
   <h1 id="title1">Abonamente & Remindere</h1>
-
   <section class="reminders-page">
     <div class="page-header">
       <h2 id="title2">Remindere</h2>
-
-      <span class="active-count">
-      {{ activeReminderCount }} ACTIVE
-    </span>
+      <div class="header-actions">
+        <span class="active-count">{{ activeReminderCount }} ACTIVE</span>
+        <button pButton type="button" class="add-button" (click)="showDialog()">
+          <i class="pi pi-plus"></i> Adaugă
+        </button>
+      </div>
     </div>
 
     <div class="title">
       <p>REMINDER</p>
-
       <div class="header-right">
         <p>RECURENȚĂ</p>
         <p>URMĂTOAREA DATĂ</p>
       </div>
     </div>
+
     <app-reminder-list
       [reminders]="reminders()"
       [loading]="loading()"
     />
   </section>
 </div>
+
+<p-dialog
+  header="Adaugă Reminder Nou"
+  [visible]="displayAddModal()"
+  (visibleChange)="displayAddModal.set($event)"
+  [modal]="true"
+  [style]="{ width: '400px' }"
+  [closable]="true"
+>
+  <form [formGroup]="reminderForm" (ngSubmit)="onSubmit()" class="reminder-form">
+
+    <div class="form-group">
+      <label for="description">Descriere</label>
+      <input pInputText id="description" formControlName="description" placeholder="Ex: Plătește chiria" />
+      <small class="error-text" *ngIf="reminderForm.get('description')?.invalid && reminderForm.get('description')?.touched">
+        Descrierea este obligatorie.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="reminderDate">Data (Următoarea dată)</label>
+      <input type="date" id="reminderDate" formControlName="reminderDate" class="p-inputtext p-component" />
+      <small class="error-text" *ngIf="reminderForm.get('reminderDate')?.invalid && reminderForm.get('reminderDate')?.touched">
+        Data este obligatorie.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="recurrence">Recurență</label>
+      <p-select inputId="recurrence" [options]="recurrenceOptions" formControlName="recurrence" optionLabel="label" optionValue="value" appendTo="body" [style]="{'width':'100%'}"></p-select>
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage()">
+      <i class="pi pi-exclamation-circle"></i> {{ errorMessage() }}
+    </div>
+
+    <div class="form-actions">
+      <button pButton type="button" class="p-button-text p-button-secondary" (click)="hideDialog()">Anulează</button>
+      <button pButton type="submit" class="add-button-submit">Salvează</button>
+    </div>
+  </form>
+</p-dialog>
