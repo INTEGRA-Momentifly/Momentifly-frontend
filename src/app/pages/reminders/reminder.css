@@ -3,46 +3,102 @@
   margin: 35vh auto 0;
   padding-bottom: 3rem;
 }
-
-
-
-
 #title1 {
   margin: 2rem;
   color: black;
   font-family: Georgia, serif;
 }
-
 #title2 {
   color: black;
   font-family: Georgia, serif;
 }
-
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .page-header h1 {
   margin: 0;
 }
-
 .active-count {
   margin-left: auto;
-  color: gray
+  color: gray;
 }
-
 .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 2rem;
-  color: gray
-  font-size: small
+  color: gray;
+  font-size: small;
 }
-
 .header-right {
   display: flex;
   gap: 3rem;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.add-button {
+  background-color: #a96f52;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+.add-button:hover {
+  background-color: #8f5a40;
+}
+.reminder-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-group label {
+  font-weight: 600;
+  color: #393735;
+  font-size: 0.9rem;
+}
+.error-text {
+  color: #bd6048;
+  font-size: 0.8rem;
+  margin-top: -0.2rem;
+}
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #bd6048;
+  background-color: #fcece8;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.add-button-submit {
+  background-color: #a96f52;
+  border: none;
+}
+.add-button-submit:hover {
+  background-color: #8f5a40;
 }
