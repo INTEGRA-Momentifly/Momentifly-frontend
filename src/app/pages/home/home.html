@@ -1,0 +1,94 @@
+<div class="dashboard-container">
+  <h1 id="title1">Bună, user</h1>
+  <p class="stat-title">{{ today | date:'EEEE, d MMMM yyyy':'':'ro-RO' }}</p>
+
+  <div class="top-cards-grid">
+
+    <!-- Calorie Card -->
+    <div class="card stat-card">
+      <div class="stat-info">
+        <span class="stat-title">CALORII RĂMASE</span>
+
+      </div>
+      <div class="circle-progress orange"></div>
+    </div>
+
+    <!-- Score Card -->
+    <div class="card stat-card">
+      <div class="stat-info">
+        <span class="stat-title">SCOR SĂPTĂMÂNAL</span>
+      </div>
+      <div class="circle-progress brown"></div>
+    </div>
+
+    <!-- Streak Card -->
+    <div class="card stat-card">
+      <div class="stat-info">
+        <span class="stat-title">STREAK CURENT</span>
+      </div>
+      <div class="circle-progress green"></div>
+    </div>
+
+    <!-- Task Count Card -->
+    <div class="card stat-card">
+      <div class="stat-info">
+        <span class="stat-title">TASK-URI AZI</span>
+        <div class="stat-value">
+          x<span class="sub-val">/y</span>
+        </div>
+        <span class="stat-subtext">completate azi</span>
+      </div>
+      <div class="circle-progress brown"></div>
+    </div>
+
+  </div>
+
+
+  <div class="main-content-grid">
+
+    <!-- TASK-URI -->
+    <div class="card section-card">
+      <div class="section-header">
+        <h2 id="title2">Task-uri de azi</h2>
+
+      </div>
+
+      <div class="task-legend">
+        <span class="dot easy"></span> <span class="stat-title">&nbsp; Easy &nbsp;</span>
+        <span class="dot medium"></span> <span class="stat-title">&nbsp; Medium &nbsp;</span>
+        <span class="dot hard"></span> <span class="stat-title">&nbsp; Hard &nbsp;</span>
+      </div>
+
+
+    </div>
+
+    <!--CALENDAR + QUESTS -->
+    <div class="right-column">
+
+      <!-- CALENDAR -->
+      <div class="card section-card">
+        <div class="section-header">
+          <h2 id="title3">Astăzi în calendar</h2>
+
+        </div>
+      </div>
+
+
+
+      <!-- QUESTS -->
+      <div class="card section-card">
+        <div class="section-header">
+          <h2 id="title4">Quests zilnice</h2>
+          <span class="sub-info">x/y</span>
+        </div>
+
+        <div class="progress-bar-line"></div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
