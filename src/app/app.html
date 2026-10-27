@@ -14,7 +14,13 @@
         >
           <i class="pi pi-th-large nav-icon" aria-hidden="true"></i>Dashboard
         </button>
-        <button pButton type="button" class="nav-button">
+        <button
+          pButton
+          type="button"
+          routerLink="/tasks"
+          routerLinkActive="active"
+          class="nav-button"
+        >
           <i class="pi pi-check-square nav-icon" aria-hidden="true"></i>Tasks
         </button>
         <button pButton type="button" class="nav-button">
@@ -23,11 +29,12 @@
         <button pButton type="button" class="nav-button">
           <i class="pi pi-sync nav-icon" aria-hidden="true"></i>Fitness
         </button>
-        <button pButton
-                type="button"
-                routerLink="/reminders"
-                routerLinkActive="active"
-                class="nav-button"
+        <button 
+          pButton
+          type="button"
+          routerLink="/reminders"
+          routerLinkActive="active"
+          class="nav-button"
         >
           <i class="pi pi-clock nav-icon" aria-hidden="true"></i>Subscriptions
         </button>
@@ -44,5 +51,6 @@
 
   <main class="page-content">
     <router-outlet />
+    <app-quest-list />
   </main>
 </div>

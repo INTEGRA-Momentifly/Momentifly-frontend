@@ -1,0 +1,40 @@
+<section class="quests-card">
+  <header class="quests-header">
+    <div class="header-top">
+      <h2>Daily Quests</h2>
+
+      @if (quests().length > 0) {
+        <span class="progress-text">{{ completedCount() }}/{{ quests().length }}</span>
+      }
+    </div>
+
+    @if (quests().length > 0) {
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" [style.width.%]="progress()"></div>
+      </div>
+    }
+  </header>
+
+  @if (quests().length > 0 && completedCount() === quests().length) {
+    <p class="success-message">All quests completed!</p>
+  }
+
+  <ul class="quest-list">
+    @for (quest of quests(); track quest.id) {
+      <li class="quest-row" [class.done]="isDone(quest.id)">
+        <button
+          type="button"
+          class="check"
+          [class.checked]="isDone(quest.id)"
+          (click)="toggle(quest.id)"
+          [attr.aria-pressed]="isDone(quest.id)"
+          aria-label="Mark quest as done"
+        ></button>
+        <span class="description">{{ quest.description }}</span>
+        <span class="points">{{ quest.points }} pts</span>
+      </li>
+    } @empty {
+      <li class="empty">No quests for today.</li>
+    }
+  </ul>
+</section>
