@@ -1,4 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+@import './styles/theme.css';
 :root {
   --bg-main: #F4EFE6;
   --bg-card: #EFE9DD;
@@ -11,4 +13,4 @@
   --color-green: #677862;
   --color-terracotta: #A85A48;
   --color-light-brown: #D98A6C;
-}/* You can add global styles to this file, and also import other style files */
+}
