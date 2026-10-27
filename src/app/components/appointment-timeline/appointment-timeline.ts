@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../services/appointment.service';
 import { Appointment } from '../../models/appointment.model';
+import { DatePipe } from '@angular/common';
 
 interface MappedAppointment extends Appointment {
   startHourFloat: number;
@@ -14,7 +15,7 @@ interface MappedAppointment extends Appointment {
 @Component({
   selector: 'app-appointment-timeline',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DatePipe],
   templateUrl: './appointment-timeline.html',
   styleUrls: ['./appointment-timeline.css']
 })
@@ -44,15 +45,13 @@ export class AppointmentTimelineComponent implements OnInit {
   loadAppointments(): void {
     this.appointmentService.getAllAppointments().subscribe({
       next: (data) => {
-        console.log('Răspuns backend:', data);
+
         const today = new Date();
 
         const mapped = data
           .filter(apt => {
             const d = new Date(apt.startDate);
-            return d.getFullYear() === today.getFullYear() &&
-              d.getMonth() === today.getMonth() &&
-              d.getDate() === today.getDate();
+            return d.toDateString() === today.toDateString();
           })
           .map((apt, index) => {
             const start = new Date(apt.startDate);

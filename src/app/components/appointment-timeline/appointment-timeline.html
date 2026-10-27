@@ -28,7 +28,7 @@
   <div class="appointment-list">
     @for (apt of listAppointments; track apt.id) {
       <div class="appointment-item color-{{ apt.colorName }}">
-        <span class="time">{{ formatTime(apt.startDate) }}</span>
+        <span class="time">{{ apt.startDate | date:'shortTime' }}</span>
         <span class="description">{{ apt.description }}</span>
         <span class="duration">{{ formatDuration(apt.durationHours) }}</span>
       </div>
