@@ -1,5 +1,5 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
-
+# docker run -it --rm -p 4200:4200 -v "//d/p/Momentifly-frontend:/app" -w //app node:24-slim sh
 # Compiled output
 /dist
 /tmp
