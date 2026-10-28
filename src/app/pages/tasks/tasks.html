@@ -4,17 +4,47 @@
       <h1>Task-urile tale</h1>
       <p>{{ completedCount() }} din {{ tasks().length }} completate</p>
     </div>
-    <button pButton class="add-task" type="button" click)="toggleTaskForm()">
+    <button pButton class="add-task" type="button" (click)="toggleTaskForm()">
       <i class="pi pi-plus add-task-icon" aria-hidden="true"></i>
       <span>Task nou</span>
     </button>
   </header>
 
+
   @if (showTaskForm()) {
-  <app-task-form
-    (taskCreated)="createTask($event)"
-  />
+  <div class="modal-overlay" (click)="toggleTaskForm()">
+    <div
+      class="task-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="task-modal-title"
+      (click)="$event.stopPropagation()"
+    >
+      <button
+        type="button"
+        class="close-button"
+        aria-label="Close"
+        (click)="toggleTaskForm()"
+      >
+        &times;
+      </button>
+
+      <h2 id="task-modal-title">Task nou</h2>
+
+      <app-task-form
+        (taskCreated)="createTask($event)"
+        (formClosed)="toggleTaskForm()"
+      />
+
+      @if (errorMessage()) {
+      <p class="error-message" role="alert">
+        {{ errorMessage() }}
+      </p>
+      }
+    </div>
+  </div>
   }
+
 
   <div class="task-toolbar">
     <div class="view-tabs" aria-label="Task views">

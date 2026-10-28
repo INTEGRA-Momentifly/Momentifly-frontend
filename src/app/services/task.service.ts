@@ -1,11 +1,12 @@
+
 import { Injectable, inject } from '@angular/core';
 import { Task } from '../models/task.model';
 import { HttpClient } from '@angular/common/http';
-import { delay, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export type CreateTaskRequest = Pick<
   Task,
-  'description' | 'dueDate' | 'difficulty'
+  'userId' | 'description' | 'dueDate' | 'difficulty'
 >;
 
 @Injectable({ providedIn: 'root' })
@@ -17,13 +18,14 @@ export class TaskService {
     return this.http.get<Task[]>(this.baseUrl);
   }
 
-  createTask(
-      userId: string,
-      request: CreateTaskRequest
-    ): Observable<Task> {
-      return this.http.post<Task>(
-        `${this.baseUrl}/${userId}`,
-        request
-      );
-    }
+  createTask(request: CreateTaskRequest): Observable<Task> {
+    return this.http.post<Task>(
+      `${this.baseUrl}/${request.userId}`,
+      {
+        description: request.description,
+        dueDate: request.dueDate,
+        difficulty: request.difficulty,
+      }
+    );
+  }
 }
