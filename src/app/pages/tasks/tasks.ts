@@ -1,9 +1,9 @@
 import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { TaskList } from '../../components/task-list/task-list';
 import { Task } from '../../models/task.model';
-import { TaskService, CreateTaskRequest } from '../../services/task.service';
+import { TaskService } from '../../services/task.service';
 import { ButtonDirective } from 'primeng/button';
-import { TaskForm } from '../../components/task-form/task-form';
+import { TaskForm, CreateTaskRequest} from '../../components/task-form/task-form';
 
 type SortOption = 'date' | 'difficulty';
 type TaskFilter = 'all' | 'today' | 'week';
@@ -31,16 +31,16 @@ export class Tasks implements OnInit {
   }
 
   createTask(request: CreateTaskRequest): void {
-    //after authentnication change this to the current userId
-    const userId = 'IDE_A_VALODI_USER_UUID_KERUL';
-    this.taskService.createTask( userId, request).subscribe({
+    this.errorMessage.set('');
+
+    this.taskService.createTask(request).subscribe({
       next: (createdTask) => {
         this.tasks.update(tasks => [...tasks, createdTask]);
         this.showTaskForm.set(false);
       },
       error: () => {
         this.errorMessage.set('Unable to create task. Please try again.');
-      }
+      },
     });
   }
 
