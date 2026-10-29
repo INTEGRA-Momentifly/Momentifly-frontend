@@ -3,12 +3,13 @@ import { TaskList } from '../../components/task-list/task-list';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../../services/task.service';
 import { ButtonDirective } from 'primeng/button';
+import { TaskForm, CreateTaskRequest} from '../../components/task-form/task-form';
 
 type SortOption = 'date' | 'difficulty';
 type TaskFilter = 'all' | 'today' | 'week';
 
 @Component({
-  imports: [ButtonDirective, TaskList],
+  imports: [ButtonDirective, TaskList, TaskForm],
   selector: 'app-tasks',
   styleUrl: './tasks.css',
   templateUrl: './tasks.html',
@@ -22,6 +23,27 @@ export class Tasks implements OnInit {
   sortMenuOpen = signal(false);
   activeView = signal<TaskFilter>('all');
   filterAnimating = signal(false);
+
+  showTaskForm = signal(false);
+
+  toggleTaskForm(): void {
+    this.showTaskForm.update(value => !value);
+  }
+
+  createTask(request: CreateTaskRequest): void {
+    this.errorMessage.set('');
+
+    this.taskService.createTask(request).subscribe({
+      next: (createdTask) => {
+        this.tasks.update(tasks => [...tasks, createdTask]);
+        this.showTaskForm.set(false);
+      },
+      error: () => {
+        this.errorMessage.set('Unable to create task. Please try again.');
+      },
+    });
+  }
+
   sortedTasks = computed(() => {
     const tasks = [...this.tasks()];
 
