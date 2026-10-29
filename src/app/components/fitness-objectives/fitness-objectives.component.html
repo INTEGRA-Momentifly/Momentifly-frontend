@@ -1,0 +1,152 @@
+<section class="objectives-card">
+  <header class="objectives-header">
+    <div>
+      <h2 class="objectives-title">Obiective de fitness</h2>
+      <p class="objectives-subtitle">Ținta ta zilnică de calorii și macronutrienți</p>
+    </div>
+
+    @if (objectives() && !loading()) {
+      <button type="button" class="btn btn-secondary" (click)="openEdit()">Editează</button>
+    }
+  </header>
+
+  @if (loading()) {
+    <p class="state-message">Se încarcă obiectivele...</p>
+  } @else if (loadError()) {
+    <div class="state-message state-error">
+      <p>Nu am putut încărca obiectivele.</p>
+      <button type="button" class="btn btn-secondary" (click)="loadObjectives()">Reîncearcă</button>
+    </div>
+  } @else {
+    @if (objectives(); as current) {
+      <div class="summary">
+        <div class="summary-calories">
+          <span class="summary-label">Calorii zilnice</span>
+          <span class="summary-value">{{ current.calories }}<small>kcal</small></span>
+        </div>
+
+        <div class="summary-macros">
+          @for (dial of dials; track dial.key) {
+            <div class="summary-macro" [class]="'accent-' + dial.accent">
+              <span class="summary-label">{{ dial.label }}</span>
+              <span class="summary-macro-value">{{ current[dial.key] }}<small>g</small></span>
+              <div class="summary-bar">
+                <div class="summary-bar-fill" [style.width.%]="caloriesShare(current, dial)"></div>
+              </div>
+              <span class="summary-share">{{ caloriesShare(current, dial) }}% din calorii</span>
+            </div>
+          }
+        </div>
+      </div>
+    } @else {
+      <p class="empty-message">Nu ai setat încă obiective. Completează formularul de mai jos pentru a începe.</p>
+      <ng-container [ngTemplateOutlet]="objectiveForm" />
+    }
+  }
+</section>
+
+@if (editOpen()) {
+  <div class="overlay" (click)="closeEdit()">
+    <div
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="edit-objectives-title"
+      (click)="$event.stopPropagation()"
+    >
+      <header class="modal-header">
+        <h3 id="edit-objectives-title" class="objectives-title">Editează obiectivele</h3>
+        <button type="button" class="btn-close" aria-label="Închide" (click)="closeEdit()">&times;</button>
+      </header>
+
+      <ng-container [ngTemplateOutlet]="objectiveForm" />
+    </div>
+  </div>
+}
+
+<ng-template #objectiveForm>
+  <form class="objective-form" (submit)="$event.preventDefault(); save()">
+    <div class="mode-toggle" role="radiogroup" aria-label="Mod de calcul">
+      <button
+        type="button"
+        role="radio"
+        class="mode-option"
+        [class.active]="mode() === 'preset'"
+        [attr.aria-checked]="mode() === 'preset'"
+        (click)="setMode('preset')"
+      >
+        Presetat
+      </button>
+      <button
+        type="button"
+        role="radio"
+        class="mode-option"
+        [class.active]="mode() === 'manual'"
+        [attr.aria-checked]="mode() === 'manual'"
+        (click)="setMode('manual')"
+      >
+        Manual
+      </button>
+    </div>
+
+    <p class="mode-hint">
+      @if (mode() === 'preset') {
+        Introdu caloriile, iar macronutrienții se calculează automat (50% carbohidrați, 30% proteine, 20% grăsimi).
+      } @else {
+        Ajustează macronutrienții, iar caloriile se calculează automat.
+      }
+    </p>
+
+    <label class="field">
+      <span class="field-label">Calorii</span>
+      <div class="calories-input">
+        <input
+          type="number"
+          min="0"
+          max="10000"
+          step="10"
+          inputmode="numeric"
+          [value]="calories()"
+          [disabled]="mode() === 'manual'"
+          (input)="onCaloriesInput($event)"
+        />
+        <span class="unit">kcal</span>
+      </div>
+    </label>
+
+    <div class="dials">
+      @for (dial of dials; track dial.key) {
+        <label class="dial" [class]="'accent-' + dial.accent" [class.disabled]="mode() === 'preset'">
+          <div class="dial-header">
+            <span class="field-label">{{ dial.label }}</span>
+            <span class="dial-value">{{ macros()[dial.key] }} g</span>
+          </div>
+          <input
+            type="range"
+            min="0"
+            step="1"
+            [max]="dial.max"
+            [value]="macros()[dial.key]"
+            [disabled]="mode() === 'preset'"
+            [style.--fill]="fillPercent(dial) + '%'"
+            (input)="onMacroInput(dial.key, dial.max, $event)"
+          />
+          <span class="dial-kcal">{{ macros()[dial.key] * dial.kcalPerGram }} kcal</span>
+        </label>
+      }
+    </div>
+
+    @if (saveError()) {
+      <p class="form-error">Salvarea a eșuat. Încearcă din nou.</p>
+    }
+
+    <div class="form-actions">
+      @if (editOpen()) {
+        <button type="button" class="btn btn-secondary" [disabled]="saving()" (click)="closeEdit()">Anulează</button>
+      }
+      <button type="submit" class="btn btn-primary" [disabled]="!canSave()">
+        {{ saving() ? 'Se salvează...' : 'Salvează' }}
+      </button>
+    </div>
+  </form>
+</ng-template>
