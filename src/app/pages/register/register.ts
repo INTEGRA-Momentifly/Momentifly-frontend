@@ -14,9 +14,25 @@ export class Register {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   readonly registerForm = this.formBuilder.nonNullable.group({
-    username: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    username: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30),
+        Validators.pattern(/^[A-Za-z0-9._-]*$/),
+      ],
+    ],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(254)]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(72),
+        Validators.pattern(/^(?=.*\p{L})(?=.*\d).*$/u),
+      ],
+    ],
     confirmPassword: ['', Validators.required],
   });
   readonly submitted = signal(false);
