@@ -2,16 +2,17 @@
   display: block;
 }
 
+/* Matches the dashboard .card.section-card style (see pages/home/home.css) */
 .quests-card {
-  max-width: 420px;
-  margin: 0 auto;
-
-  background: var(--bg-card);
-  border-radius: 18px;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-card);
-  padding: 18px 20px;
-  margin-top: 16px;
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 170px;
+  max-height: 170px;
+  overflow-y: auto;
 }
 
 .header-top {
@@ -22,29 +23,28 @@
 }
 
 .header-top h2 {
-  font-family: var(--font-satoshi, sans-serif);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
   margin: 0;
 }
 
 .progress-text {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .progress-bar-bg {
   height: 3px;
-  background-color: var(--border);
+  background-color: var(--bg-card-inner);
   border-radius: 2px;
   overflow: hidden;
-  margin-bottom: 12px;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background-color: var(--accent-primary);
+  background-color: var(--color-orange);
   border-radius: 2px;
   transition: width 0.4s ease;
 }
@@ -72,26 +72,26 @@
   height: 18px;
   padding: 0;
   border-radius: 50%;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--text-muted);
   background-color: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .check.checked {
-  background-color: var(--accent-primary);
-  border-color: var(--accent-primary);
+  background-color: var(--color-orange);
+  border-color: var(--color-orange);
 }
 
 .description {
   font-size: 13px;
-  color: var(--text-primary);
+  color: var(--text-dark);
   transition: all 0.2s ease;
 }
 
 .quest-row.done .description {
   text-decoration: line-through;
-  color: var(--text-secondary);
+  color: var(--text-muted);
 }
 
 .points {
@@ -100,11 +100,5 @@
 
 .empty, .success-message {
   font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 10px;
-}
-
-.quests-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+  color: var(--text-muted);
 }
