@@ -7,8 +7,10 @@ export type Status = 'PENDING' | 'DECLINED' | 'ACCEPTED';
 
 export interface Friendship {
   id: string;
-  user: User;
-  friend: User;
-  friendshipDate: string;
-  status: Status;
+    userId: string;
+    userName: string;
+    friendId: string;
+    friendName: string;
+    friendshipDate: string;
+    status: string;
 }

@@ -2,10 +2,10 @@
 
   <div class="left">
     <span class="first-letter">
-      {{ otherUser.username.charAt(0).toUpperCase() }}
+      {{ other ? other.charAt(0).toUpperCase() : '?' }}
     </span>
     <span class="friend-name">
-      {{otherUser.username }}
+      {{ other }}
     </span>
   </div>
 

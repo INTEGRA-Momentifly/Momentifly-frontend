@@ -1,6 +1,8 @@
-<div>
+<h1 id="title">Friendships</h1>
+<div class="list">
   <app-friendship-list
-    [friendships]="friendships"
-    [loading]="false"
+    [friendships]="friendships()"
+    [loading]="loading()"
+    [currentUserId]="currentUserId"
   />
 </div>

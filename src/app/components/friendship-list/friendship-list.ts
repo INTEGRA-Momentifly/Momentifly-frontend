@@ -12,6 +12,7 @@ import { Friendship } from '../../models/friendship.model';
 export class FriendshipList {
   friendships = input<Friendship[]>([]);
   loading = input(false);
+  currentUserId = input<string>('');
 
   get activeFriends(): Friendship[] {
     return this.friendships().filter((friendship) => friendship.status == 'ACCEPTED');

@@ -9,7 +9,10 @@
 } @else {
 <div class="friend-group">
   @for (friendship of activeFriends; track friendship.id) {
-  <app-friendship-item [friendship]="friendship" />
+  <app-friendship-item
+    [friendship]="friendship"
+    [currentUserId]="currentUserId()"
+  />
   }
 </div>
 }
