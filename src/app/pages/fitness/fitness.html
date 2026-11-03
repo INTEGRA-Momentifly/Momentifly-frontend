@@ -1,0 +1,78 @@
+<div class="fitness-page">
+  <header class="page-header">
+    <h1 class="page-title">Fitness &amp; Nutriție</h1>
+    <p class="page-date">{{ today }}</p>
+  </header>
+
+  @switch (status()) {
+    @case ('loading') {
+      <div class="overview" aria-busy="true" aria-label="Se încarcă obiectivele">
+        <div class="skeleton-card">
+          <span class="skeleton-line short"></span>
+          <span class="skeleton-ring"></span>
+          <span class="skeleton-line"></span>
+        </div>
+        <div class="skeleton-card">
+          <span class="skeleton-line short"></span>
+          <span class="skeleton-line"></span>
+          <span class="skeleton-line"></span>
+          <span class="skeleton-line"></span>
+        </div>
+      </div>
+    }
+
+    @case ('error') {
+      <section class="state-card error-card" role="alert">
+        <i class="pi pi-exclamation-circle state-icon" aria-hidden="true"></i>
+        <h2 class="state-title">Nu am putut încărca obiectivele.</h2>
+        <p class="state-text">Verifică conexiunea la internet și încearcă din nou.</p>
+        <button type="button" class="btn-primary" (click)="loadObjectives()">
+          <i class="pi pi-refresh" aria-hidden="true"></i>
+          Reîncearcă
+        </button>
+      </section>
+    }
+
+    @case ('empty') {
+      <section class="state-card setup-card" aria-labelledby="setup-title">
+        <header class="setup-header">
+          <h2 id="setup-title" class="setup-title">Setează-ți obiectivele</h2>
+          <p class="setup-subtitle">Alege ținta ta zilnică de calorii și macronutrienți</p>
+        </header>
+        <app-objectives-form
+          variant="create"
+          [submitting]="submitting()"
+          [error]="submitError()"
+          (submitted)="create($event)"
+        />
+      </section>
+    }
+
+    @case ('ready') {
+      @if (objectives(); as current) {
+        <div class="overview">
+          <app-calorie-goal-card
+            [goal]="current.calories"
+            [consumed]="consumedCalories"
+            (edit)="openEdit()"
+          />
+          <app-macros-card
+            [objectives]="current"
+            [consumed]="consumedMacros"
+            [consumedCalories]="consumedCalories"
+          />
+        </div>
+
+        @if (editOpen()) {
+          <app-objectives-dialog
+            [initialValues]="current"
+            [submitting]="submitting()"
+            [error]="submitError()"
+            (submitted)="update($event)"
+            (closed)="closeEdit()"
+          />
+        }
+      }
+    }
+  }
+</div>

@@ -1,0 +1,35 @@
+<section class="card" aria-labelledby="macros-title">
+  <h2 id="macros-title" class="card-title">Macronutrienți</h2>
+
+  <div class="rows">
+    @for (row of rows(); track row.key) {
+      <div class="row" [class]="'accent-' + row.accent">
+        <div class="row-head">
+          <span class="row-label" [id]="'macro-' + row.key">{{ row.label }}</span>
+          <span class="row-value">{{ row.value }}<small>g</small></span>
+        </div>
+        <div
+          class="bar"
+          role="progressbar"
+          aria-valuemin="0"
+          [attr.aria-valuemax]="row.target"
+          [attr.aria-valuenow]="row.value"
+          [attr.aria-valuetext]="row.value + ' din ' + row.target + ' grame'"
+          [attr.aria-labelledby]="'macro-' + row.key"
+        >
+          <div class="bar-fill" [style.width.%]="row.percent"></div>
+        </div>
+        <span class="row-target">{{ row.value }} / {{ row.target }}g</span>
+      </div>
+    }
+  </div>
+
+  <dl class="stats">
+    @for (stat of stats(); track stat.label) {
+      <div class="stat">
+        <dt class="stat-label">{{ stat.label }}</dt>
+        <dd class="stat-value">{{ stat.value }}<small>{{ stat.unit }}</small></dd>
+      </div>
+    }
+  </dl>
+</section>
