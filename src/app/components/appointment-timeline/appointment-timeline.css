@@ -1,0 +1,124 @@
+.calendar-widget {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-satoshi);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.event-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.timeline-container {
+  margin-bottom: 24px;
+}
+
+.time-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.timeline-track {
+  position: relative;
+  height: 64px;
+  background: var(--border-soft-35);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.timeline-block {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.block-title {
+  color: var(--on-accent);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.appointment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.appointment-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
+}
+
+.time {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  min-width: 45px;
+}
+
+.description {
+  font-size: 15px;
+  color: var(--text-primary);
+  font-weight: 600;
+  flex: 1;
+}
+
+.duration {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.appointment-item.color-primary {
+  background: var(--primary-soft-10);
+  border-left: 4px solid var(--accent-primary);
+}
+
+.appointment-item.color-secondary {
+  background: var(--secondary-soft-12);
+  border-left: 4px solid var(--accent-secondary);
+}
+
+.appointment-item.color-tertiary {
+  background: var(--tertiary-soft-13);
+  border-left: 4px solid var(--accent-tertiary);
+}
+
+.appointment-item.color-alert {
+  background: var(--alert-soft-10);
+  border-left: 4px solid var(--accent-alert);
+}
