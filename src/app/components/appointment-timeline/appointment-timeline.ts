@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../services/appointment.service';
 import { Appointment } from '../../models/appointment.model';
-import { DatePipe } from '@angular/common';
 
 interface MappedAppointment extends Appointment {
   startHourFloat: number;
@@ -15,14 +13,14 @@ interface MappedAppointment extends Appointment {
 @Component({
   selector: 'app-appointment-timeline',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule],
   templateUrl: './appointment-timeline.html',
   styleUrls: ['./appointment-timeline.css']
 })
 export class AppointmentTimelineComponent implements OnInit {
-  appointments: any[] = [];
-  listAppointments: any[] = [];
-  totalEvents = 0;
+  appointments = signal<MappedAppointment[]>([]);
+  listAppointments = computed(() => this.appointments().slice(0, 3));
+  totalEvents = computed(() => this.appointments().length);
 
   readonly START_HOUR = 8;
   readonly END_HOUR = 18;
@@ -71,9 +69,7 @@ export class AppointmentTimelineComponent implements OnInit {
           })
           .sort((a, b) => a.startHourFloat - b.startHourFloat);
 
-        this.appointments = mapped;
-        this.totalEvents = mapped.length;
-        this.listAppointments = mapped.slice(0, 3);
+        this.appointments.set(mapped);
       },
       error: (err) => {
         console.error('Error:', err);
