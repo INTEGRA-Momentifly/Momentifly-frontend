@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
-import { User } from '../models/user.model';
+import { catchError, tap, throwError } from 'rxjs';
+import { CreateUser, User } from '../models/user.model';
 const STORAGE_KEY = 'momentifly-auth';
 
 @Injectable({ providedIn: 'root' })
@@ -28,16 +28,11 @@ export class AuthService {
     );
   }
 
-  // post for register to create the user
-  // something like:
-  // register(username: string, password: string) {
-  //   this.setCredentials(username, password);
-  //   return this.http.post<User>(this.baseUrl, {
-  //     username: username,
-  //     password: password,
-  //     dailyCalorieGoal: 2000,
-  //   });
-  // }
+  register(user: CreateUser) {
+    return this.http.post<User>(this.baseUrl, user).pipe(
+      tap(() => this.setCredentials(user.username, user.password)),
+    );
+  }
 
   clear() {
     // for logout

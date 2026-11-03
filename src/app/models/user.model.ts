@@ -5,10 +5,9 @@ export interface User {
   score: number;
 }
 
-// for register, probably
-// export interface CreateUser {
-//   username: string;
-//   email: string;
-//   password: string;
-//   dailyCalorieGoal: number;
-// }
+export interface CreateUser {
+  username: string;
+  email: string;
+  password: string;
+  dailyCalorieGoal: number;
+}

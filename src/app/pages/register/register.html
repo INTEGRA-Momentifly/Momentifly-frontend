@@ -40,9 +40,12 @@
       @if (registerForm.controls.confirmPassword.touched || submitted()) {
         @if (registerForm.controls.confirmPassword.hasError('required')) {
           <small class="field-error">Confirmarea parolei este obligatorie.</small>
-        } @else if (registerForm.controls.password.value !== registerForm.controls.confirmPassword.value) {
+        } @else if (registerForm.hasError('passwordMismatch')) {
           <small class="field-error">Parolele nu coincid.</small>
         }
+      }
+      @if (errorMessage()) {
+        <p class="field-error" role="alert">{{ errorMessage() }}</p>
       }
       <button class="primary-button" type="submit">Creează cont</button>
     </form>

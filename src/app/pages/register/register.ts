@@ -1,7 +1,30 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+
+const passwordsMatchValidator: ValidatorFn = (
+  control: AbstractControl,
+): ValidationErrors | null => {
+  const password = control.get('password')?.value;
+  const confirmPassword = control.get('confirmPassword')?.value;
+
+  return typeof password === 'string' &&
+    typeof confirmPassword === 'string' &&
+    password !== confirmPassword &&
+    password.length > 0 &&
+    confirmPassword.length > 0
+    ? { passwordMismatch: true }
+    : null;
+};
 
 @Component({
   imports: [ReactiveFormsModule, RouterLink],
@@ -34,19 +57,31 @@ export class Register {
       ],
     ],
     confirmPassword: ['', Validators.required],
-  });
+  }, { validators: passwordsMatchValidator });
   readonly submitted = signal(false);
+  readonly errorMessage = signal('');
 
   submit() {
     this.submitted.set(true);
-    if (
-      this.registerForm.invalid ||
-      this.registerForm.value.password !== this.registerForm.value.confirmPassword
-    ) {
+    this.errorMessage.set('');
+    if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
       return;
     }
-    // something like: this.authService.register(username, password)...
-    // this.router.navigateByUrl('/home');
+
+    const { username, email, password } = this.registerForm.getRawValue();
+    this.authService.register({
+      username,
+      email,
+      password,
+      dailyCalorieGoal: 2000,
+    }).subscribe({
+      next: () => {
+        this.router.navigateByUrl('/home');
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorMessage.set(error.error);
+      },
+    });
   }
 }
