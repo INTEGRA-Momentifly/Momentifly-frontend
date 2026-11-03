@@ -5,9 +5,10 @@ import { filter } from 'rxjs';
 import { ButtonDirective } from 'primeng/button';
 import { Sidebar } from 'primeng/sidebar';
 import { AuthService } from './services/auth.service';
+import { QuestList } from './components/quest-list/quest-list';
 
 @Component({
-  imports: [ButtonDirective, RouterLink, RouterLinkActive, RouterOutlet, Sidebar],
+  imports: [ButtonDirective, RouterLink, RouterLinkActive, RouterOutlet, Sidebar, QuestList],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
