@@ -1,0 +1,24 @@
+ .food-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+ }
+
+ .food-nutrients{
+   display: flex;
+   gap: 16px;
+   align-items: center;
+ }
+
+ .macro {
+   color: #777;
+   font-size: 14px;
+ }
+
+ .calories {
+   font-weight: 600;
+   color: #333;
+ }
+
