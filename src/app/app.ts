@@ -1,11 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ButtonDirective } from 'primeng/button';
-import { Sidebar } from 'primeng/sidebar';
-import { QuestList } from './components/quest-list/quest-list';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {Sidebar} from 'primeng/sidebar';
+import {ButtonDirective} from 'primeng/button';
 
 @Component({
-  imports: [ButtonDirective, RouterLink, RouterLinkActive, RouterOutlet, Sidebar, QuestList],
+  imports: [RouterOutlet, Sidebar, RouterLinkActive, ButtonDirective, RouterLink],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

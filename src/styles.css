@@ -1,14 +1,8 @@
-@import "primeicons/primeicons.css";
-:root {
-  --bg-main: #F4EFE6;
-  --bg-card: #EFE9DD;
-  --bg-card-inner: #E6DFD3;
-  --text-dark: #2C2623;
-  --text-muted: #8C827A;
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
 
-  --color-orange: #C77A58;
-  --color-brown: #8D5B4C;
-  --color-green: #677862;
-  --color-terracotta: #A85A48;
-  --color-light-brown: #D98A6C;
-}/* You can add global styles to this file, and also import other style files */
+h1, h2, .calendar-month-title {
+  font-family: 'Playfair Display', serif;
+}
