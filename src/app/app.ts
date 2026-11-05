@@ -8,7 +8,7 @@ import { AuthService } from './services/auth.service';
 import { QuestList } from './components/quest-list/quest-list';
 
 @Component({
-  imports: [ButtonDirective, RouterLink, RouterLinkActive, RouterOutlet, Sidebar, QuestList],
+  imports: [ButtonDirective, RouterLink, RouterLinkActive, RouterOutlet, Sidebar],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
