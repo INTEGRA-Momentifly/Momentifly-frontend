@@ -5,6 +5,7 @@
       [binary]="true"
       [ngModel]="task().completed"
       [disabled]="true"
+      (onChange)="onToggleComplete()"
       [ariaLabel]="task().completed ? 'Completed' : 'Not completed'"
     />
     <span
