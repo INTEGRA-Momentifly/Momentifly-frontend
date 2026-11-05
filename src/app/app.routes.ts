@@ -1,7 +1,10 @@
 import { Routes } from '@angular/router';
-import {CalendarItem} from './components/calendar-item/calendar-item';
+import { Tasks } from './pages/tasks/tasks';
+import { Reminders } from './pages/reminders/reminder';
+import { Home } from './pages/home/home';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'calendar', pathMatch: 'full' },
-  { path: 'calendar', component: CalendarItem },
+  { path: '', component: Home },
+  { path: 'tasks', component: Tasks },
+  { path: 'reminders', component: Reminders },
 ];

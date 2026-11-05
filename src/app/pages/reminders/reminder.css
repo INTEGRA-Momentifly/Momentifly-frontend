@@ -1,0 +1,48 @@
+.reminders-page {
+  width: 90%;
+  margin: 35vh auto 0;
+  padding-bottom: 3rem;
+}
+
+
+
+
+#title1 {
+  margin: 2rem;
+  color: black;
+  font-family: Georgia, serif;
+}
+
+#title2 {
+  color: black;
+  font-family: Georgia, serif;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+.active-count {
+  margin-left: auto;
+  color: gray
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  color: gray
+  font-size: small
+}
+
+.header-right {
+  display: flex;
+  gap: 3rem;
+}

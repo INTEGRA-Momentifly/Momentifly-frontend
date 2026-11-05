@@ -1,0 +1,137 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  min-height: 64px;
+
+
+  padding: 0 6px;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid #e8e4dd;
+}
+
+
+
+.reminder-main {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+
+  gap: 15px;
+}
+
+.reminder-icon {
+  flex: 0 0 auto;
+
+  color: #6d6962;
+  font-size: 16px;
+}
+
+
+/* DESCRIPTION */
+
+.reminder-description {
+  margin: 0;
+
+  color: black;
+
+  font-family: Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.4;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+.reminder-right {
+  display: flex;
+  align-items: center;
+
+  flex: 0 0 auto;
+
+
+  gap: 120px;
+
+  margin-left: 20px;
+}
+
+
+
+
+.reminder-recurrence {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 29px;
+
+  padding: 0 10px;
+
+  border-radius: 8px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.recurrence-none {
+  background: #e8ede4;
+  color: #53614d;
+}
+
+.recurrence-weekly {
+  background: #f1e7d8;
+  color: #996c35;
+}
+
+.recurrence-monthly {
+  background: #eee3dc;
+  color: #815e4a;
+  margin-right: 13px;
+}
+
+.recurrence-yearly {
+  background: #f1e2dc;
+  color: #914b35;
+  margin-right: 13px;
+}
+
+
+
+
+.task-due {
+  min-width: 68px;
+
+  color: #68645d;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+
+  text-align: right;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.task-due.today {
+  color: #bd6048;
+  font-weight: 600;
+}
