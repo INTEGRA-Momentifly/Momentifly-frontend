@@ -1,0 +1,16 @@
+<div class="category-card">
+  <!-- Antet: Numele categoriei și totalul de calorii -->
+  <div class="category-header">
+    <h3>{{ displayTitle() }}</h3>
+    <span class="category-total">{{ categoryCalories() }} kcal</span>
+  </div>
+
+  <!-- Lista elementelor din această categorie -->
+  <div class="category-items">
+    @for(item of categoryLogs(); track item.id) {
+      <app-food-log-item [foodLog]="item"></app-food-log-item>
+    } @empty {
+      <p class="empty-message">Niciun aliment adăugat aici.</p>
+    }
+  </div>
+</div>
