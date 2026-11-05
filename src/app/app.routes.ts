@@ -11,6 +11,7 @@ import { authGuard } from './guards/auth.guard';
 import { CalendarItem } from './components/calendar-item/calendar-item';
 import { Home } from './pages/home/home';
 import { Subscriptions } from './pages/subscriptions/subscription-page';
+import {FoodLogList} from './components/food-log-list/food-log-list';
 
 // all routes to all pages should be added here in the end (except login + register)
 export const routes: Routes = [
@@ -27,4 +28,5 @@ export const routes: Routes = [
   { path: 'social', component: Social, canActivate: [authGuard] },
   { path: 'not-found', component: NotFound },
   { path: '**', redirectTo: 'not-found' },
+  { path: 'food_log', component: FoodLogList},
 ];
