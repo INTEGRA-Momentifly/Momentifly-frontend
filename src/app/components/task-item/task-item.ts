@@ -1,8 +1,9 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { FormsModule } from '@angular/forms';
 import { Checkbox } from 'primeng/checkbox';
+//import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   imports: [Checkbox, FormsModule],
@@ -12,7 +13,17 @@ import { Checkbox } from 'primeng/checkbox';
 })
 export class TaskItem {
   task = input.required<Task>();
+
+  statusChanged = output<Task>();
+
   private datePipe = new DatePipe('en-GB');
+
+  onToggleComplete() {
+    const currentTask = this.task();
+    const updatedTask = { ...currentTask, completed: !currentTask.completed };
+    this.statusChanged.emit(updatedTask);
+  }
+
 
   formatDueDate(dateValue: string) {
     const date = new Date(`${dateValue}T00:00:00`);
