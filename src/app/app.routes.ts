@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { Tasks } from './pages/tasks/tasks';
 import { Reminders } from './pages/reminders/reminder';
-import {Friendships} from './pages/friendships/friendship';
 import { Home } from './pages/home/home';
 import { Social } from './pages/social/social';
 import { Fitness } from './pages/fitness/fitness';
@@ -12,6 +11,7 @@ import {CalendarItem} from './components/calendar-item/calendar-item';
 
 // all routes to all pages should be added here in the end (except login + register)
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '', component: Home },
   { path: 'tasks', component: Tasks },
   { path: 'reminders', component: Reminders },

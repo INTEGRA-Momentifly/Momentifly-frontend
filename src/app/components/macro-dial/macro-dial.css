@@ -1,0 +1,114 @@
+:host {
+  display: block;
+}
+
+.dial {
+  position: relative;
+  width: clamp(96px, 100%, 132px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  touch-action: none;
+  cursor: grab;
+  outline: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.dial.dragging {
+  cursor: grabbing;
+}
+
+.dial.readonly {
+  cursor: default;
+}
+
+.dial:focus-visible {
+  box-shadow: 0 0 0 3px var(--fit-card), 0 0 0 5px var(--dial-color);
+}
+
+.accent-terracotta {
+  --dial-color: var(--fit-terracotta);
+}
+
+.accent-gold {
+  --dial-color: var(--fit-gold);
+}
+
+.accent-sage {
+  --dial-color: var(--fit-sage);
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.track,
+.value-arc {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.track {
+  stroke: var(--dial-color);
+  opacity: 0.16;
+}
+
+.value-arc {
+  stroke: var(--dial-color);
+}
+
+.readonly .value-arc {
+  opacity: 0.55;
+}
+
+.knob {
+  fill: var(--fit-bg);
+  stroke: var(--dial-color);
+  stroke-width: 3;
+  transition: r 120ms ease;
+}
+
+.dial:hover .knob,
+.dial:focus-visible .knob,
+.dragging .knob {
+  r: 8.5;
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  padding-top: 38%;
+  pointer-events: none;
+}
+
+.center-value {
+  font-family: var(--fit-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--fit-text);
+}
+
+.readonly .center-value {
+  color: var(--fit-muted);
+}
+
+.center-unit {
+  margin-left: 2px;
+  font-size: 0.8rem;
+  color: var(--fit-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .knob {
+    transition: none;
+  }
+}
