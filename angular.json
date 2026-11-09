@@ -3,7 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "4c6e90ba-283a-4435-ad49-e5e24fd279fd"
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -25,9 +25,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css", "node_modules/primeicons/primeicons.css"]
           },
           "configurations": {
             "production": {
