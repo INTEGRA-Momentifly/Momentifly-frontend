@@ -11,4 +11,8 @@ export class ReminderService {
   getReminders(): Observable<Reminder[]> {
     return this.http.get<Reminder[]>(this.baseUrl);
   }
+
+  addReminder(reminder: Partial<Reminder>): Observable<Reminder> {
+    return this.http.post<Reminder>(this.baseUrl, reminder);
+  }
 }
