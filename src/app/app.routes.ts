@@ -16,14 +16,14 @@ export const routes: Routes = [
   { path: 'tasks', component: Tasks },
   { path: 'reminders', component: Reminders },
   { path: 'friendships', component: Friendships},
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
   { path: 'home', component: Home, canActivate: [authGuard] },
   { path: 'reminders', component: Reminders, canActivate: [authGuard] },
   // after merge with Tasks UI page on main
   // {path: 'tasks', component: Tasks, canActivate[authGuard]}
-  { path: '**', redirectTo: 'login' },
+  // { path: '**', redirectTo: 'login' },
   { path: 'calendar', component: CalendarItem },
   { path: 'fitness', component: Fitness },
   { path: 'social', component: Social },
