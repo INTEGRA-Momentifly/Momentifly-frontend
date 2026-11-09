@@ -143,7 +143,7 @@ describe('ObjectivesForm', () => {
       switchTo('manual');
       type(macroInput('Proteine'), '401');
 
-      expect(component.macroErrors().protein).toBe('Introdu un număr întreg între 0 și 400.');
+      expect(component.macroErrors().protein).toBe('Introdu un număr întreg între 1 și 400.');
       expect(macroInput('Proteine').getAttribute('aria-invalid')).toBe('true');
     });
 

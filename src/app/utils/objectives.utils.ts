@@ -15,9 +15,9 @@ export const PRESET_SPLIT: Readonly<Record<MacroKey, number>> = {
 export const CALORIE_LIMITS = { min: 500, max: 10000 } as const;
 
 export const MACRO_LIMITS: Readonly<Record<MacroKey, { min: number; max: number }>> = {
-  protein: { min: 0, max: 400 },
-  carbohydrates: { min: 0, max: 800 },
-  fats: { min: 0, max: 250 },
+  protein: { min: 1, max: 400 },
+  carbohydrates: { min: 1, max: 800 },
+  fats: { min: 1, max: 250 },
 };
 
 export const MACRO_KEYS: readonly MacroKey[] = ['protein', 'carbohydrates', 'fats'];

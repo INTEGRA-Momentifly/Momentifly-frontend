@@ -100,8 +100,9 @@ export class ObjectivesForm implements OnInit {
   readonly macroErrors = computed<Record<MacroKey, string | null>>(() => {
     const macros = this.macros();
     const errors = {} as Record<MacroKey, string | null>;
+    const skip = this.mode() === 'preset' && this.caloriesError() !== null;
     for (const field of this.fields) {
-      const valid = isWholeNumberInRange(macros[field.key], field.min, field.max);
+      const valid = skip || isWholeNumberInRange(macros[field.key], field.min, field.max);
       errors[field.key] = valid
         ? null
         : this.mode() === 'preset'
