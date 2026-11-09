@@ -2,6 +2,6 @@ export interface Appointment {
   id: string;
   userId: string;
   description: string;
-  startDate: string;
-  endDate: string;
+  startDate: Date;
+  endDate: Date;
 }
