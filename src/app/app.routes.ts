@@ -18,8 +18,8 @@ export const routes: Routes = [
   { path: 'reminders', component: Reminders, canActivate: [authGuard] },
   // after merge with Tasks UI page on main
   // {path: 'tasks', component: Tasks, canActivate[authGuard]}
-  { path: 'calendar', component: Calendar },
-  { path: 'fitness', component: Fitness, canActivate: [authGuard] },
-  { path: 'social', component: Social },
   { path: '**', redirectTo: 'login' },
+  { path: 'calendar', component: Calendar },
+  { path: 'fitness', component: Fitness },
+  { path: 'social', component: Social },
 ];
