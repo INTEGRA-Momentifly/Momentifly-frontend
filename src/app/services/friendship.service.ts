@@ -8,17 +8,7 @@ export class FriendshipService {
   private http = inject(HttpClient);
   private baseUrl = 'http://localhost:8080/api/friendships';
 
-  private authHeaders = new HttpHeaders({
-      'Authorization': 'Basic ' + btoa('username11:username1')
-    });
-
-  /*getActiveFriendships(): Observable<Friendship[]> {
-    return this.http.get<Friendship[]>(`${this.baseUrl}?status=ACCEPTED`);
-  }*/
-
   getActiveFriendships(): Observable<Friendship[]> {
-    return this.http.get<Friendship[]>(`${this.baseUrl}?status=ACCEPTED`, {
-        headers: this.authHeaders
-      });
-    }
+    return this.http.get<Friendship[]>(`${this.baseUrl}?status=ACCEPTED`);
+  }
 }
