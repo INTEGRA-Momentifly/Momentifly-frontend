@@ -1,7 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { Task } from '../models/task.model';
 import { HttpClient } from '@angular/common/http';
-import { delay, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+
+export type CreateTaskRequest = Pick<
+  Task,
+  'userId' | 'description' | 'dueDate' | 'difficulty'
+>;
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -14,5 +19,16 @@ export class TaskService {
 
   updateTaskStatus(taskId: string | number, isCompleted: boolean): Observable<Task> {
     return this.http.patch<Task>(`${this.baseUrl}/${taskId}`, { completed: isCompleted });
+  }
+
+  createTask(request: CreateTaskRequest): Observable<Task> {
+    return this.http.post<Task>(
+      `${this.baseUrl}`,
+      {
+        description: request.description,
+        dueDate: request.dueDate,
+        difficulty: request.difficulty,
+      }
+    );
   }
 }
