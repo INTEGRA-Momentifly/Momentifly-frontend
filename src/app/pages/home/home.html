@@ -29,7 +29,7 @@
           {{ currentScore() }}<span class="sub-val">%</span>
         </div>
 
-        @if (scoreDifference()! > 0) {
+        @if (scoreDifference()! > 0 && scoreDifference()! != 100) {
         <span class="stat-subtext score-positive">
           +{{ scoreDifference() }}% față de săpt. trecută
         </span>
@@ -37,7 +37,7 @@
         <span class="stat-subtext score-negative">
           {{ scoreDifference() }}% față de săpt. trecută
         </span>
-        } @else {
+        } @else if (scoreDifference()! == 0){
         <span class="stat-subtext">
           La fel ca săptămâna trecută
         </span>
