@@ -26,7 +26,7 @@ export class App {
   }
 
   private updateAuthPage(url: string) {
-    this.isAuthPage.set(url === '/login' || url === '/register');
+    this.isAuthPage.set(url === '/login' || url === '/register' || url === '/not-found');
   }
 
   logout() {

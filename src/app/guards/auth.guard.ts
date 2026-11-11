@@ -8,11 +8,3 @@ export const authGuard: CanActivateFn = () => {
 
   return authService.isLoggedIn() ? true : router.createUrlTree(['/login']);
 };
-
-export const logoutGuard: CanActivateFn = () => {
-  const authService = inject(AuthService);
-  const router = inject(Router);
-
-  authService.clear();
-  return router.createUrlTree(['/login']);
-};

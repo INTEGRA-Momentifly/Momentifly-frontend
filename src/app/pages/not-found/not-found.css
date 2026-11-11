@@ -1,0 +1,43 @@
+.not-found-page {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  box-sizing: border-box;
+  padding: 2rem 1rem;
+  background: #f9f7f3;
+  color: #393735;
+  font-family: 'Avenir Next', 'Trebuchet MS', sans-serif;
+}
+
+.not-found-card {
+  width: min(100%, 32rem);
+  box-sizing: border-box;
+  padding: 3rem 2.5rem;
+  border: 1px solid #e8e0d5;
+  border-radius: 1.35rem;
+  background: #f1ede4;
+  text-align: center;
+  box-shadow: 0 1rem 2rem rgb(91 72 57 / 8%);
+}
+
+.status-code {
+  margin: 0;
+  color: #ad7558;
+  font-family: Georgia, serif;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0.5rem 0 0.75rem;
+  font-family: Georgia, serif;
+}
+
+p:not(.status-code) {
+  color: #817a72;
+}
+
+a {
+  color: #ad7558;
+  text-underline-offset: 0.15rem;
+}
