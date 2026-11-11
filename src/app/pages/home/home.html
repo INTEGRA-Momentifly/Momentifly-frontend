@@ -13,13 +13,41 @@
       <div class="circle-progress orange"></div>
     </div>
 
+
     <!-- Score Card -->
     <div class="card stat-card">
       <div class="stat-info">
         <span class="stat-title">SCOR SĂPTĂMÂNAL</span>
+
+        @if (scoreLoading()) {
+        <div class="stat-value">...</div>
+        } @else if (scoreError()) {
+        <div class="stat-value">--</div>
+        <span class="stat-subtext">Nu s-a putut încărca scorul</span>
+        } @else {
+        <div class="stat-value">
+          {{ currentScore() }}<span class="sub-val">%</span>
+        </div>
+
+        @if (scoreDifference()! > 0 && scoreDifference()! != 100) {
+        <span class="stat-subtext score-positive">
+          +{{ scoreDifference() }}% față de săpt. trecută
+        </span>
+        } @else if (scoreDifference()! < 0) {
+        <span class="stat-subtext score-negative">
+          {{ scoreDifference() }}% față de săpt. trecută
+        </span>
+        } @else if (scoreDifference()! == 0){
+        <span class="stat-subtext">
+          La fel ca săptămâna trecută
+        </span>
+        }
+        }
       </div>
+
       <div class="circle-progress brown"></div>
     </div>
+
 
     <!-- Streak Card -->
     <div class="card stat-card">
