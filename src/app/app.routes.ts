@@ -1,15 +1,16 @@
 import { Routes } from '@angular/router';
 import { Tasks } from './pages/tasks/tasks';
 import { Reminders } from './pages/reminders/reminder';
-import {Friendships} from './pages/friendships/friendship';
-import { Home } from './pages/home/home';
+import { Friendships } from './pages/friendships/friendship';
 import { Social } from './pages/social/social';
 import { Fitness } from './pages/fitness/fitness';
 import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { NotFound } from './pages/not-found/not-found';
 import { authGuard } from './guards/auth.guard';
-import {CalendarItem} from './components/calendar-item/calendar-item';
+import { CalendarItem } from './components/calendar-item/calendar-item';
+import { Home } from './pages/home/home';
+import { Subscriptions } from './pages/subscriptions/subscription-page';
 
 // all routes to all pages should be added here in the end (except login + register)
 export const routes: Routes = [
