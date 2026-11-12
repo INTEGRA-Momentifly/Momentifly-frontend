@@ -11,8 +11,8 @@ const APPOINTMENT: Appointment = {
   id: 'a1',
   userId: 'u1',
   description: 'Stand-up echipa',
-  startDate: '2026-11-03T09:00:00',
-  endDate: '2026-11-03T09:30:00',
+  startDate: new Date('2026-11-03T09:00:00'),
+  endDate: new Date ('2026-11-03T09:30:00')
 };
 
 describe('AppointmentService', () => {
