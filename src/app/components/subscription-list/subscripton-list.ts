@@ -1,4 +1,4 @@
-import {Component, computed, input, signal} from '@angular/core';
+import {Component, computed, input} from '@angular/core';
 import {Subscription} from '../../models/subscription.model';
 import {SubscriptionItem} from '../subscription-item/subscription-item';
 import {mockSubscriptions} from '../../subscriptions-mock';
@@ -15,7 +15,6 @@ export class SubscriptionList{
   subscriptions = input<Subscription[]>([]);
 
   // subscriptions = mockSubscriptions;
-
 
   totalActiveSubscriptions = computed(() => this.subscriptions().length);
 
