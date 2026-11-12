@@ -1,0 +1,67 @@
+.subscription-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 8px;
+  border-bottom: 1px solid #eae6e1;
+  font-family: inherit;
+}
+
+/* Coloana cu cerc/avatar și nume */
+.service-info{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 2;
+}
+
+.avatar{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ebe5df;
+  color: #5a524c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.service-name{
+  font-size: 15px;
+  font-weight: 500;
+  color: #1c1b18;
+}
+
+/* Coloana cu prețul */
+.price-info{
+  flex: 1;
+  text-align: right;
+  padding-right: 40px;
+}
+
+.cost{
+  font-size: 15px;
+  font-weight: 700;
+  color: #1c1b18;
+}
+
+.currency{
+  font-size: 12px;
+  color: #7a7571;
+}
+
+/* Coloana cu data */
+/* Stilul implicit (pentru date mai îndepărtate) */
+.date-info span{
+  flex: 1;
+  font-weight: 500;
+  color: #7a7571
+}
+
+/* Clasa aplicată dinamic când este aproape de expirare */
+.date-info span.urgent{
+  color: #bc4c38;
+  font-weight: 600;
+}
