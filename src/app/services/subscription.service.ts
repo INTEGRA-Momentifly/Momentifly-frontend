@@ -1,10 +1,21 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Subscription } from '../models/subscription.model';
-import {Injectable, inject} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
 
-@Injectable({providedIn: 'root'})
-export class SubscriptionService{
-  private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8080/api/subscriptions';
+@Injectable({
+  providedIn: 'root',
+})
+export class SubscriptionService {
+  private apiUrl = 'http://localhost:8080/api/subscriptions';
+
+  constructor(private http: HttpClient) {}
+
+  createSubscription(subscription: Subscription): Observable<Subscription> {
+    return this.http.post<Subscription>(this.apiUrl, subscription);
+  }
+
+  getSubscriptions() {
+    return this.http.get<any[]>('http://localhost:8080/api/subscriptions');
+  }
 }

@@ -10,7 +10,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private baseUrl = 'http://localhost:8080/api/users';
 
-  isLoggedIn = computed(() => true);
+  isLoggedIn = computed(() => this.credentials() !== null);
 
   setCredentials(username: string, password: string) {
     const value = btoa(`${username}:${password}`);
@@ -29,9 +29,9 @@ export class AuthService {
   }
 
   register(user: CreateUser) {
-    return this.http.post<User>(this.baseUrl, user).pipe(
-      tap(() => this.setCredentials(user.username, user.password)),
-    );
+    return this.http
+      .post<User>(this.baseUrl, user)
+      .pipe(tap(() => this.setCredentials(user.username, user.password)));
   }
 
   clear() {

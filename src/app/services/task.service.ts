@@ -17,6 +17,10 @@ export class TaskService {
     return this.http.get<Task[]>(this.baseUrl);
   }
 
+  updateTaskStatus(taskId: string | number, isCompleted: boolean): Observable<Task> {
+    return this.http.patch<Task>(`${this.baseUrl}/${taskId}`, { completed: isCompleted });
+  }
+
   createTask(request: CreateTaskRequest): Observable<Task> {
     return this.http.post<Task>(
       `${this.baseUrl}`,

@@ -1,6 +1,6 @@
 <div class="task-group">
   @for (task of pendingTasks(); track task.id) {
-    <app-task-item [task]="task" />
+    <app-task-item [task]="task" (statusChanged)="onTaskStatusChange($event)"/>
   }
 </div>
 
@@ -8,7 +8,7 @@
   <div class="completed-heading">Completate ({{ completedTasks().length }})</div>
   <div class="task-group completed-tasks">
     @for (task of completedTasks(); track task.id) {
-      <app-task-item [task]="task" />
+      <app-task-item [task]="task" (statusChanged)="onTaskStatusChange($event)"/>
     }
   </div>
 }
