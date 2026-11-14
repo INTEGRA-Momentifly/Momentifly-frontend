@@ -3,7 +3,6 @@ import { DatePipe } from '@angular/common';
 import { Task } from '../../models/task.model';
 import { FormsModule } from '@angular/forms';
 import { Checkbox } from 'primeng/checkbox';
-//import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
   imports: [Checkbox, FormsModule],
