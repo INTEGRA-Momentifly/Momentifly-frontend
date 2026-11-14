@@ -59,6 +59,15 @@
         <span class="dot hard"></span> <span class="stat-title">&nbsp; Hard &nbsp;</span>
       </div>
 
+      @if (loading()) {
+        <p class="stat-subtext">Se încarcă...</p>
+      } @else if (errorMessage()) {
+        <p class="stat-subtext">{{ errorMessage() }}</p>
+      } @else if (todayTasks().length === 0) {
+        <p class="stat-subtext">Niciun task pentru azi.</p>
+      } @else {
+        <app-task-list [tasks]="todayTasks()" />
+      }
 
     </div>
 
