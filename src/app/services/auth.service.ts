@@ -29,9 +29,9 @@ export class AuthService {
   }
 
   register(user: CreateUser) {
-    return this.http.post<User>(this.baseUrl, user).pipe(
-      tap(() => this.setCredentials(user.username, user.password)),
-    );
+    return this.http
+      .post<User>(this.baseUrl, user)
+      .pipe(tap(() => this.setCredentials(user.username, user.password)));
   }
 
   clear() {
