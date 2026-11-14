@@ -38,7 +38,9 @@ export class CreateSubscriptionComponent {
     this.isSubmitting = true;
     this.errorMessage = null;
 
-    this.subscriptionService.createSubscription(this.subscriptionForm.value).subscribe({
+    const subscriptionData = this.subscriptionForm.value;
+
+    this.subscriptionService.createSubscription(subscriptionData).subscribe({
       next: () => {
         this.isSubmitting = false;
         this.subscriptionCreated.emit();
@@ -46,12 +48,21 @@ export class CreateSubscriptionComponent {
       },
       error: (err) => {
         this.isSubmitting = false;
-        this.errorMessage = 'A apărut o eroare. Te rugăm să încerci din nou.';
-        console.error('Error creating subscription:', err);
+
+        if (err.status === 0) {
+          this.errorMessage = 'Nu ne putem conecta la server. Verifică conexiunea la internet!';
+        } else if (err.error && typeof err.error === 'string') {
+          this.errorMessage = err.error;
+        } else if (err.error && err.error.message) {
+          this.errorMessage = err.error.message;
+        } else {
+          this.errorMessage = 'A apărut o eroare la salvarea abonamentului. Te rugăm să încerci din nou.';
+        }
+
+        console.error('Eroare la crearea abonamentului:', err);
       },
     });
   }
-
   closePopup() {
     this.close.emit();
   }

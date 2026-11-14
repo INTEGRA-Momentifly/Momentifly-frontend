@@ -1,6 +1,8 @@
-<div class="all_page">
-  <h1 id="title1">Abonamente & Remindere</h1>
+<div>
+  <h1 id="title1">Remindere</h1>
   <section class="reminders-page">
+
+    <!-- SECȚIUNEA EXISTENTĂ PENTRU REMINDERE -->
     <div class="page-header">
       <h2 id="title2">Remindere</h2>
       <div class="header-actions">
@@ -25,11 +27,11 @@
     />
   </section>
 
+  <!-- Componenta existentă pentru Adăugare Reminder -->
   <app-add-reminder
     [displayModal]="displayAddModal()"
     (closeModal)="hideDialog()"
     (reminderAdded)="onReminderAdded($event)">
   </app-add-reminder>
+
 </div>
-
-

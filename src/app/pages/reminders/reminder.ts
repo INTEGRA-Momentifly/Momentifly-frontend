@@ -2,6 +2,8 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReminderList } from '../../components/reminder-list/reminder-list';
 import { AddReminderComponent } from '../../components/add-reminder/add-reminder';
+// 1. IMPORTĂM NOUA COMPONENTĂ
+import { CreateSubscriptionComponent } from '../../components/create-subscription/create-subscription';
 import { Reminder } from '../../models/reminder.model';
 import { ReminderService } from '../../services/reminder.service';
 import { ButtonModule } from 'primeng/button';
@@ -13,6 +15,8 @@ import { ButtonModule } from 'primeng/button';
     CommonModule,
     ReminderList,
     AddReminderComponent,
+    // 2. ADAUGĂM COMPONENTA AICI
+    CreateSubscriptionComponent,
     ButtonModule,
   ],
   templateUrl: './reminder.html',
@@ -24,6 +28,8 @@ export class Reminders implements OnInit {
   reminders = signal<Reminder[]>([]);
   loading = signal(true);
   displayAddModal = signal(false);
+
+
 
   ngOnInit(): void {
     this.loadReminders();
@@ -57,4 +63,5 @@ export class Reminders implements OnInit {
   onReminderAdded(newReminder: Reminder): void {
     this.reminders.update((current) => [...current, newReminder]);
   }
+
 }

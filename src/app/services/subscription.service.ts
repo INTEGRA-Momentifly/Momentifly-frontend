@@ -14,4 +14,8 @@ export class SubscriptionService {
   createSubscription(subscription: Subscription): Observable<Subscription> {
     return this.http.post<Subscription>(this.apiUrl, subscription);
   }
+
+  getSubscriptions() {
+    return this.http.get<any[]>('http://localhost:8080/api/subscriptions');
+  }
 }
