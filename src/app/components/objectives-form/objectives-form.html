@@ -1,0 +1,128 @@
+<form class="objectives-form" novalidate (submit)="$event.preventDefault(); submit()">
+  <fieldset class="form-body" [disabled]="submitting()">
+    <legend class="visually-hidden">Obiective zilnice</legend>
+
+    <div class="mode-row">
+      <span class="section-label" [id]="formId + '-mode-label'">Mod de calcul</span>
+      <div class="segmented" role="radiogroup" [attr.aria-labelledby]="formId + '-mode-label'">
+        @for (option of modes; track option.value) {
+          <button
+            type="button"
+            role="radio"
+            class="segment"
+            [attr.data-mode]="option.value"
+            [class.active]="mode() === option.value"
+            [attr.aria-checked]="mode() === option.value"
+            [attr.tabindex]="mode() === option.value ? 0 : -1"
+            (click)="setMode(option.value)"
+            (keydown)="onModeKeydown($event)"
+          >
+            {{ option.label }}
+          </button>
+        }
+      </div>
+      <p class="mode-hint">
+        @if (mode() === 'preset') {
+          Introdu caloriile, iar macronutrienții se calculează automat.
+        } @else {
+          Ajustează macronutrienții, iar caloriile se calculează automat.
+        }
+      </p>
+    </div>
+
+    <div class="calories-field">
+      <label class="field-label" [for]="formId + '-calories'">Calorii (kcal)</label>
+      <div class="calories-input" [class.locked]="mode() === 'manual'">
+        <input
+          type="number"
+          inputmode="numeric"
+          step="1"
+          [min]="500"
+          [max]="10000"
+          [id]="formId + '-calories'"
+          [value]="caloriesDisplay()"
+          [readOnly]="mode() === 'manual'"
+          [attr.placeholder]="mode() === 'preset' ? 'ex. 2000' : null"
+          [attr.aria-invalid]="showCaloriesError()"
+          [attr.aria-describedby]="formId + '-calories-hint ' + (showCaloriesError() ? errorId('calories') : '')"
+          (input)="onCaloriesInput($event)"
+          (blur)="caloriesTouched.set(true)"
+        />
+        @if (mode() === 'manual') {
+          <i class="pi pi-lock lock-icon" aria-hidden="true"></i>
+        }
+      </div>
+      <p class="field-hint" [id]="formId + '-calories-hint'">
+        {{ mode() === 'manual' ? 'Calculat automat din macronutrienți (4P + 4C + 9G).' : 'Între 500 și 10.000 kcal.' }}
+      </p>
+      @if (showCaloriesError()) {
+        <p class="field-error" [id]="errorId('calories')">{{ caloriesError() }}</p>
+      }
+    </div>
+
+    <div class="dials">
+      @for (field of fields; track field.key) {
+        <div class="dial-field" [class]="'accent-' + field.accent">
+          <span class="section-label dial-label" [id]="formId + '-' + field.key + '-label'">{{ field.label }}</span>
+          <app-macro-dial
+            [value]="macros()[field.key]"
+            [min]="field.min"
+            [max]="field.max"
+            [accent]="field.accent"
+            [labelId]="formId + '-' + field.key + '-label'"
+            [describedBy]="macroErrors()[field.key] ? errorId(field.key) : null"
+            [readonly]="mode() === 'preset'"
+            [disabled]="submitting()"
+            (valueChange)="setMacro(field.key, $event)"
+          />
+          <div class="stepper">
+            <input
+              type="number"
+              inputmode="numeric"
+              step="1"
+              [min]="field.min"
+              [max]="field.max"
+              [value]="macros()[field.key]"
+              [readOnly]="mode() === 'preset'"
+              [attr.aria-label]="field.label + ' în grame'"
+              [attr.aria-invalid]="macroErrors()[field.key] !== null"
+              [attr.aria-describedby]="macroErrors()[field.key] ? errorId(field.key) : null"
+              (input)="onMacroInput(field.key, $event)"
+            />
+            <span class="stepper-unit">g</span>
+          </div>
+          @if (macroErrors()[field.key]; as message) {
+            <p class="field-error" [id]="errorId(field.key)">{{ message }}</p>
+          }
+        </div>
+      }
+    </div>
+
+    <ul class="split-summary" aria-live="polite">
+      @for (item of summary(); track item.key) {
+        <li [class]="'accent-' + item.accent">
+          <span class="dot" aria-hidden="true"></span>
+          {{ item.label }} <strong>{{ item.kcal }} kcal</strong> · {{ item.share }}%
+        </li>
+      }
+    </ul>
+  </fieldset>
+
+  @if (error(); as message) {
+    <p class="submit-error" role="alert">{{ message }}</p>
+  }
+
+  <div class="actions">
+    @if (variant() === 'edit') {
+      <button type="button" class="btn btn-ghost" [disabled]="submitting()" (click)="cancelled.emit()">Anulează</button>
+    }
+    <button type="submit" class="btn btn-primary" [disabled]="!valid() || submitting()" [attr.aria-busy]="submitting()">
+      @if (submitting()) {
+        <span class="spinner" aria-hidden="true"></span>
+        Se salvează…
+      } @else {
+        {{ variant() === 'edit' ? 'Salvează' : 'Salvează obiectivele' }}
+      }
+    </button>
+  </div>
+</form>

@@ -1,0 +1,36 @@
+<div
+  class="dial"
+  role="slider"
+  [class]="'accent-' + accent()"
+  [class.readonly]="readonly()"
+  [class.dragging]="dragging()"
+  [attr.tabindex]="disabled() ? -1 : 0"
+  [attr.aria-labelledby]="labelId()"
+  [attr.aria-describedby]="describedBy()"
+  [attr.aria-valuemin]="min()"
+  [attr.aria-valuemax]="max()"
+  [attr.aria-valuenow]="clampedValue()"
+  [attr.aria-valuetext]="value() + ' grame'"
+  [attr.aria-readonly]="readonly() || null"
+  [attr.aria-disabled]="disabled() || null"
+  (pointerdown)="onPointerDown($event)"
+  (pointermove)="onPointerMove($event)"
+  (pointerup)="onPointerUp($event)"
+  (pointercancel)="onPointerUp($event)"
+  (keydown)="onKeydown($event)"
+>
+  <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+    <path class="track" [attr.d]="trackPath" />
+    @if (valuePath(); as path) {
+      <path class="value-arc" [attr.d]="path" />
+    }
+    @if (interactive()) {
+      <circle class="knob" r="7" [attr.cx]="knob().x" [attr.cy]="knob().y" />
+    }
+  </svg>
+
+  <span class="center" aria-hidden="true">
+    <span class="center-value">{{ value() }}</span>
+    <span class="center-unit">g</span>
+  </span>
+</div>

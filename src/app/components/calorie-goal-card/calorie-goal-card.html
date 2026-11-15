@@ -1,0 +1,31 @@
+<section class="card" aria-labelledby="calorie-goal-title">
+  <header class="card-header">
+    <h2 id="calorie-goal-title" class="card-title">Obiectiv caloric zilnic</h2>
+    <button type="button" class="edit-button" aria-label="Editează obiectivele" title="Editează obiectivele" (click)="edit.emit()">
+      <i class="pi pi-pencil" aria-hidden="true"></i>
+    </button>
+  </header>
+
+  <div class="ring" [class.over]="over()" role="img" [attr.aria-label]="ringLabel()">
+    <svg [attr.viewBox]="'0 0 ' + size + ' ' + size" aria-hidden="true" focusable="false">
+      <circle class="ring-track" [attr.cx]="size / 2" [attr.cy]="size / 2" [attr.r]="radius" [attr.stroke-width]="stroke" />
+      <circle
+        class="ring-progress"
+        [attr.cx]="size / 2"
+        [attr.cy]="size / 2"
+        [attr.r]="radius"
+        [attr.stroke-width]="stroke"
+        [attr.stroke-dasharray]="circumference"
+        [style.stroke-dashoffset]="dashOffset()"
+      />
+    </svg>
+    <div class="ring-center" aria-hidden="true">
+      <span class="ring-value">{{ format(over() ? -remaining() : remaining()) }}</span>
+      <span class="ring-caption">{{ over() ? 'kcal peste obiectiv' : 'kcal rămase' }}</span>
+    </div>
+  </div>
+
+  <p class="consumed">
+    <strong>{{ format(consumed()) }}</strong> din {{ format(goal()) }} kcal
+  </p>
+</section>
