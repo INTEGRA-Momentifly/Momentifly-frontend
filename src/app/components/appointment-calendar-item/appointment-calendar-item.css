@@ -12,13 +12,6 @@
   margin-bottom: 24px;
 }
 
-/* Grupează titlul și butonul de programare pe stânga */
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
 .calendar-header h1 {
   font-size: 24px;
   font-weight: 600;
@@ -26,7 +19,6 @@
   font-family: 'Playfair Display', serif;
 }
 
-/* Buton de programare nouă (fără funcție atașată) */
 .btn-new-appointment {
   background-color: #a37b63;
   border: none;
@@ -76,7 +68,7 @@
 }
 
 /* =========================================
-1. ZI (Layout nou pe verticală cu linii)
+1. ZI (Layout pe verticală cu linii)
    ========================================= */
 .day-schedule-view {
   display: flex;
@@ -127,24 +119,30 @@
   font-style: italic;
 }
 
-/* =========================================
+/* =============================
    2. SĂPTĂMÂNĂ (Grila pe 7 zile)
-   ========================================= */
+   ============================= */
 .calendar-grid {
   display: grid;
-  grid-template-columns: 120px repeat(7, 1fr);
+  /* 110px pentru coloana de ore din stânga, iar cele 7 zile împart restul în mod egal */
+  grid-template-columns: 110px repeat(7, minmax(0, 1fr));
   gap: 1px;
   background-color: #e6dfd5;
   border: 1px solid #e6dfd5;
   border-radius: 8px;
   overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .grid-cell {
   background-color: #ffffff;
-  padding: 12px;
-  min-height: 80px;
+  padding: 8px;
+  height: 120px;
+  max-height: 120px;
   box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
 }
 
 .header-cell {
@@ -156,6 +154,7 @@
   justify-content: center;
   align-items: center;
   gap: 2px;
+  min-height: 65px;
 }
 
 .header-cell.empty {
@@ -196,11 +195,42 @@
 .slot-cell {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+}
+
+.week-appointment-chip {
+  background-color: #f7f4ee;
+  border-left: 3px solid #8c6d53;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  color: #2c221e;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.chip-time {
+  font-size: 10px;
+  color: #8c6d53;
+  font-weight: 500;
+}
+
+.chip-desc {
+  font-weight: 600;
+  color: #2c221e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
 
 /* =========================================
-   3. LUNĂ (Afișaj simplificat cu titluri text)
+   3. LUNĂ (Afișaj cu limitare și popover)
    ========================================= */
 .month-grid-container {
   display: flex;
@@ -234,6 +264,7 @@
 }
 
 .month-cell {
+  position: relative;
   background-color: #ffffff;
   min-height: 110px;
   padding: 8px;
@@ -263,11 +294,9 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  overflow-y: auto;
-  max-height: 80px;
+  overflow: hidden;
 }
 
-/* Stil pentru descrierile simple randate direct ca <p> în modul Lună */
 .month-appointments-list p {
   font-size: 11px;
   background-color: #f7f4ee;
@@ -279,4 +308,110 @@
   overflow: hidden;
   text-overflow: ellipsis;
   border-left: 2px solid #8c6d53;
+}
+
+.more-appointments-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: #8c6d53;
+  background-color: #f1ede6;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.more-appointments-badge:hover {
+  background-color: #e6dfd5;
+}
+
+/* =========================================
+   POPOVER / PANOU FLOTANT LA HOVER (LUNĂ)
+   ========================================= */
+.day-popover {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  background-color: #ffffff;
+  border: 1px solid #d9cbb8;
+  box-shadow: 0 8px 20px rgba(44, 34, 30, 0.15);
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.month-cell:hover .day-popover {
+  display: block;
+}
+
+.popover-header {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8c6d53;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #f1ede6;
+  padding-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.popover-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.popover-item {
+  font-size: 11px;
+  color: #2c221e;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f7f4ee;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border-left: 2px solid #8c6d53;
+}
+
+.popover-time {
+  font-weight: 600;
+  color: #8c6d53;
+  white-space: nowrap;
+}
+
+.popover-desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================
+   POPOVER / PANOU FLOTANT LA HOVER (SĂPTĂMÂNĂ)
+   ========================================= */
+.week-slot-cell {
+  position: relative;
+}
+
+.week-slot-cell:hover .week-slot-popover {
+  display: block;
+}
+
+.week-slot-popover {
+  display: none;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 100;
+  background-color: #ffffff;
+  border: 1px solid #d9cbb8;
+  box-shadow: 0 8px 20px rgba(44, 34, 30, 0.15);
+  border-radius: 8px;
+  padding: 10px;
+  width: 220px;
+  max-height: 180px;
+  overflow-y: auto;
 }

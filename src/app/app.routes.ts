@@ -8,7 +8,7 @@ import { Login } from './pages/login/login';
 import { Register } from './pages/register/register';
 import { NotFound } from './pages/not-found/not-found';
 import { authGuard } from './guards/auth.guard';
-import { CalendarItem } from './components/calendar-item/calendar-item';
+import { AppointmentCalendarItem } from './components/appointment-calendar-item/appointment-calendar-item';
 import { Home } from './pages/home/home';
 import { Subscriptions } from './pages/subscriptions/subscription-page';
 
@@ -22,7 +22,7 @@ export const routes: Routes = [
   { path: 'tasks', component: Tasks, canActivate: [authGuard] },
   { path: 'reminders', component: Reminders, canActivate: [authGuard] },
   { path: 'friendships', component: Friendships, canActivate: [authGuard] },
-  { path: 'calendar', component: CalendarItem, canActivate: [authGuard] },
+  { path: 'calendar', component: AppointmentCalendarItem, canActivate: [authGuard] },
   { path: 'fitness', component: Fitness, canActivate: [authGuard] },
   { path: 'social', component: Social, canActivate: [authGuard] },
   { path: 'not-found', component: NotFound },

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
 import {Appointment} from '../../models/appointment.model';
 import {AppointmentService} from '../../services/appointment.service';
 import {CommonModule} from '@angular/common';
@@ -8,20 +8,31 @@ import {mockAppointments} from '../../appointment-calendar-mock';
 @Component({
   imports: [CommonModule, AppointmentItem],
   selector:'app-appointment-calendar',
-  templateUrl:'./calendar-item.html',
-  styleUrl:'./calendar-item.css'
+  templateUrl:'./appointment-calendar-item.html',
+  styleUrl:'./appointment-calendar-item.css'
 })
 
-export class CalendarItem{
+export class AppointmentCalendarItem {
 
-  appointments: Appointment[] = [];
-  // appointments = mockAppointments;
+  // appointments = signal<Appointment[]>([]);
+
+  appointments = signal<Appointment[]>(
+    mockAppointments.map(app => ({
+      ...app,
+      startDate: new Date(app.startDate),
+      endDate: new Date(app.endDate)
+    }))
+  );
 
   private appointmentService = inject(AppointmentService);
 
-  currentView: 'day' | 'week' | 'month' = 'week';
+  currentView: 'day' | 'week' | 'month' = 'day';
   currentDate: Date = new Date();
   weekDays: { name: string; date: Date | null }[] = [];
+
+  ngOnInit() {
+    this.loadAppointmentsForCurrentView();
+  }
 
   changeView(view: 'day' | 'week' | 'month') {
     this.currentView = view;
@@ -55,24 +66,27 @@ export class CalendarItem{
     }
 
     this.appointmentService.getAppointments(startDate, endDate).subscribe({
-      next: (data) => this.appointments = data.map(app => ({
-        ...app,
-        startDate: new Date(app.startDate),
-        endDate: new Date(app.endDate)
-      })),
+      next: (data) => {
+        const mappedData = data.map(app =>({
+          ...app,
+          startDate: new Date(app.startDate),
+          endDate: new Date(app.endDate)
+        }));
+        this.appointments.set(mappedData);
+      },
       error: (err) => console.error('Eroare la încărcarea programărilor:', err)
     })
   }
 
   getAppointmentsForTimeSlot(dayDate: Date | null, slot: 'dimineata' | 'amiaza' | 'seara'): Appointment[] {
     if(!dayDate) return [];
-    return this.appointments.filter(app => {
+    return this.appointments().filter(app => {
       const appDate = new Date(app.startDate);
 
       const isSameDay =
         appDate.getFullYear() == dayDate.getFullYear() &&
         appDate.getMonth() == dayDate.getMonth() &&
-        appDate.getDay() == dayDate.getDay();
+        appDate.getDate() == dayDate.getDate();
 
       if(!isSameDay) return false;
 
@@ -87,12 +101,42 @@ export class CalendarItem{
   }
 
   getAppointmentsForDay(dayDate: Date): Appointment[] {
-    return this.appointments.filter(app => {
+    const dayAppointments = this.appointments().filter(app => {
       const appDate = new Date(app.startDate);
       return appDate.getFullYear() === dayDate.getFullYear() &&
         appDate.getMonth() === dayDate.getMonth() &&
         appDate.getDate() === dayDate.getDate();
     });
+
+    return dayAppointments.sort((a, b) => {
+      return new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
+    });
+  }
+
+  getVisibleAppointmentsForDay(dayDate: Date): Appointment[] {
+    const allAppointments = this.getAppointmentsForDay(dayDate);
+    return allAppointments.slice(0, 2);
+  }
+
+  hasMoreAppointments(dayDate: Date): boolean {
+    return this.getAppointmentsForDay(dayDate).length > 2;
+  }
+
+  getRemainingAppointmentsCount(dayDate: Date): number {
+    return this.getAppointmentsForDay(dayDate).length - 2;
+  }
+
+  getVisibleAppointmentsForTimeSlot(dayDate: Date | null, slot: 'dimineata' | 'amiaza' | 'seara'): Appointment[] {
+    const allAppointments = this.getAppointmentsForTimeSlot(dayDate, slot);
+    return allAppointments.slice(0, 2);
+  }
+
+  hasMoreAppointmentsForTimeSlot(dayDate: Date | null, slot: 'dimineata' | 'amiaza' | 'seara'): boolean {
+    return this.getAppointmentsForTimeSlot(dayDate, slot).length > 2;
+  }
+
+  getRemainingAppointmentsCountForTimeSlot(dayDate: Date | null, slot: 'dimineata' | 'amiaza' | 'seara'): number {
+    return this.getAppointmentsForTimeSlot(dayDate, slot).length - 2;
   }
 
   getFormattedHeaderTitle(): string {
@@ -184,14 +228,25 @@ export class CalendarItem{
     }
   }
 
-  private formatDate(date: Date, type: 'start' | 'end'): string{
+  private formatDate(date: Date, type: 'start' | 'end'): string {
     const d = new Date(date);
-    if(type == 'start') {
+    if (type == 'start') {
       d.setHours(0, 0, 0, 0);
     } else {
-      d.setHours(23,59,59,999);
+      d.setHours(23, 59, 59, 999);
     }
-    return d.toISOString();
+
+    // Construim manual formatul YYYY-MM-DDTHH:mm:ss fără 'Z'
+    const pad = (n: number) => n.toString().padStart(2, '0');
+
+    const year = d.getFullYear();
+    const month = pad(d.getMonth() + 1);
+    const day = pad(d.getDate());
+    const hours = pad(d.getHours());
+    const minutes = pad(d.getMinutes());
+    const seconds = pad(d.getSeconds());
+
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   }
 
   private getWeekRange(date: Date){
