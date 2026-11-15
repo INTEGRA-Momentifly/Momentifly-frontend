@@ -1,0 +1,158 @@
+<div class="calendar-page">
+  <!-- Header: Titlu și View Switcher -->
+  <div class="calendar-header">
+    <h1>Calendarul tău</h1>
+    <button class="btn-new-appointment">+ Programare nouă</button>
+    <div class="view-switcher">
+      <button [class.active]="currentView === 'day'" (click)="changeView('day')">Zi</button>
+      <button [class.active]="currentView === 'week'" (click)="changeView('week')">Săptămână</button>
+      <button [class.active]="currentView === 'month'" (click)="changeView('month')">Lună</button>
+    </div>
+  </div>
+
+  <h2 class="calendar-month-title">{{ getFormattedHeaderTitle() }}</h2>
+
+  <!-- A. LAYOUTUL PENTRU ZI (Orar pe verticală: Dimineață, Amiază, Seară) -->
+  @if (currentView === 'day') {
+    <div class="day-schedule-view">
+
+      <!-- DIMINEAȚĂ -->
+      <div class="time-slot-group">
+        <div class="slot-header">
+          <span class="slot-title">DIMINEAȚĂ</span>
+          <span class="slot-hours">07:00 – 12:00</span>
+          <div class="slot-line"></div>
+        </div>
+        <div class="slot-content">
+          @for (app of getAppointmentsForTimeSlot(currentDate, 'dimineata'); track app.id) {
+            <app-appointment-item [appointment]="app"></app-appointment-item>
+          } @empty {
+            <span class="empty-text">Liber</span>
+          }
+        </div>
+      </div>
+
+      <!-- PRÂNZ -->
+      <div class="time-slot-group">
+        <div class="slot-header">
+          <span class="slot-title">PRÂNZ</span>
+          <span class="slot-hours">12:00 – 17:00</span>
+          <div class="slot-line"></div>
+        </div>
+        <div class="slot-content">
+          @for (app of getAppointmentsForTimeSlot(currentDate, 'amiaza'); track app.id) {
+            <app-appointment-item [appointment]="app"></app-appointment-item>
+          } @empty {
+            <span class="empty-text">Liber</span>
+          }
+        </div>
+      </div>
+
+      <!-- SEARĂ -->
+      <div class="time-slot-group">
+        <div class="slot-header">
+          <span class="slot-title">SEARĂ</span>
+          <span class="slot-hours">17:00 – 22:00</span>
+          <div class="slot-line"></div>
+        </div>
+        <div class="slot-content">
+          @for (app of getAppointmentsForTimeSlot(currentDate, 'seara'); track app.id) {
+            <app-appointment-item [appointment]="app"></app-appointment-item>
+          } @empty {
+            <span class="empty-text">Liber</span>
+          }
+        </div>
+      </div>
+
+    </div>
+  }
+
+  <!-- B. LAYOUTUL PENTRU SĂPTĂMÂNĂ (Dacă vrei să rămână separat, îl poți păstra sau adapta după preferințe) -->
+  @if (currentView === 'week') {
+    <div class="calendar-grid">
+      <div class="grid-cell header-cell empty"></div>
+      @for (day of weekDays; track day.date) {
+        <div class="grid-cell header-cell day-header" [class.highlighted]="isCurrentDay(day.date)">
+          @if (day.date) {
+            <span class="day-name">{{ getShortDayName(day.date) }}</span>
+            <span class="day-num">{{ day.date | date:'d' }}</span>
+            <span class="day-month">{{ day.date | date:'MMM' }}</span>
+          }
+        </div>
+      }
+
+      <!-- Rânduri ore săptămână -->
+      <div class="grid-cell time-label">
+        <span class="slot-title">DIMINEAȚĂ</span>
+        <span class="slot-hours">07:00 – 12:00</span>
+      </div>
+      @for (day of weekDays; track day.date) {
+        <div class="grid-cell slot-cell">
+          @if (day.date) {
+            @for (app of getAppointmentsForTimeSlot(day.date, 'dimineata'); track app.id) {
+              <app-appointment-item [appointment]="app"></app-appointment-item>
+            }
+          }
+        </div>
+      }
+
+      <div class="grid-cell time-label">
+        <span class="slot-title">AMIAZĂ</span>
+        <span class="slot-hours">12:00 – 17:00</span>
+      </div>
+      @for (day of weekDays; track day.date) {
+        <div class="grid-cell slot-cell">
+          @if (day.date) {
+            @for (app of getAppointmentsForTimeSlot(day.date, 'amiaza'); track app.id) {
+              <app-appointment-item [appointment]="app"></app-appointment-item>
+            }
+          }
+        </div>
+      }
+
+      <div class="grid-cell time-label">
+        <span class="slot-title">SEARĂ</span>
+        <span class="slot-hours">17:00 – 22:00</span>
+      </div>
+      @for (day of weekDays; track day.date) {
+        <div class="grid-cell slot-cell">
+          @if (day.date) {
+            @for (app of getAppointmentsForTimeSlot(day.date, 'seara'); track app.id) {
+              <app-appointment-item [appointment]="app"></app-appointment-item>
+            }
+          }
+        </div>
+      }
+    </div>
+  }
+
+  <!-- C. LAYOUTUL PENTRU LUNĂ -->
+  @if (currentView === 'month') {
+    <div class="month-grid-container">
+      <div class="month-header-row">
+        <div class="month-header-cell">LU</div>
+        <div class="month-header-cell">MA</div>
+        <div class="month-header-cell">MI</div>
+        <div class="month-header-cell">JO</div>
+        <div class="month-header-cell">VI</div>
+        <div class="month-header-cell">SÂ</div>
+        <div class="month-header-cell">DU</div>
+      </div>
+
+      <div class="month-days-grid">
+        @for (day of weekDays; track $index) {
+          <div class="month-cell" [class.empty-cell]="!day.date" [class.highlighted]="isCurrentDay(day.date)">
+            @if (day.date) {
+              <div class="month-day-number">{{ day.date | date:'d' }}</div>
+              <div class="month-appointments-list">
+                @for (app of getAppointmentsForDay(day.date); track app.id) {
+                  <p>{{ app.description }}</p>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

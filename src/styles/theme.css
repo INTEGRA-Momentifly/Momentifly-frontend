@@ -1,0 +1,225 @@
+/* Usage: <html data-theme="light|dark"> */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap');
+
+/* Shared Tokens */
+:root {
+  --font-fraunces: 'Fraunces', serif;
+  --font-satoshi: 'Satoshi', sans-serif;
+  --radius-card: 18px;
+
+  --color-terracotta: #A8735A;   /* Primary */
+  --color-sage: #7A8B6F;         /* Secondary */
+  --color-gold: #C99B6B;         /* Tertiary */
+  --color-brick: #B5654F;        /* Alert */
+  --color-bg: #FAF7F2;
+  --color-card: #F0EBE3;
+  --color-border: #E8E1D6;
+  --color-text: #2C2823;
+  --color-muted: #6B6459;
+}
+
+/* Light Mode (Default) */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* Backgrounds */
+  --bg-main: #FAF7F2;
+  --bg-sidebar: #F0EBE3;
+  --bg-card: #F0EBE3;
+  --bg-input: #FAF7F2;
+  --border: #E8E1D6;
+
+  /* Text */
+  --text-primary: #2C2823;
+  --text-secondary: #6B6459;
+  --text-soft: #3A352D;
+  --muted-light: #C8BFB4;
+
+  /* Accents */
+  --accent-primary: #A8735A;
+  --accent-primary-strong: #7A5540;
+  --accent-secondary: #7A8B6F;
+  --accent-secondary-strong: #4E6047;
+  --accent-tertiary: #C99B6B;
+  --accent-tertiary-strong: #8C6A3A;
+  --accent-alert: #B5654F;
+  --accent-alert-strong: #7D3A28;
+
+  /* On-Accent */
+  --on-accent: #FAF7F2;
+  --toggle-knob: #FAF7F2;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-overlay: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --shadow-login: 0 4px 24px rgba(44, 40, 35, 0.07);
+  --active-glow: none;
+
+  /* Overlays & Hover */
+  --overlay: rgba(44, 40, 35, 0.35);
+  --surface-hover: rgba(240, 235, 227, 0.5);
+
+  /* Transparent: Primary */
+  --primary-soft-05: rgba(168, 115, 90, 0.05);
+  --primary-soft-06: rgba(168, 115, 90, 0.06);
+  --primary-soft-07: rgba(168, 115, 90, 0.07);
+  --primary-soft-08: rgba(168, 115, 90, 0.08);
+  --primary-soft-09: rgba(168, 115, 90, 0.09);
+  --primary-soft-10: rgba(168, 115, 90, 0.1);
+  --primary-soft-11: rgba(168, 115, 90, 0.11);
+  --primary-soft-12: rgba(168, 115, 90, 0.12);
+  --primary-soft-13: rgba(168, 115, 90, 0.13);
+  --primary-soft-14: rgba(168, 115, 90, 0.14);
+  --primary-soft-15: rgba(168, 115, 90, 0.15);
+  --primary-soft-16: rgba(168, 115, 90, 0.16);
+  --primary-soft-18: rgba(168, 115, 90, 0.18);
+
+  /* Transparent: Secondary */
+  --secondary-soft-08: rgba(122, 139, 111, 0.08);
+  --secondary-soft-12: rgba(122, 139, 111, 0.12);
+  --secondary-soft-13: rgba(122, 139, 111, 0.13);
+  --secondary-soft-14: rgba(122, 139, 111, 0.14);
+  --secondary-soft-15: rgba(122, 139, 111, 0.15);
+  --secondary-soft-16: rgba(122, 139, 111, 0.16);
+  --secondary-soft-18: rgba(122, 139, 111, 0.18);
+
+  /* Transparent: Tertiary */
+  --tertiary-soft-13: rgba(201, 155, 107, 0.13);
+  --tertiary-soft-15: rgba(201, 155, 107, 0.15);
+  --tertiary-soft-16: rgba(201, 155, 107, 0.16);
+  --tertiary-soft-18: rgba(201, 155, 107, 0.18);
+
+  /* Transparent: Alert */
+  --alert-soft-10: rgba(181, 101, 79, 0.1);
+  --alert-soft-12: rgba(181, 101, 79, 0.12);
+  --alert-soft-13: rgba(181, 101, 79, 0.13);
+  --alert-soft-16: rgba(181, 101, 79, 0.16);
+  --alert-soft-25: rgba(181, 101, 79, 0.25);
+
+  /* Transparent: Muted */
+  --muted-soft-13: rgba(107, 100, 89, 0.13);
+  --muted-soft-18: rgba(107, 100, 89, 0.18);
+  --muted-soft-40: rgba(107, 100, 89, 0.4);
+
+  /* Transparent: Borders */
+  --border-soft-35: rgba(232, 225, 214, 0.35);
+  --border-soft-40: rgba(232, 225, 214, 0.4);
+  --border-soft-50: rgba(232, 225, 214, 0.5);
+  --border-soft-60: rgba(232, 225, 214, 0.6);
+}
+
+/* Dark Mode */
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg-main: #1C1A17;
+  --bg-sidebar: #211E1A;
+  --bg-card: #26221D;
+  --bg-input: #211E1A;
+  --border: #35302A;
+
+  /* Text */
+  --text-primary: #F0EBE3;
+  --text-secondary: #A39C8F;
+  --text-soft: #D8D1C7;
+  --muted-light: #716A60;
+
+  /* Accents */
+  --accent-primary: #B98268;
+  --accent-primary-strong: #D2A089;
+  --accent-secondary: #8A9B80;
+  --accent-secondary-strong: #A9B6A1;
+  --accent-tertiary: #D4AC7E;
+  --accent-tertiary-strong: #E1C29C;
+  --accent-alert: #C47762;
+  --accent-alert-strong: #D99A88;
+
+  /* On-Accent */
+  --on-accent: #1C1A17;
+  --toggle-knob: #F0EBE3;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-menu: 0 8px 24px rgba(0, 0, 0, 0.24);
+  --shadow-overlay: 0 16px 48px rgba(0, 0, 0, 0.32);
+  --shadow-login: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --active-glow: 0 0 8px rgba(184, 130, 104, 0.3);
+
+  /* Overlays & Hover */
+  --overlay: rgba(14, 12, 10, 0.62);
+  --surface-hover: rgba(53, 48, 42, 0.7);
+
+  /* Transparent: Primary */
+  --primary-soft-05: rgba(185, 130, 104, 0.05);
+  --primary-soft-06: rgba(185, 130, 104, 0.06);
+  --primary-soft-07: rgba(185, 130, 104, 0.07);
+  --primary-soft-08: rgba(185, 130, 104, 0.08);
+  --primary-soft-09: rgba(185, 130, 104, 0.09);
+  --primary-soft-10: rgba(185, 130, 104, 0.1);
+  --primary-soft-11: rgba(185, 130, 104, 0.11);
+  --primary-soft-12: rgba(185, 130, 104, 0.12);
+  --primary-soft-13: rgba(185, 130, 104, 0.13);
+  --primary-soft-14: rgba(185, 130, 104, 0.14);
+  --primary-soft-15: rgba(185, 130, 104, 0.15);
+  --primary-soft-16: rgba(185, 130, 104, 0.16);
+  --primary-soft-18: rgba(185, 130, 104, 0.18);
+
+  /* Transparent: Secondary */
+  --secondary-soft-08: rgba(138, 155, 128, 0.08);
+  --secondary-soft-12: rgba(138, 155, 128, 0.12);
+  --secondary-soft-13: rgba(138, 155, 128, 0.13);
+  --secondary-soft-14: rgba(138, 155, 128, 0.14);
+  --secondary-soft-15: rgba(138, 155, 128, 0.15);
+  --secondary-soft-16: rgba(138, 155, 128, 0.16);
+  --secondary-soft-18: rgba(138, 155, 128, 0.18);
+
+  /* Transparent: Tertiary */
+  --tertiary-soft-13: rgba(212, 172, 126, 0.13);
+  --tertiary-soft-15: rgba(212, 172, 126, 0.15);
+  --tertiary-soft-16: rgba(212, 172, 126, 0.16);
+  --tertiary-soft-18: rgba(212, 172, 126, 0.18);
+
+  /* Transparent: Alert */
+  --alert-soft-10: rgba(196, 119, 98, 0.1);
+  --alert-soft-12: rgba(196, 119, 98, 0.12);
+  --alert-soft-13: rgba(196, 119, 98, 0.13);
+  --alert-soft-16: rgba(196, 119, 98, 0.16);
+  --alert-soft-25: rgba(196, 119, 98, 0.25);
+
+  /* Transparent: Muted */
+  --muted-soft-13: rgba(163, 156, 143, 0.13);
+  --muted-soft-18: rgba(163, 156, 143, 0.18);
+  --muted-soft-40: rgba(163, 156, 143, 0.4);
+
+  /* Transparent: Borders */
+  --border-soft-35: rgba(53, 48, 42, 0.35);
+  --border-soft-40: rgba(53, 48, 42, 0.4);
+  --border-soft-50: rgba(53, 48, 42, 0.5);
+  --border-soft-60: rgba(53, 48, 42, 0.6);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-satoshi);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.font-fraunces {
+  font-family: var(--font-fraunces);
+}
+
+.font-satoshi {
+  font-family: var(--font-satoshi);
+}

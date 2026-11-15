@@ -71,7 +71,6 @@
 }
 
 .main-nav .nav-button,
-.settings-link,
 .logout-link {
   display: flex;
   align-items: center;

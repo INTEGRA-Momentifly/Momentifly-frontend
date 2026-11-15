@@ -1,14 +1,13 @@
 import { Component, signal, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-import { ButtonDirective } from 'primeng/button';
-import { Sidebar } from 'primeng/sidebar';
 import { AuthService } from './services/auth.service';
-import { QuestList } from './components/quest-list/quest-list';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Sidebar } from 'primeng/sidebar';
+import { ButtonDirective } from 'primeng/button';
 
 @Component({
-  imports: [ButtonDirective, RouterLink, RouterLinkActive, RouterOutlet, Sidebar],
+  imports: [RouterOutlet, Sidebar, RouterLinkActive, ButtonDirective, RouterLink],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

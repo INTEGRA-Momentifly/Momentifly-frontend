@@ -1,0 +1,44 @@
+
+<div class="task-form-container">
+
+  <form (ngSubmit)="submitForm()" #taskForm="ngForm">
+    <div>
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        [(ngModel)]="task.description"
+        required
+      ></textarea>
+    </div>
+
+    <div>
+      <label for="dueDate">Due date</label>
+      <input
+        id="dueDate"
+        name="dueDate"
+        type="date"
+        [(ngModel)]="task.dueDate"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="difficulty">Difficulty</label>
+      <select
+        id="difficulty"
+        name="difficulty"
+        [(ngModel)]="task.difficulty"
+        required
+      >
+        @for (difficulty of difficulties; track difficulty) {
+        <option [value]="difficulty">{{ difficulty }}</option>
+        }
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="taskForm.invalid">
+      Create task
+    </button>
+  </form>
+</div>

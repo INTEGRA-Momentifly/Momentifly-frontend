@@ -1,0 +1,58 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.subscription-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.subscription-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subscription-page-header h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #111827;
+  font-family: Georgia, serif
+}
+
+.active-subscriptions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.active-subscriptions-header h2 {
+  font-family: Georgia, serif;
+}
+
+.subscription-page-container .p-button-add-subscription {
+  background: transparent;
+  border: 1px solid #a96f52;
+  color: #a96f52;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: none;
+}
+
+.subscription-page-container .p-button-add-subscription:hover {
+  background: rgba(169, 111, 82, 0.08);
+}
+
+.subscription-page-content {
+  width: 100%;
+}
