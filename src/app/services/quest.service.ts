@@ -37,4 +37,10 @@ export class QuestService {
       `${this.baseUrl}/completedQuests`
     );
   }
+
+  getStreak(): Observable<number> {
+    return this.http.get<number>(
+      `${this.baseUrl}/streak`
+    );
+  }
 }

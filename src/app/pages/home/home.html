@@ -53,6 +53,16 @@
     <div class="card stat-card">
       <div class="stat-info">
         <span class="stat-title">STREAK CURENT</span>
+        @if (streakLoading()) {
+        <div class="stat-value">...</div>
+        } @else if (streakError()) {
+        <div class="stat-value">--</div>
+        <span class="stat-subtext">Nu s-a putut încărca streak-ul</span>
+        } @else {
+        <div class="stat-value">
+          {{ streak() }}<span class="sub-val"> zile</span>
+        </div>
+        }
       </div>
       <div class="circle-progress green"></div>
     </div>
