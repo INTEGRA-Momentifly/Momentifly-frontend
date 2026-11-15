@@ -1,7 +1,9 @@
+
 import { Component, EventEmitter, Input, Output, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ReminderService } from '../../services/reminder.service';
+import { AuthService } from '../../services/auth.service';
 import { Reminder } from '../../models/reminder.model';
 
 import { DialogModule } from 'primeng/dialog';
@@ -25,6 +27,7 @@ import { SelectModule } from 'primeng/select';
 })
 export class AddReminderComponent {
   private reminderService = inject(ReminderService);
+  private authService = inject(AuthService);
   private fb = inject(FormBuilder);
 
   @Input() displayModal = false;
@@ -59,21 +62,33 @@ export class AddReminderComponent {
       return;
     }
 
-    const newReminder: Partial<Reminder> = {
-      ...this.reminderForm.value,
-      done: false,
-      userId: '1',
-    };
+    this.errorMessage.set(null);
 
-    this.reminderService.addReminder(newReminder).subscribe({
-      next: (addedReminder) => {
-        this.reminderAdded.emit(addedReminder);
-        this.hideDialog();
+    this.authService.getCurrentUser().subscribe({
+      next: (user: any) => {
+        const newReminder: Partial<Reminder> = {
+          description: this.reminderForm.value.description,
+          reminderDate: this.reminderForm.value.reminderDate + 'T00:00:00',
+          recurrence: this.reminderForm.value.recurrence,
+          userId: user.id,
+          done: false,
+        };
+
+        this.reminderService.addReminder(newReminder).subscribe({
+          next: (addedReminder) => {
+            this.reminderAdded.emit(addedReminder);
+            this.hideDialog();
+          },
+          error: (error) => {
+            console.error('Failed to add reminder:', error);
+            this.errorMessage.set('Failed to add reminder.');
+          },
+        });
       },
       error: (error) => {
-        console.error('Failed to add reminder:', error);
+        console.error('Failed to get current user:', error);
         this.errorMessage.set(
-          'A apărut o eroare la adăugarea reminderului. Te rugăm să încerci din nou.'
+          'Could not identify the current user.'
         );
       },
     });

@@ -1,0 +1,31 @@
+
+<div class="subscription-group">
+  <div class="table-header">
+    <span class="col-service">SERVICIU</span>
+    <span class="col-price text-right">PREȚ / LUNĂ</span>
+    <span class="col-date text-right">URMĂTOAREA PLATĂ</span>
+  </div>
+  <!-- in the for below I am using $index because my DTO doesn't receive the subscription ID, not sure if it's ok though-->
+  @for (subscription of subscriptions(); track $index){
+    <app-subscription-item [subscription]="subscription"></app-subscription-item>
+  } @empty {
+    <p class="sub-list-empty-msg">Nu există abonamente active.</p>
+  }
+  <!-- Footer cu stilul din Figma + modificari la asezarea abonamentelor active-->
+  <div class="subscription-list-summary">
+    <div class="summary-card">
+      <span class="summary-label">ABONAMENTE ACTIVE</span>
+      <div class="summary-value">
+        <strong>{{ totalActiveSubscriptions() }}</strong>
+      </div>
+    </div>
+    <div class="summary-card">
+      <span class="summary-label">TOTAL LUNAR</span>
+      <div class="summary-value">
+        <strong>{{ totalMonthlyExpense() }}</strong>
+        <span class="currency">RON</span>
+      </div>
+    </div>
+  </div>
+</div>
+
