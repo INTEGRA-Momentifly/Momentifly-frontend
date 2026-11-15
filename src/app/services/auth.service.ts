@@ -44,4 +44,8 @@ export class AuthService {
     const value = this.credentials();
     return value ? `Basic ${value}` : null;
   }
+
+  getCurrentUser() {
+    return this.http.get<any>(this.baseUrl + '/current');
+  }
 }
