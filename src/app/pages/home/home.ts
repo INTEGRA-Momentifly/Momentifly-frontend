@@ -1,26 +1,41 @@
-import { Component, LOCALE_ID, OnInit, inject, signal, computed } from '@angular/core';
+import { Component, LOCALE_ID, inject, signal, OnInit, computed } from '@angular/core';
+import { Task } from '../../models/task.model';
+import { TaskService } from '../../services/task.service';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localeRo from '@angular/common/locales/ro';
 import { forkJoin } from 'rxjs';
 
 import { AppointmentTimelineComponent } from '../../components/appointment-timeline/appointment-timeline';
 import { QuestList } from '../../components/quest-list/quest-list';
+import { TaskList } from '../../components/task-list/task-list';
 import { QuestService } from '../../services/quest.service';
 
 registerLocaleData(localeRo);
 
 @Component({
-  imports: [DatePipe, AppointmentTimelineComponent, QuestList],
+  imports: [DatePipe, AppointmentTimelineComponent, QuestList, TaskList],
   selector: 'app-home',
   styleUrl: './home.css',
   templateUrl: './home.html',
   providers: [{ provide: LOCALE_ID, useValue: 'ro-RO' }],
 })
 export class Home implements OnInit {
+  private taskService = inject(TaskService);
   private questService = inject(QuestService);
 
   today = new Date();
 
+  // --- Tasks ---
+  tasks = signal<Task[]>([]);
+  loading = signal(true);
+  errorMessage = signal('');
+
+  todayTasks = computed(() => {
+    const todayKey = this.toDateKey(new Date());
+    return this.tasks().filter((task) => task.dueDate === todayKey);
+  });
+
+  // --- Weekly score ---
   currentScore = signal<number | null>(null);
   lastWeekScore = signal<number | null>(null);
   scoreLoading = signal(true);
@@ -38,7 +53,21 @@ export class Home implements OnInit {
   });
 
   ngOnInit() {
+    this.loadTasks();
     this.loadWeeklyScore();
+  }
+
+  private loadTasks() {
+    this.taskService.getAll().subscribe({
+      next: (tasks) => {
+        this.tasks.set(tasks);
+        this.loading.set(false);
+      },
+      error: () => {
+        this.errorMessage.set('Nu s-au putut încărca task-urile.');
+        this.loading.set(false);
+      },
+    });
   }
 
   private loadWeeklyScore() {
@@ -65,6 +94,13 @@ export class Home implements OnInit {
         this.scoreLoading.set(false);
       }
     });
+  }
+
+  private toDateKey(date: Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   private formatLocalDateTime(date: Date): string {
