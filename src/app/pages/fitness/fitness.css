@@ -1,0 +1,212 @@
+:host {
+  --fit-bg: #faf7f2;
+  --fit-card: #f0ebe1;
+  --fit-border: #e6dfd2;
+  --fit-text: #2b2620;
+  --fit-muted: #7a7064;
+  --fit-gold: #c99a66;
+  --fit-terracotta: #a8664f;
+  --fit-sage: #7a8c6e;
+  --fit-brick: #b5604a;
+  --fit-brick-strong: #96493a;
+  --fit-radius: 24px;
+  --fit-serif: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --fit-sans: 'Inter', 'Avenir Next', 'Segoe UI', sans-serif;
+
+  display: block;
+  min-height: 100%;
+  background: var(--fit-bg);
+  color: var(--fit-text);
+  font-family: var(--fit-sans);
+}
+
+.fitness-page {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 64px 4rem;
+}
+
+.page-header {
+  margin-bottom: 0.5rem;
+}
+
+.page-title {
+  margin: 0;
+  font-family: var(--fit-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.page-date {
+  margin: 0.5rem 0 0;
+  font-size: 1.125rem;
+  color: var(--fit-muted);
+}
+
+.overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 28px;
+}
+
+.state-card,
+.skeleton-card {
+  padding: 2rem;
+  border: 1px solid var(--fit-border);
+  border-radius: var(--fit-radius);
+  background: var(--fit-card);
+}
+
+.setup-card {
+  max-width: 860px;
+}
+
+.setup-header {
+  margin-bottom: 1.75rem;
+}
+
+.setup-title {
+  margin: 0;
+  font-family: var(--fit-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.setup-subtitle {
+  margin: 0.4rem 0 0;
+  color: var(--fit-muted);
+}
+
+.error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  max-width: 640px;
+}
+
+.state-icon {
+  font-size: 1.6rem;
+  color: var(--fit-brick);
+}
+
+.state-title {
+  margin: 0;
+  font-family: var(--fit-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--fit-brick-strong);
+}
+
+.state-text {
+  margin: 0 0 0.75rem;
+  color: var(--fit-muted);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1.4rem;
+  border: 1.5px solid var(--fit-brick);
+  border-radius: 12px;
+  background: var(--fit-brick);
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 160ms ease;
+}
+
+.btn-primary:hover {
+  background: var(--fit-brick-strong);
+  border-color: var(--fit-brick-strong);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--fit-text);
+  outline-offset: 2px;
+}
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  min-height: 420px;
+}
+
+.skeleton-line,
+.skeleton-ring {
+  display: block;
+  background: linear-gradient(90deg, var(--fit-border) 0%, #ece5d9 50%, var(--fit-border) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-line {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+}
+
+.skeleton-line.short {
+  width: 40%;
+  align-self: flex-start;
+}
+
+.skeleton-ring {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .overview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fitness-page {
+    padding: 2rem 32px 3rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .fitness-page {
+    padding: 1.5rem 16px 2.5rem;
+  }
+
+  .page-title {
+    font-size: 2.25rem;
+  }
+
+  .state-card {
+    padding: 1.5rem 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-line,
+  .skeleton-ring {
+    animation: none;
+  }
+
+  .btn-primary {
+    transition: none;
+  }
+}

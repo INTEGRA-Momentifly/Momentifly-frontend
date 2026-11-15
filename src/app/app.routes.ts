@@ -14,6 +14,7 @@ import { Subscriptions } from './pages/subscriptions/subscription-page';
 
 // all routes to all pages should be added here in the end (except login + register)
 export const routes: Routes = [
+
   { path: '', component: Home, canActivate: [authGuard] },
   { path: 'login', component: Login },
   { path: 'register', component: Register },
