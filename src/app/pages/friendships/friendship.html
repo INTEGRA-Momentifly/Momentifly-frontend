@@ -1,4 +1,17 @@
-<h1 id="title">Friendships</h1>
+<header>
+  <h1 id="title">Friendships</h1>
+
+  <button
+    pButton
+    class="add-task"
+    type="button"
+    (click)="toggleFriendshipForm()"
+  >
+    <i class="pi pi-plus add-task-icon" aria-hidden="true"></i>
+    <span>New Friend</span>
+  </button>
+</header>
+
 <div class="list">
   <app-friendship-list
     [friendships]="friendships()"
@@ -6,3 +19,30 @@
     [currentUserId]="currentUserId"
   />
 </div>
+
+@if (showFriendshipForm()) {
+<div class="modal-overlay" (click)="toggleFriendshipForm()">
+  <div
+    class="task-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="friendship-modal-title"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      type="button"
+      class="close-button"
+      aria-label="Close"
+      (click)="toggleFriendshipForm()"
+    >
+      &times;
+    </button>
+
+    <h2 id="friendship-modal-title">New Friend</h2>
+
+    <app-friendship
+      (friendshipCreated)="createFriendship()"
+    />
+  </div>
+</div>
+}

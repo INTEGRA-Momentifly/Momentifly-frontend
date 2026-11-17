@@ -1,0 +1,24 @@
+<div class="friend-form-container">
+  <form (ngSubmit)="submitForm()" #friendForm="ngForm">
+    <div>
+      <label for="description">Friend username</label>
+      <textarea
+        id="description"
+        name="description"
+        [(ngModel)]="friend.description"
+        placeholder="Enter username..."
+        required
+      ></textarea>
+    </div>
+
+    @if (errorMessage) {
+    <p class="error-message" role="alert">
+      {{ errorMessage }}
+    </p>
+    }
+
+    <button type="submit" [disabled]="friendForm.invalid">
+      New friend
+    </button>
+  </form>
+</div>
