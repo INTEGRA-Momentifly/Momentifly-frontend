@@ -18,7 +18,4 @@ export class SubscriptionService {
     return this.http.post<Subscription>(this.baseUrl, subscription);
   }
 
-  getSubscriptions() {
-    return this.http.get<any[]>('http://localhost:8080/api/subscriptions');
-  }
 }

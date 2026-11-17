@@ -21,6 +21,7 @@ export const routes: Routes = [
   { path: 'home', component: Home, canActivate: [authGuard] },
   { path: 'tasks', component: Tasks, canActivate: [authGuard] },
   { path: 'reminders', component: Reminders, canActivate: [authGuard] },
+  { path: 'subscriptions', component: Subscriptions },
   { path: 'friendships', component: Friendships, canActivate: [authGuard] },
   { path: 'calendar', component: CalendarItem, canActivate: [authGuard] },
   { path: 'fitness', component: Fitness, canActivate: [authGuard] },
