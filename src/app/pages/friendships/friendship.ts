@@ -4,11 +4,12 @@ import { FriendshipForm } from '../../components/add-friendship/add-friendship';
 import { Friendship } from '../../models/friendship.model';
 import { FriendshipService } from '../../services/friendship.service';
 import { AuthService } from '../../services/auth.service';
+import { FriendshipRequests } from '../../components/friendship-requests/friendship-requests';
 
 @Component({
   selector: 'app-friendships',
   standalone: true,
-  imports: [FriendshipList, FriendshipForm],
+  imports: [FriendshipList, FriendshipForm, FriendshipRequests],
   templateUrl: './friendship.html',
   styleUrl: './friendship.css',
 })
@@ -21,6 +22,8 @@ export class Friendships implements OnInit {
   loading = signal<boolean>(true);
   showFriendshipForm = signal<boolean>(false);
   errorMessage = signal<string>('');
+  showRequests = signal<boolean>(false);
+  requestCount = signal<number>(0);
 
   currentUserId: string = '';
 
@@ -37,7 +40,15 @@ export class Friendships implements OnInit {
 
 
     this.loadFriendships();
+    this.loadRequestCount();
   }
+
+  loadRequestCount(): void {
+      this.friendshipService.getFriendshipRequests().subscribe({
+        next: (data) => this.requestCount.set(data.length),
+        error: (err) => console.error(err)
+      });
+    }
 
   loadFriendships(): void {
     this.loading.set(true);
@@ -53,6 +64,15 @@ export class Friendships implements OnInit {
       },
     });
   }
+
+  toggleRequests(): void {
+      this.showRequests.update(value => !value);
+    }
+
+  onRequestsUpdated(): void {
+      this.loadRequestCount();
+      this.loadFriendships();
+    }
 
   toggleFriendshipForm(): void {
     this.showFriendshipForm.update(value => !value);

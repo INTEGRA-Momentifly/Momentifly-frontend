@@ -43,7 +43,7 @@
 
 .add-task {
   margin-left: 72rem;
-  margin-top: 0.05rem;
+  margin-top: 0.5rem;
   padding: 0.7rem 1rem;
   border: 0;
   border-radius: 0.55rem;
@@ -131,4 +131,58 @@
   margin: 0 2rem 1.5rem 0;
   color: #5b4436;
   font-size: 1.4rem;
+}
+
+.friend-requests-button {
+  margin-left: 72rem;
+  margin-top: 0.5rem;
+  padding: 0.7rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.3rem;
+  border: 1px solid #e2d1c4;
+  border-radius: 0.55rem;
+  background: #fffaf4;
+  color: #79513e;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.friend-requests-button:hover {
+  background: #efe3d9;
+  border-color: #ad7659;
+  transform: translateY(-1px);
+}
+
+.request-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 21px;
+  height: 21px;
+  padding: 0 5px;
+  border-radius: 50%;
+  background: #ad7659;
+  color: #fffaf4;
+  font-size: 0.7rem;
+}
+
+.friend-requests-button,
+.add-task {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 128px;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.55rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
 }

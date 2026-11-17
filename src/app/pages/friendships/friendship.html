@@ -3,11 +3,21 @@
 
   <button
     pButton
+    type="button"
+    class="friend-requests-button"
+    (click)="toggleRequests()"
+  >
+    <i class="pi pi-users"></i>
+    <span >Friend Requests ({{ requestCount() }})</span>
+  </button>
+
+  <button
+    pButton
     class="add-task"
     type="button"
     (click)="toggleFriendshipForm()"
   >
-    <i class="pi pi-plus add-task-icon" aria-hidden="true"></i>
+    <i class="pi pi-plus add-task-icon"></i>
     <span>New Friend</span>
   </button>
 </header>
@@ -26,23 +36,43 @@
     class="task-modal"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="friendship-modal-title"
     (click)="$event.stopPropagation()"
   >
     <button
       type="button"
       class="close-button"
-      aria-label="Close"
       (click)="toggleFriendshipForm()"
     >
       &times;
     </button>
 
-    <h2 id="friendship-modal-title">New Friend</h2>
-
     <app-friendship
       (friendshipCreated)="createFriendship()"
     />
+  </div>
+</div>
+}
+
+@if (showRequests()) {
+<div class="modal-overlay" (click)="toggleRequests()">
+  <div
+    class="task-modal"
+    role="dialog"
+    aria-modal="true"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      type="button"
+      class="close-button"
+      (click)="toggleRequests()"
+    >
+      &times;
+    </button>
+
+    <app-friendship-requests
+      (requestsUpdated)="onRequestsUpdated()"
+    />
+
   </div>
 </div>
 }

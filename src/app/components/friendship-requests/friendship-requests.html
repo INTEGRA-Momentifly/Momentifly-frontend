@@ -1,0 +1,42 @@
+<h2>Friend Requests</h2>
+
+@if (loading()) {
+<p>Loading requests...</p>
+} @else if (requests().length === 0) {
+<p>No pending friend requests.</p>
+} @else {
+<div class="requests-list">
+
+  @for (request of requests(); track request.id) {
+  <div class="request-item">
+
+    <div class="request-info">
+      <h3>{{ request.userName }}</h3>
+      <span>Wants to be your friend</span>
+    </div>
+
+    <div class="request-actions">
+      <button
+        pButton
+        type="button"
+        class="accept-button"
+        (click)="modifyRequest(request.id, 'ACCEPTED')"
+      >
+        Accept
+      </button>
+
+      <button
+        pButton
+        type="button"
+        class="reject-button"
+        (click)="modifyRequest(request.id, 'DECLINED')"
+      >
+        Decline
+      </button>
+    </div>
+
+  </div>
+  }
+
+</div>
+}
