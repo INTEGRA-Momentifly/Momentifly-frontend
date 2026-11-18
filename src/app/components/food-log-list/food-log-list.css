@@ -1,0 +1,207 @@
+.journal-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #2c2420;
+  background-color: #f7f4ee;
+  border-radius: 16px;
+  border: 1px solid #e8e3d9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.journal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid #e2ddd5;
+  padding-bottom: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.journal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c2420;
+}
+
+.journal-header span {
+  font-size: 0.9rem;
+  color: #7b6d5f;
+  font-weight: 500;
+}
+
+/* Stilul pentru butonul „+ Adaugă aliment” din partea de jos */
+.add-food-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #8c7a6b;
+  border: 1px solid #d4c5b9;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.add-food-btn:hover {
+  background-color: #efede6;
+}
+
+/* Fundalul întunecat/semitransparent care acoperă ecranul în spatele modalului */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Conținutul propriu-zis al modalului (cardul crem din designul tău) */
+.modal-content {
+  background-color: #f7f4ee;
+  border-radius: 20px;
+  border: 1px solid #e8e3d9;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #2c2420;
+}
+
+/* Antetul modalului */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2c2420;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #7b6d5f;
+}
+
+/* Grupuri de inputuri și etichete */
+.form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #8c7a6b;
+  letter-spacing: 0.05em;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid #d4c5b9;
+  background-color: #ffffff;
+  font-size: 0.95rem;
+  color: #2c2420;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #a89582;
+}
+
+/* Butonul de tip pastilă pentru categorii (Mic dejun, Prânz, Cină) */
+.category-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.category-buttons button {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid #d4c5b9;
+  background-color: transparent;
+  color: #7b6d5f;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Starea activă a butonului de categorie (asemănătoare din poză) */
+.category-buttons button.active {
+  background-color: #f7f4ee;
+  border-color: #a89582;
+  color: #2c2420;
+  box-shadow: inset 0 0 0 1px #a89582;
+  font-weight: 600;
+}
+
+/* Grila pentru macronutrienți (Calorii, Proteine, Carbohidrați, Grăsimi) */
+.macros-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+/* Butoanele de acțiune din josul modalului (Anulează / Adaugă) */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  border: 1px solid #d4c5b9;
+  color: #7b6d5f;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-submit {
+  background-color: #c2ab96;
+  border: none;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
