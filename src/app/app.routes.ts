@@ -26,7 +26,7 @@ export const routes: Routes = [
   { path: 'calendar', component: CalendarItem, canActivate: [authGuard] },
   { path: 'fitness', component: Fitness, canActivate: [authGuard] },
   { path: 'social', component: Social, canActivate: [authGuard] },
+  { path: 'food_log', component: FoodLogList},
   { path: 'not-found', component: NotFound },
   { path: '**', redirectTo: 'not-found' },
-  { path: 'food_log', component: FoodLogList},
 ];
