@@ -5,9 +5,9 @@ export interface FoodLog{
   userId: string,
   description: string,
   foodCategory: FoodCategory,
-  proteins?: number,
-  carbs?: number,
-  fats?: number,
-  calories?: number,
+  proteins?: number | null,
+  carbs?: number | null,
+  fats?: number | null,
+  calories?: number | null,
   date: string
 }
