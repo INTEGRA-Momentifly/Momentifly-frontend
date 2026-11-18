@@ -70,11 +70,21 @@ export class QuestList implements OnInit {
 
     this.questService.completeQuest(id).subscribe({
       next: (response) => {
+        const wasAllCompleted =
+          this.quests().length > 0 &&
+          this.completedCount() === this.quests().length;
+
         const nextCompleted = new Set(this.completedIds());
         nextCompleted.add(id);
         this.completedIds.set(nextCompleted);
 
         this.removeLoading(id);
+
+        if (!wasAllCompleted &&
+            this.quests().length > 0 &&
+            this.completedCount() === this.quests().length) {
+          this.questService.incrementStreak();
+        }
       },
       error: (err) => {
         console.error('Error completing quest:', err);

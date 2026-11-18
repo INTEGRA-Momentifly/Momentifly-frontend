@@ -40,7 +40,7 @@ export class Home implements OnInit {
   lastWeekScore = signal<number | null>(null);
   scoreLoading = signal(true);
   scoreError = signal(false);
-  streak = signal<number | null>(null);
+  streak = this.questService.streak;
   streakLoading = signal(true);
   streakError = signal(false);
 
@@ -116,7 +116,7 @@ export class Home implements OnInit {
   private loadStreak() {
     this.questService.getStreak().subscribe({
       next: (streak) => {
-        this.streak.set(streak);
+        this.questService.streak.set(streak);
         this.streakLoading.set(false);
       },
       error: (err) => {
