@@ -11,4 +11,22 @@ export class FriendshipService {
   getActiveFriendships(): Observable<Friendship[]> {
     return this.http.get<Friendship[]>(`${this.baseUrl}?status=ACCEPTED`);
   }
+
+  newFriendshipRequest(friendName: string): Observable<Friendship> {
+    return this.http.post<Friendship>(
+      `${this.baseUrl}?friendName=${encodeURIComponent(friendName)}`,
+      {}
+    );
+  }
+
+  getFriendshipRequests():Observable<Friendship[]> {
+    return this.http.get<Friendship[]>(`${this.baseUrl}/requests`);
+    }
+
+  modifyFriendshipStatus(status: string, id: string): Observable<Friendship> {
+    return this.http.patch<Friendship>(
+          `${this.baseUrl}/${id}?status=${status}`,
+          {}
+        );
+    }
 }
