@@ -1,0 +1,44 @@
+<div class="modal-overlay" (click)="closePopup()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Add New Subscription</h2>
+
+    <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" type="text" formControlName="name" placeholder="Netflix, Gym, etc.">
+        <div *ngIf="subscriptionForm.get('name')?.invalid && subscriptionForm.get('name')?.touched" class="error-text">
+          Numele este obligatoriu.
+        </div>
+      </div>
+
+      <!-- Cost Field -->
+      <div class="form-group">
+        <label for="cost">Cost</label>
+        <input id="cost" type="number" formControlName="cost" placeholder="0.00">
+        <div *ngIf="subscriptionForm.get('cost')?.invalid && subscriptionForm.get('cost')?.touched" class="error-text">
+          Costul este obligatoriu și trebuie să fie un număr pozitiv.
+        </div>
+      </div>
+
+      <!-- End Date Field -->
+      <div class="form-group">
+        <label for="endDate">End Date (Optional)</label>
+        <input id="endDate" type="datetime-local" formControlName="endDate">
+      </div>
+
+      <!-- Server Error Message -->
+      <div *ngIf="errorMessage" class="error-text global-error">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="actions">
+        <button type="button" class="btn-cancel" (click)="closePopup()" [disabled]="isSubmitting">Cancel</button>
+        <button type="submit" class="btn-save" [disabled]="isSubmitting">Save</button>
+      </div>
+
+    </form>
+  </div>
+</div>
