@@ -1,0 +1,95 @@
+<div class="journal-container">
+  <div class="journal-header">
+    <h2>Jurnal de azi</h2>
+    <span>{{ totalEntries() }} intrări · {{ totalCalories() }} kcal</span>
+  </div>
+
+  <app-food-category-section
+    [categoryName]="'BREAKFAST'"
+    [displayTitle]="'Mic dejun'"
+    [allLogs]="foodLogs()">
+  </app-food-category-section>
+
+  <app-food-category-section
+    [categoryName]="'LUNCH'"
+    [displayTitle]="'Prânz'"
+    [allLogs]="foodLogs()">
+  </app-food-category-section>
+
+  <app-food-category-section
+    [categoryName]="'DINNER'"
+    [displayTitle]="'Cină'"
+    [allLogs]="foodLogs()">
+  </app-food-category-section>
+
+  <button class="add-food-btn" (click)="openModal()">
+    + Adaugă aliment
+  </button>
+
+  @if (isModalOpen()) {
+    <div class="modal-backdrop">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Adaugă aliment</h3>
+          <button class="close-btn" (click)="closeModal()">×</button>
+        </div>
+
+        <form [formGroup]="foodForm" (ngSubmit)="addFoodEntry()">
+          <!-- Descriere aliment -->
+          <div class="form-group">
+            <label>ALIMENT</label>
+            <input type="text" formControlName="description" placeholder="ex. Piept de pui la grătar" />
+          </div>
+
+          <!-- Selectare Masă (Conform enum-ului: BREAKFAST, LUNCH, DINNER) -->
+          <div class="form-group">
+            <label>MASĂ</label>
+            <div class="category-buttons">
+              <button type="button"
+                      [class.active]="foodForm.get('foodCategory')?.value === 'BREAKFAST'"
+                      (click)="selectCategory('BREAKFAST')">
+                Mic dejun
+              </button>
+              <button type="button"
+                      [class.active]="foodForm.get('foodCategory')?.value === 'LUNCH'"
+                      (click)="selectCategory('LUNCH')">
+                Prânz
+              </button>
+              <button type="button"
+                      [class.active]="foodForm.get('foodCategory')?.value === 'DINNER'"
+                      (click)="selectCategory('DINNER')">
+                Cină
+              </button>
+            </div>
+          </div>
+
+          <!-- Macronutrienți -->
+          <div class="macros-grid">
+            <div class="form-group">
+              <label>CALORII</label>
+              <input type="number" formControlName="calories" />
+            </div>
+            <div class="form-group">
+              <label>PROTEINE G</label>
+              <input type="number" formControlName="proteins" />
+            </div>
+            <div class="form-group">
+              <label>CARBOHIDRAȚI G</label>
+              <input type="number" formControlName="carbs" />
+            </div>
+            <div class="form-group">
+              <label>GRĂSIMI G</label>
+              <input type="number" formControlName="fats" />
+            </div>
+          </div>
+
+          <!-- Acțiuni -->
+          <div class="modal-actions">
+            <button type="button" class="btn-cancel" (click)="closeModal()">Anulează</button>
+            <button type="submit" class="btn-submit" [disabled]="foodForm.invalid">Adaugă</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+</div>
