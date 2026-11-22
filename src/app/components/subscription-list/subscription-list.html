@@ -1,31 +1,71 @@
+<div class="subscription-filters">
+  <div class="filter-tabs">
+    <button
+      type="button"
+      class="filter-btn"
+      [class.active]="activeFilter()==='ALL'"
+      (click)="filterChange.emit('ALL')"
+    >
+      Toate
+    </button>
+    <button
+      type="button"
+      class="filter-btn"
+      [class.active]="activeFilter()==='ACTIVE'"
+      (click)="filterChange.emit('ACTIVE')"
+    >
+      Active
+    </button>
+    <button
+      type="button"
+      class="filter-btn"
+      [class.active]="activeFilter()==='EXPIRED'"
+      (click)="filterChange.emit('EXPIRED')"
+    >
+      Expirate
+    </button>
+  </div>
+
+  @if (activeFilter() !== 'EXPIRED') {
+    <div class="subscription-list-summary">
+      @for (card of summaryCards(); track card.label) {
+        <div class="summary-card">
+          <span class="summary-label">{{ card.label }}</span>
+          <div class="summary-value">
+            <strong>{{ card.value }}</strong>
+            @if (card.currency) {
+              <span class="currency">{{ card.currency }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
 
 <div class="subscription-group">
   <div class="table-header">
     <span class="col-service">SERVICIU</span>
     <span class="col-price text-right">PREȚ / LUNĂ</span>
-    <span class="col-date text-right">URMĂTOAREA PLATĂ</span>
+    <span class="col-date text-center">URMĂTOAREA PLATĂ</span>
+    <span class="col-autorenew text-center">REÎNNOIRE AUTOMATĂ</span>
   </div>
-  <!-- in the for below I am using $index because my DTO doesn't receive the subscription ID, not sure if it's ok though-->
-  @for (subscription of subscriptions(); track $index){
-    <app-subscription-item [subscription]="subscription"></app-subscription-item>
-  } @empty {
-    <p class="sub-list-empty-msg">Nu există abonamente active.</p>
-  }
-  <!-- Footer cu stilul din Figma + modificari la asezarea abonamentelor active-->
-  <div class="subscription-list-summary">
-    <div class="summary-card">
-      <span class="summary-label">ABONAMENTE ACTIVE</span>
-      <div class="summary-value">
-        <strong>{{ totalActiveSubscriptions() }}</strong>
-      </div>
-    </div>
-    <div class="summary-card">
-      <span class="summary-label">TOTAL LUNAR</span>
-      <div class="summary-value">
-        <strong>{{ totalMonthlyExpense() }}</strong>
-        <span class="currency">RON</span>
-      </div>
-    </div>
-  </div>
-</div>
+  @for (subscription of subscriptions(); track subscription.id) {
+    <app-subscription-item [subscription]="subscription"
+                           (toggleAutoRenewal)="toggleAutoRenewal.emit($event)">
 
+    </app-subscription-item>
+  } @empty {
+    @switch (activeFilter()) {
+      @case ('ACTIVE') {
+        <p class="sub-list-empty-msg">Nu există abonamente active.</p>
+      }
+      @case ('EXPIRED') {
+        <p class="sub-list-empty-msg">Nu există abonamente expirate.</p>
+      }
+      @default {
+        <p class="sub-list-empty-msg">Nu există abonamente.</p>
+      }
+    }
+  }
+</div>
