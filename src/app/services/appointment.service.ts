@@ -24,6 +24,6 @@ export class AppointmentService {
     if (startDate && endDate) {
       params = params.set('startDate', startDate).set('endDate', endDate);
     }
-    return this.http.get<Appointment[]>('/api/appointments', {params})
+    return this.http.get<Appointment[]>(this.baseUrl, {params})
   }
 }
