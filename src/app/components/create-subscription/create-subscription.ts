@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SubscriptionService } from '../../services/subscription.service';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {SubscriptionService} from '../../services/subscription.service';
 
 @Component({
   selector: 'app-create-subscription',
@@ -11,6 +11,7 @@ import { SubscriptionService } from '../../services/subscription.service';
   styleUrls: ['./create-subscription.css'],
 })
 export class CreateSubscriptionComponent {
+  @Input() userId: string | null = null;
   @Output() close = new EventEmitter<void>();
   @Output() subscriptionCreated = new EventEmitter<void>();
 
@@ -26,6 +27,7 @@ export class CreateSubscriptionComponent {
       name: ['', Validators.required],
       cost: [null, [Validators.required, Validators.min(0)]],
       endDate: [''],
+      autoRenewal: [true]
     });
   }
 
@@ -35,10 +37,26 @@ export class CreateSubscriptionComponent {
       return;
     }
 
+    if (!this.userId) {
+      this.errorMessage = 'Nu s-a putut identifica utilizatorul curent.';
+      return;
+    }
+
     this.isSubmitting = true;
     this.errorMessage = null;
 
-    const subscriptionData = this.subscriptionForm.value;
+    const raw = this.subscriptionForm.getRawValue();
+    const normalizedEndDate = raw.endDate
+      ? (raw.endDate.length === 16 ? `${raw.endDate}:00` : raw.endDate)
+      : null;
+
+    const subscriptionData = {
+      userId: this.userId,
+      name: raw.name?.trim(),
+      cost: Number(raw.cost),
+      autoRenewal: this.isExpired ? false : Boolean(raw.autoRenewal),
+      endDate: normalizedEndDate
+    };
 
     this.subscriptionService.createSubscription(subscriptionData).subscribe({
       next: () => {
@@ -63,7 +81,27 @@ export class CreateSubscriptionComponent {
       },
     });
   }
+
+  get isExpired(): boolean {
+    const value = this.subscriptionForm.get('endDate')?.value;
+    if (!value) return false;
+    const timestamp = new Date(value).getTime();
+    return !Number.isNaN(timestamp) && timestamp < Date.now();
+  }
+
   closePopup() {
     this.close.emit();
+  }
+
+  onEndDateChange(): void {
+    const autoRenewalCtrl = this.subscriptionForm.get('autoRenewal');
+    if (!autoRenewalCtrl) return;
+
+    if (this.isExpired) {
+      autoRenewalCtrl.setValue(false);
+      autoRenewalCtrl.disable();
+    } else {
+      autoRenewalCtrl.enable();
+    }
   }
 }
