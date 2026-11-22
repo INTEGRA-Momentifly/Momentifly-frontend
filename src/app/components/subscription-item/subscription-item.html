@@ -2,19 +2,45 @@
   <!-- Coloana 1: Avatar + Nume -->
   <div class="service-info">
     <div class="avatar">
-      {{ subscription.name ? subscription.name.charAt(0).toUpperCase() : ''}}
+      {{ subscription.name ? subscription.name.charAt(0).toUpperCase() : '' }}
     </div>
     <span class="service-name">{{ subscription.name }}</span>
   </div>
 
   <!-- Coloana 2: Preț / lună -->
   <div class="price-info">
-    <span class="cost">{{ subscription.cost }}</span>
+    <span class="cost">{{ subscription.cost.toFixed(2) }}</span>
     <span class="currency"> RON</span>
   </div>
 
   <!-- Coloana 3: Următoarea plată -->
   <div class="date-info">
-    <span [ngClass]="{ 'urgent': isUrgent() }">{{ getFormattedDate() }}</span>
+    <span [class.urgent]="isUrgent()" [class.expired]="isExpired">
+      {{ getFormattedDate() }}
+    </span>
+  </div>
+
+  <!-- Coloana 4: Auto reînnoire -->
+  <div class="autorenew-info">
+    <button
+      type="button"
+      class="autorenew-box"
+      [class.checked]="subscription.autoRenewal"
+      [class.disabled]="isExpired"
+      [disabled]="isExpired"
+      (click)="onToggleClick()"
+      [attr.aria-pressed]="subscription.autoRenewal"
+      [title]="
+        isExpired
+          ? 'Abonament expirat — reînnoirea automată nu poate fi modificată'
+          : subscription.autoRenewal
+            ? 'Reînnoire automată activă (click pentru a opri)'
+            : 'Reînnoire automată oprită (click pentru a activa)'
+      "
+    >
+      @if (subscription.autoRenewal) {
+        <span>✓</span>
+      }
+    </button>
   </div>
 </div>

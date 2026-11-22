@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from '../../models/subscription.model';
 
@@ -10,6 +10,7 @@ import { Subscription } from '../../models/subscription.model';
 })
 export class SubscriptionItem {
   @Input({ required: true }) subscription!: Subscription;
+  @Output() toggleAutoRenewal = new EventEmitter<Subscription>();
 
   private getDaysDifference(): number | null {
     if (!this.subscription.endDate) return null;
@@ -36,11 +37,23 @@ export class SubscriptionItem {
 
     if (diffInDays === 0) return 'Astăzi';
     if (diffInDays === 1) return 'Mâine';
-    if (diffInDays === -1) return 'Ieri';
-
+    if (this.isExpired) {
+      return 'Expirat';
+    }
     if (!this.subscription.endDate) return '';
 
     const targetDate = new Date(this.subscription.endDate);
     return targetDate.toLocaleDateString('ro-RO', { day: 'numeric', month: 'short' });
+  }
+
+  get isExpired(): boolean {
+    if (!this.subscription?.endDate) return false;
+    const timestamp = new Date(this.subscription.endDate).getTime();
+    return !isNaN(timestamp) && timestamp < Date.now();
+  }
+
+  onToggleClick(): void {
+    if (this.isExpired) return;
+    this.toggleAutoRenewal.emit(this.subscription);
   }
 }
