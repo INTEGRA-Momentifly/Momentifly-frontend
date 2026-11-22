@@ -1,42 +1,62 @@
-<div class="modal-overlay" (click)="closePopup()">
+<div class="modal-overlay">
   <div class="modal-content" (click)="$event.stopPropagation()">
-    <h2>Add New Subscription</h2>
+    <h2>Introdu datele abonamentului</h2>
 
     <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
 
       <!-- Name Field -->
       <div class="form-group">
-        <label for="name">Name</label>
+        <label for="name">Nume</label>
         <input id="name" type="text" formControlName="name" placeholder="Netflix, Gym, etc.">
-        <div *ngIf="subscriptionForm.get('name')?.invalid && subscriptionForm.get('name')?.touched" class="error-text">
-          Numele este obligatoriu.
-        </div>
+        @if (subscriptionForm.get('name')?.invalid && subscriptionForm.get('name')?.touched) {
+          <div class="error-text">
+            Numele este obligatoriu.
+          </div>
+        }
       </div>
 
       <!-- Cost Field -->
       <div class="form-group">
-        <label for="cost">Cost</label>
+        <label for="cost">Preț</label>
         <input id="cost" type="number" formControlName="cost" placeholder="0.00">
-        <div *ngIf="subscriptionForm.get('cost')?.invalid && subscriptionForm.get('cost')?.touched" class="error-text">
-          Costul este obligatoriu și trebuie să fie un număr pozitiv.
-        </div>
+        @if (subscriptionForm.get('cost')?.invalid && subscriptionForm.get('cost')?.touched) {
+          <div class="error-text">
+            Costul este obligatoriu și trebuie să fie un număr pozitiv.
+          </div>
+        }
       </div>
 
       <!-- End Date Field -->
       <div class="form-group">
-        <label for="endDate">End Date (Optional)</label>
-        <input id="endDate" type="datetime-local" formControlName="endDate">
+        <label for="endDate">Data expirării (Optional)</label>
+        <input id="endDate"
+               type="datetime-local"
+               formControlName="endDate"
+               (change)="onEndDateChange()">
+      </div>
+
+      <!-- Auto Renewal Checkbox -->
+      <div class="form-group checkbox-group">
+        <label for="autoRenewal">
+          <input id="autoRenewal"
+                 type="checkbox"
+                 formControlName="autoRenewal"
+          >
+          <span>Reînnoire automată</span>
+        </label>
       </div>
 
       <!-- Server Error Message -->
-      <div *ngIf="errorMessage" class="error-text global-error">
-        {{ errorMessage }}
-      </div>
+      @if (errorMessage) {
+        <div class="error-text global-error">
+          {{ errorMessage }}
+        </div>
+      }
 
       <!-- Action Buttons -->
       <div class="actions">
-        <button type="button" class="btn-cancel" (click)="closePopup()" [disabled]="isSubmitting">Cancel</button>
-        <button type="submit" class="btn-save" [disabled]="isSubmitting">Save</button>
+        <button type="button" class="btn-cancel" (click)="closePopup()" [disabled]="isSubmitting">Anulează</button>
+        <button type="submit" class="btn-save" [disabled]="isSubmitting">Salvează</button>
       </div>
 
     </form>

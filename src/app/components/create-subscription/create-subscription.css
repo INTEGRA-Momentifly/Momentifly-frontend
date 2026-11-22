@@ -58,3 +58,63 @@ input {
 .btn-cancel { background: #f1f1f1; }
 .btn-save { background: #007bff; color: white; }
 .btn-save:disabled { background: #a0c4ff; cursor: not-allowed; }
+
+.checkbox-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #1c1b18;
+  user-select: none;
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border-radius: 6px;
+  border: 1.5px solid #b8afa5;
+  background-color: #ffffff;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.checkbox-group input[type="checkbox"]::before {
+  content: "✓";
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  transform: scale(0);
+  transition: transform 0.12s ease-in-out;
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: #5a7d5c;
+  border-color: #5a7d5c;
+}
+
+.checkbox-group input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.checkbox-group input[type="checkbox"]:focus-visible {
+  outline: 2px solid #a96f52;
+  outline-offset: 2px;
+}
+
+.checkbox-group input[type="checkbox"]:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.checkbox-group label:has(input[type="checkbox"]:disabled) {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

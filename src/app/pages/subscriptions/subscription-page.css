@@ -39,18 +39,24 @@
 }
 
 .subscription-page-container .p-button-add-subscription {
-  background: transparent;
-  border: 1px solid #a96f52;
-  color: #a96f52;
+  background-color: #a96f52;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
-  padding: 0.5rem 1rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  box-shadow: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
 }
 
 .subscription-page-container .p-button-add-subscription:hover {
-  background: rgba(169, 111, 82, 0.08);
+  background-color: #935d42;
+  border-color: #935d42;
 }
 
 .subscription-page-content {
