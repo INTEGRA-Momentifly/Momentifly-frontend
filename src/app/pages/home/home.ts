@@ -40,6 +40,9 @@ export class Home implements OnInit {
   lastWeekScore = signal<number | null>(null);
   scoreLoading = signal(true);
   scoreError = signal(false);
+  streak = this.questService.streak;
+  streakLoading = signal(true);
+  streakError = signal(false);
 
   scoreDifference = computed(() => {
     const current = this.currentScore();
@@ -55,6 +58,7 @@ export class Home implements OnInit {
   ngOnInit() {
     this.loadTasks();
     this.loadWeeklyScore();
+    this.loadStreak();
   }
 
   private loadTasks() {
@@ -81,7 +85,7 @@ export class Home implements OnInit {
 
     forkJoin({
       current: this.questService.getWeekScore(currentDateParam),
-      previous: this.questService.getWeekScore(previousDateParam)
+      previous: this.questService.getWeekScore(previousDateParam),
     }).subscribe({
       next: (result) => {
         this.currentScore.set(result.current);
@@ -92,7 +96,7 @@ export class Home implements OnInit {
         console.error('Error loading weekly scores:', err);
         this.scoreError.set(true);
         this.scoreLoading.set(false);
-      }
+      },
     });
   }
 
@@ -107,5 +111,19 @@ export class Home implements OnInit {
     const pad = (value: number) => String(value).padStart(2, '0');
 
     return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+  }
+
+  private loadStreak() {
+    this.questService.getStreak().subscribe({
+      next: (streak) => {
+        this.questService.streak.set(streak);
+        this.streakLoading.set(false);
+      },
+      error: (err) => {
+        console.error('Error loading current streak:', err);
+        this.streakError.set(true);
+        this.streakLoading.set(false);
+      },
+    });
   }
 }
